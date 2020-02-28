@@ -28,17 +28,29 @@ SOURCES += \
         main.cpp \
         widget.cpp \
     admin.cpp \
-    aunt.cpp
+    aunt.cpp \
+    admin/admin_addinfo.cpp \
+    admin/admin_adddormitory.cpp \
+    admin/admin_adddean.cpp \
+    admin/admin_addarchive.cpp
 
 HEADERS += \
         widget.h \
     admin.h \
-    aunt.h
+    aunt.h \
+    admin/admin_addinfo.h \
+    admin/admin_adddormitory.h \
+    admin/admin_adddean.h \
+    admin/admin_addarchive.h
 
 FORMS += \
         widget.ui \
     admin.ui \
-    aunt.ui
+    aunt.ui \
+    admin/admin_addinfo.ui \
+    admin/admin_adddormitory.ui \
+    admin/admin_adddean.ui \
+    admin/admin_addarchive.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

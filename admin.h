@@ -3,7 +3,10 @@
 
 #include <QWidget>
 #include <QtSql/QSqlDatabase>
-
+#include "admin/admin_addarchive.h"
+#include "admin/admin_adddean.h"
+#include "admin/admin_adddormitory.h"
+#include "admin/admin_addinfo.h"
 
 
 namespace Ui {
@@ -24,6 +27,7 @@ private:
     void Init();//初始化
     void InitConnection();//绑定控件
 
+public slots:
     void queryTemperature();//查体温
     void queryArchive();//查学生
     void queryDormitory();//查宿舍
@@ -47,13 +51,16 @@ public slots:
 
 signals:
     void signal_backWindow();//返回上个窗口的信号
-    void signal_addClicked();//添加按钮点击信号
+
 
 private:
     Ui::Admin *ui;
 
     QSqlDatabase m_db;//连接数据库
-
+    Admin_AddDean *m_adm_addDean;
+    Admin_AddInfo *m_adm_addInfo;
+    Admin_AddArchive *m_adm_addArchive;
+    Admin_AddDormitory *m_adm_addDormitory;
 };
 
 #endif // ADMIN_H

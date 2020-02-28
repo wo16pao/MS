@@ -219,26 +219,37 @@ void Admin::pushButton_add()
 {
     switch (ui->comboBox->currentIndex()) {
     case 1:
-
+        m_adm_addInfo->show();
         break;
     case 2:
+        m_adm_addArchive->show();
+        break;
     case 3:
+        m_adm_addDormitory->show();
+        connect(m_adm_addDormitory,SIGNAL(refresh()),this,SLOT(queryDormitory()));
+        break;
     case 4:
+        connect(m_adm_addDean,SIGNAL(refresh()),this,SLOT(queryDean()));
+        m_adm_addDean->show();
+        break;
     default:
         return;
     }
-    emit signal_addClicked();
 
 }
 
-
+//初始化
 void Admin::Init()
 {
     m_db = QSqlDatabase::database("mysql_connect");
     ui->tabWidget->tabBar()->hide();
-
+    m_adm_addDean = new Admin_AddDean;
+    m_adm_addInfo = new Admin_AddInfo;
+    m_adm_addArchive = new Admin_AddArchive;
+    m_adm_addDormitory = new Admin_AddDormitory ;
 }
 
+//初始化连接
 void Admin::InitConnection()
 {
     connect(ui->pushButton_back,SIGNAL(clicked()),this,SLOT(pushButton_back()));//返回
@@ -280,6 +291,7 @@ void Admin::queryDormitory()
     queryFunction(get_row,str,"dormitory");
 }
 
+//学院信息
 void Admin::queryDean()
 {
     QString get_row = "SELECT COUNT(*) FROM `dean`;";

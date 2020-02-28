@@ -15,6 +15,13 @@ public:
     explicit Admin_AddDean(QWidget *parent = nullptr);
     ~Admin_AddDean();
 
+public slots:
+    void addDean();
+    void pushButton_back();
+
+signals:
+    void refresh();
+
 private:
     Ui::Admin_AddDean *ui;
 };
