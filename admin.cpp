@@ -224,6 +224,7 @@ void Admin::pushButton_add()
         m_adm_addInfo->show();
         break;
     case 2:
+        //m_adm_addArchive->initCombobox();
         m_adm_addArchive->show();
         break;
     case 3:
