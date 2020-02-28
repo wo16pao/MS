@@ -114,7 +114,7 @@ void Admin::combobox_query(int index)
 {
     switch (index) {
     case 1:
-        queryTemperature();
+        queryInfo();
         break;
     case 2:
         queryArchive();
@@ -221,10 +221,11 @@ void Admin::pushButton_add()
 {
     switch (ui->comboBox->currentIndex()) {
     case 1:
+        connect(m_adm_addInfo,SIGNAL(refresh()),this,SLOT(queryInfo()));
         m_adm_addInfo->show();
         break;
     case 2:
-        //m_adm_addArchive->initCombobox();
+        connect(m_adm_addArchive,SIGNAL(refresh()),this,SLOT(queryArchive()));
         m_adm_addArchive->show();
         break;
     case 3:
@@ -349,7 +350,7 @@ void Admin::InitConnection()
 }
 
 //温度信息
-void Admin::queryTemperature()
+void Admin::queryInfo()
 {
     QString get_row = "SELECT COUNT(*) FROM `information`;";
     QString str="select * from `information` order by 学号 asc;";

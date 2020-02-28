@@ -31,7 +31,7 @@ private:
     void InitConnection();//绑定控件
 
 public slots:
-    void queryTemperature();//查体温
+    void queryInfo();//查体温
     void queryArchive();//查学生
     void queryDormitory();//查宿舍
     void queryDean();//查学院
