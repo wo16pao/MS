@@ -7,6 +7,8 @@
 #include "admin/admin_adddean.h"
 #include "admin/admin_adddormitory.h"
 #include "admin/admin_addinfo.h"
+#include "admin/admin_modifydean.h"
+#include "admin/admin_modifydormitory.h"
 
 
 namespace Ui {
@@ -47,7 +49,7 @@ public slots:
     void pushButton_search();
     void pushButton_add();
    // void pushButton_delete();
-   // void pushButton_modify();
+    void pushButton_modify();
 
 signals:
     void signal_backWindow();//返回上个窗口的信号
@@ -57,10 +59,16 @@ private:
     Ui::Admin *ui;
 
     QSqlDatabase m_db;//连接数据库
+
+    //添加信息
     Admin_AddDean *m_adm_addDean;
     Admin_AddInfo *m_adm_addInfo;
     Admin_AddArchive *m_adm_addArchive;
     Admin_AddDormitory *m_adm_addDormitory;
+
+    //修改信息
+    Admin_ModifyDean *m_adm_modifyDean;
+    Admin_ModifyDormitory *m_adm_modifyDorm;
 };
 
 #endif // ADMIN_H

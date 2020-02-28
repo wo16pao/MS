@@ -19,6 +19,7 @@ Admin::~Admin()
     delete ui;
 }
 
+//表格功能函数
 void Admin::queryFunction(const QString &get_row, const QString &str, const QString &tableName ,bool flag)
 {
     ui->tableWidget->clearContents();
@@ -225,8 +226,8 @@ void Admin::pushButton_add()
         m_adm_addArchive->show();
         break;
     case 3:
-        m_adm_addDormitory->show();
         connect(m_adm_addDormitory,SIGNAL(refresh()),this,SLOT(queryDormitory()));
+        m_adm_addDormitory->show();
         break;
     case 4:
         connect(m_adm_addDean,SIGNAL(refresh()),this,SLOT(queryDean()));
@@ -238,15 +239,49 @@ void Admin::pushButton_add()
 
 }
 
+//修改按钮
+void Admin::pushButton_modify()
+{
+    if(!ui->tableWidget->isItemSelected(ui->tableWidget->currentItem()))
+        return;
+
+    switch (ui->comboBox->currentIndex()) {
+    case 1:
+
+        break;
+    case 2:
+
+        break;
+    case 3:
+        connect(m_adm_modifyDorm,SIGNAL(refresh()),this,SLOT(queryDormitory()));
+        m_adm_modifyDorm->getDean(ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),4)->text());
+        m_adm_modifyDorm->show();
+        break;
+    case 4:
+        connect(m_adm_modifyDean,SIGNAL(refresh()),this,SLOT(queryDean()));
+        m_adm_modifyDean->getDean(ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text());
+        m_adm_modifyDean->show();
+        break;
+    default:
+        return;
+    }
+}
+
 //初始化
 void Admin::Init()
 {
     m_db = QSqlDatabase::database("mysql_connect");
-    ui->tabWidget->tabBar()->hide();
+    ui->tabWidget->tabBar()->hide();//隐藏页头
+
+    //初始化添加信息类
     m_adm_addDean = new Admin_AddDean;
     m_adm_addInfo = new Admin_AddInfo;
     m_adm_addArchive = new Admin_AddArchive;
-    m_adm_addDormitory = new Admin_AddDormitory ;
+    m_adm_addDormitory = new Admin_AddDormitory;
+
+    //初始化修改信息类
+    m_adm_modifyDean = new Admin_ModifyDean;
+    m_adm_modifyDorm = new Admin_ModifyDormitory;
 }
 
 //初始化连接
@@ -265,6 +300,7 @@ void Admin::InitConnection()
 
     connect(ui->pushButton_search,SIGNAL(clicked()),this,SLOT(pushButton_search()));//搜素按钮
     connect(ui->pushButton_add,SIGNAL(clicked()),this,SLOT(pushButton_add()));//添加按钮
+    connect(ui->pushButton_modify,SIGNAL(clicked()),this,SLOT(pushButton_modify()));//修改按钮
 }
 
 //温度信息
