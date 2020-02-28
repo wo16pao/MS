@@ -33,7 +33,7 @@ void Widget::SqlConnect()
     db=QSqlDatabase::addDatabase("QMYSQL","mysql_connect");
     db.setHostName("localhost");
     db.setPort(3306);
-    db.setDatabaseName("managesystem");
+    db.setDatabaseName("test");
     db.setUserName("root");
     db.setPassword("root");
     while(!db.open())
@@ -66,7 +66,7 @@ void Widget::Login()
     else if(ui->radioButton_admin->isChecked())
     {
         //管理员登陆
-        query.exec("select count(manager_id) from manager where manager_id = "+userId+" and manager_password = "+userPsw);
+        query.exec("select count(账号) from manager where 账号 = '"+userId+"' and 密码 = '"+userPsw+"';");
     }
     bool flag=false;//判断是否登录成功
     while(query.next())//判断是否存在，若存在则应为1

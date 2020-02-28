@@ -48,7 +48,7 @@ public slots:
 
     void pushButton_search();
     void pushButton_add();
-   // void pushButton_delete();
+    void pushButton_delete();
     void pushButton_modify();
 
 signals:

@@ -3,6 +3,7 @@
 #include <QtSql/QSqlQuery>
 #include <QDebug>
 #include <QTime>
+#include <QMessageBox>
 
 Admin::Admin(QWidget *parent) :
     QWidget(parent),
@@ -239,6 +240,48 @@ void Admin::pushButton_add()
 
 }
 
+//删除按钮
+void Admin::pushButton_delete()
+{
+    if(!ui->tableWidget->isItemSelected(ui->tableWidget->currentItem()))
+        return;
+
+    if(QMessageBox::No==QMessageBox::question(this,"警告","确定要删除吗",QMessageBox::Yes|QMessageBox::No))
+        return;
+
+    QSqlQuery query(m_db);
+    QString str;
+
+    switch (ui->comboBox->currentIndex()) {
+    case 1:
+        str="delete from `information` where 学号='"+ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text()+"' and 姓名='"+ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text()+"' and 出门时间='"+ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text()+"' and 进门时间='"+ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text()+"';";
+        break;
+
+    case 2:
+        str="delete from `archive` where 学号='"+ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text()+"';";
+        break;
+
+    case 3:
+        str="delete from `dormitory` where 宿舍区域='"+ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text()+"' and 楼栋号='"+ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text()+"' and 大寝号='"+ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text()+"' and 小寝号='"+ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text()+"' and 床号='"+ui->tableWidget->item(ui->tableWidget->currentRow(),4)->text()+"';";
+        break;
+
+    case 4:
+        str="delete from `dean` where 学院名称='"+ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text()+"' and 专业名称='"+ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text()+"' and 班级号='"+ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text()+"' and 辅导员='"+ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text()+"';";
+        break;
+
+    default:
+        return;
+    }
+    if(query.exec(str))
+    {
+        combobox_query(ui->comboBox->currentIndex());
+        QMessageBox::information(this,"提示","删除成功",QMessageBox::Ok);
+    }
+    else {
+         QMessageBox::critical(this,"提示","删除失败",QMessageBox::Ok);
+    }
+}
+
 //修改按钮
 void Admin::pushButton_modify()
 {
@@ -301,13 +344,14 @@ void Admin::InitConnection()
     connect(ui->pushButton_search,SIGNAL(clicked()),this,SLOT(pushButton_search()));//搜素按钮
     connect(ui->pushButton_add,SIGNAL(clicked()),this,SLOT(pushButton_add()));//添加按钮
     connect(ui->pushButton_modify,SIGNAL(clicked()),this,SLOT(pushButton_modify()));//修改按钮
+    connect(ui->pushButton_delete,SIGNAL(clicked()),this,SLOT(pushButton_delete()));//删除按钮
 }
 
 //温度信息
 void Admin::queryTemperature()
 {
     QString get_row = "SELECT COUNT(*) FROM `information`;";
-    QString str="select * from `information` order by '学号' asc;";
+    QString str="select * from `information` order by 学号 asc;";
     queryFunction(get_row,str,"information",true);
 }
 
@@ -315,7 +359,7 @@ void Admin::queryTemperature()
 void Admin::queryArchive()
 {
     QString get_row = "SELECT COUNT(*) FROM `archive`;";//获取行数
-    QString str = "select * from `archive` order by '学号' asc;";//全部数据
+    QString str = "select * from `archive` order by 学号 asc;";//全部数据
     queryFunction(get_row,str,"archive");
 }
 
@@ -323,7 +367,7 @@ void Admin::queryArchive()
 void Admin::queryDormitory()
 {
     QString get_row = "SELECT COUNT(*) FROM `dormitory`;";
-    QString str = "SELECT * FROM `dormitory` ORDER BY '楼栋号' ASC;";
+    QString str = "SELECT * FROM `dormitory` ORDER BY 楼栋号 ASC, 大寝号 asc, 小寝号 asc, 床号 asc;";
     queryFunction(get_row,str,"dormitory");
 }
 
@@ -331,6 +375,6 @@ void Admin::queryDormitory()
 void Admin::queryDean()
 {
     QString get_row = "SELECT COUNT(*) FROM `dean`;";
-    QString str = "select * from `dean` order by '班级号' asc;";
+    QString str = "select * from `dean` order by 班级号 asc;";
     queryFunction(get_row,str,"dean");
 }
