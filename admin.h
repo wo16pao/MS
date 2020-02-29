@@ -12,6 +12,8 @@
 #include "admin/admin_modifyarchive.h"
 #include "admin/admin_modifyinfo.h"
 
+#include "other/excelexport.h"
+#include "other/loading.h"
 
 namespace Ui {
 class Admin;
@@ -38,20 +40,22 @@ public slots:
     void queryDean();//查学院
 
 public slots:
-    void pushButton_back();
+    void pushButton_back();//返回
 
-    void pushButton_index();
+    void pushButton_index();//切换tabwidget按钮
     void pushButton_info();
     void pushButton_data();
     void pushButton_release();
     void pushButton_other();
 
-    void combobox_query(int);
+    void combobox_query(int);//查询切换
 
-    void pushButton_search();
-    void pushButton_add();
-    void pushButton_delete();
-    void pushButton_modify();
+    void pushButton_search();//查询
+    void pushButton_add();//添加
+    void pushButton_delete();//删除
+    void pushButton_modify();//修改
+
+    void exportExcel();//导出到excel表
 
 signals:
     void signal_backWindow();//返回上个窗口的信号
@@ -73,6 +77,9 @@ private:
     Admin_ModifyDormitory *m_adm_modifyDorm;
     Admin_ModifyArchive *m_adm_modifyArchive;
     Admin_ModifyInfo *m_adm_modifyInfo;
+
+    ExcelExport *excelExport;
+    Loading *loading;//等待动画
 };
 
 #endif // ADMIN_H

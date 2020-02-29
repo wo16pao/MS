@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QTime>
 #include <QMessageBox>
+#include <QFileDialog>
 
 Admin::Admin(QWidget *parent) :
     QWidget(parent),
@@ -316,6 +317,37 @@ void Admin::pushButton_modify()
     }
 }
 
+//导出按钮
+void Admin::exportExcel()
+{
+    QString filepath=QFileDialog::getSaveFileName(this,tr("Save as"),".",tr(" (*.xlsx)"));
+    if(filepath.isEmpty())
+        return;
+
+    loading->show();//开始动画
+
+    excelExport->newExcel(filepath);
+
+    //设置表头
+    for(int i=0;i<ui->tableWidget->columnCount();++i)
+    {
+        excelExport->setCellValue(1 , i+1 , ui->tableWidget->horizontalHeaderItem(i)->text());
+    }
+
+    //设置内容
+    for(int i=1;i<ui->tableWidget->rowCount();++i)
+    {
+        for(int j=0;j<ui->tableWidget->columnCount();++j)
+        {
+            excelExport->setCellValue(i+1,j+1,ui->tableWidget->item(i,j)->text());
+        }
+    }
+
+    excelExport->saveExcel(filepath);
+
+    loading->close();//结束动画
+}
+
 //初始化
 void Admin::Init()
 {
@@ -333,6 +365,9 @@ void Admin::Init()
     m_adm_modifyDorm = new Admin_ModifyDormitory;
     m_adm_modifyArchive = new Admin_ModifyArchive;
     m_adm_modifyInfo = new Admin_ModifyInfo;
+
+    excelExport = new ExcelExport;
+    loading = new Loading(this);
 }
 
 //初始化连接
@@ -353,6 +388,8 @@ void Admin::InitConnection()
     connect(ui->pushButton_add,SIGNAL(clicked()),this,SLOT(pushButton_add()));//添加按钮
     connect(ui->pushButton_modify,SIGNAL(clicked()),this,SLOT(pushButton_modify()));//修改按钮
     connect(ui->pushButton_delete,SIGNAL(clicked()),this,SLOT(pushButton_delete()));//删除按钮
+
+    connect(ui->pushButton_export,SIGNAL(clicked()),this,SLOT(exportExcel()));//导出按钮
 }
 
 //温度信息

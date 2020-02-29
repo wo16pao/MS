@@ -22,7 +22,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++11
+CONFIG += c++11 qaxcontainer
 
 SOURCES += \
         main.cpp \
@@ -36,7 +36,9 @@ SOURCES += \
     admin/admin_modifydean.cpp \
     admin/admin_modifydormitory.cpp \
     admin/admin_modifyarchive.cpp \
-    admin/admin_modifyinfo.cpp
+    admin/admin_modifyinfo.cpp \
+    other/excelexport.cpp \
+    other/loading.cpp
 
 HEADERS += \
         widget.h \
@@ -49,7 +51,9 @@ HEADERS += \
     admin/admin_modifydean.h \
     admin/admin_modifydormitory.h \
     admin/admin_modifyarchive.h \
-    admin/admin_modifyinfo.h
+    admin/admin_modifyinfo.h \
+    other/excelexport.h \
+    other/loading.h
 
 FORMS += \
         widget.ui \
@@ -62,9 +66,13 @@ FORMS += \
     admin/admin_modifydean.ui \
     admin/admin_modifydormitory.ui \
     admin/admin_modifyarchive.ui \
-    admin/admin_modifyinfo.ui
+    admin/admin_modifyinfo.ui \
+    other/loading.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resource.qrc
