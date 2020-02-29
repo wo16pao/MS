@@ -292,7 +292,9 @@ void Admin::pushButton_modify()
 
     switch (ui->comboBox->currentIndex()) {
     case 1:
-
+        connect(m_adm_modifyInfo,SIGNAL(refresh()),this,SLOT(queryInfo()));
+        m_adm_modifyInfo->getInfo(ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text());
+        m_adm_modifyInfo->show();
         break;
     case 2:
         connect(m_adm_modifyArchive,SIGNAL(refresh()),this,SLOT(queryArchive()));
@@ -330,6 +332,7 @@ void Admin::Init()
     m_adm_modifyDean = new Admin_ModifyDean;
     m_adm_modifyDorm = new Admin_ModifyDormitory;
     m_adm_modifyArchive = new Admin_ModifyArchive;
+    m_adm_modifyInfo = new Admin_ModifyInfo;
 }
 
 //初始化连接

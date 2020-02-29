@@ -104,7 +104,7 @@ void Admin_ModifyArchive::getArchive(QString text)
 void Admin_ModifyArchive::initArchive(QString text)
 {
     QSqlQuery query(db);
-    QString str = "select * from `archive` where 学号='"+text+"'";
+    QString str = "select * from `archive` where 学号='"+text+"';";
     query.exec(str);
     int index=0;
     if(query.next())

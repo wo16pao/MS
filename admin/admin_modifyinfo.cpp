@@ -1,17 +1,16 @@
-#include "admin_addinfo.h"
-#include "ui_admin_addinfo.h"
+#include "admin_modifyinfo.h"
+#include "ui_admin_modifyinfo.h"
 #include <QtSql/QSqlQuery>
 #include <QKeyEvent>
 
-
-Admin_AddInfo::Admin_AddInfo(QWidget *parent) :
+Admin_ModifyInfo::Admin_ModifyInfo(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Admin_AddInfo)
+    ui(new Ui::Admin_ModifyInfo)
 {
     ui->setupUi(this);
     db = QSqlDatabase::database("mysql_connect");
 
-    connect(ui->pushButton_confirm,SIGNAL(clicked()),this,SLOT(addInfo()));
+    connect(ui->pushButton_confirm,SIGNAL(clicked()),this,SLOT(modifyInfo()));
     connect(ui->pushButton_quit,SIGNAL(clicked()),this,SLOT(pushButton_back()));
     connect(ui->lineEdit_id,SIGNAL(textChanged(QString)),this,SLOT(checkId(QString)));
     connect(ui->lineEdit_id,SIGNAL(textChanged (QString)),this,SLOT(showId(QString)));
@@ -20,12 +19,12 @@ Admin_AddInfo::Admin_AddInfo(QWidget *parent) :
     ui->listWidget->setVisible(false);
 }
 
-Admin_AddInfo::~Admin_AddInfo()
+Admin_ModifyInfo::~Admin_ModifyInfo()
 {
     delete ui;
 }
 
-void Admin_AddInfo::addInfo()
+void Admin_ModifyInfo::modifyInfo()
 {
     QString id = ui->lineEdit_id->text();
     QString name = ui->lineEdit_name->text();
@@ -45,19 +44,19 @@ void Admin_AddInfo::addInfo()
         return;
     }
 
-    QString str = "insert into `information` values ('"+id+"','"+name+"','"+out+"','"+in+"','"+sub+"','"+temp+"','"+normal+"','"+remark+"');";
+    QString str = "update `information` set 学号= '"+id+"',姓名='"+name+"',出门时间='"+out+"',进门时间='"+in+"',时间间隔='"+sub+"',体温='"+temp+"',是否正常='"+normal+"',备注='"+remark+"' where 学号='"+m_id+"' and 姓名='"+m_name+"' and 出门时间='"+m_out.toString("hh:mm:ss")+"' and 进门时间='"+m_in.toString("hh:mm:ss")+"';";
     QSqlQuery query(db);
     if(query.exec(str))
     {
-        ui->label_result->setText("添加成功");
+        ui->label_result->setText("修改成功");
         emit refresh();
     }
     else {
-        ui->label_result->setText("添加失败，请检查信息是否填写正确");
+        ui->label_result->setText("修改失败，请检查信息是否填写正确");
     }
 }
 
-void Admin_AddInfo::pushButton_back()
+void Admin_ModifyInfo::pushButton_back()
 {
     ui->label_id->clear();
     ui->label_result->clear();
@@ -70,7 +69,35 @@ void Admin_AddInfo::pushButton_back()
     this->close();
 }
 
-void Admin_AddInfo::showId(QString text)
+void Admin_ModifyInfo::getInfo(QString id, QString name, QString out , QString in)
+{
+    m_id = id;
+    m_name = name;
+    m_out = QTime::fromString(out,"hh:mm:ss");
+    m_in = QTime::fromString(in,"hh:mm:ss");
+    initInfo();
+}
+
+void Admin_ModifyInfo::initInfo()
+{
+    ui->lineEdit_id->setText(m_id);
+    ui->lineEdit_name->setText(m_name);
+    ui->timeEdit->setTime(m_out);
+    ui->timeEdit_2->setTime(m_in);
+    QSqlQuery query(db);
+    QString str = "select * from `information` where 学号='"+m_id+"' and 姓名='"+m_name+"' and 出门时间='"+m_out.toString("hh:mm:ss")+"' and 进门时间='"+m_in.toString("hh:mm:ss")+"';";
+    query.exec(str);
+    int index = 5;
+    if(query.next())
+    {
+        ui->lineEdit_temp->setText(query.value(index++).toString());
+        ui->comboBox->setCurrentText(query.value(index++).toString());
+        ui->lineEdit_remark->setText(query.value(index++).toString());
+    }
+}
+
+
+void Admin_ModifyInfo::showId(QString text)
 {
     ui->listWidget->clear();
     ui->listWidget->setMinimumHeight(81);
@@ -107,7 +134,7 @@ void Admin_AddInfo::showId(QString text)
     }
 }
 
-void Admin_AddInfo::checkId(QString text)
+void Admin_ModifyInfo::checkId(QString text)
 {
     QSqlQuery query(db);
     QString str = "select 姓名 from `archive` where 学号='"+text+"';";
@@ -124,7 +151,7 @@ void Admin_AddInfo::checkId(QString text)
     ui->label_id->setText("学号不存在");
 }
 
-void Admin_AddInfo::mouseClicked()
+void Admin_ModifyInfo::mouseClicked()
 {
     ui->lineEdit_id->setText(ui->listWidget->currentItem()->text());
     ui->listWidget->setVisible(false);
@@ -132,12 +159,12 @@ void Admin_AddInfo::mouseClicked()
     checkId(ui->lineEdit_id->text());
 }
 
-void Admin_AddInfo::listVisable()
+void Admin_ModifyInfo::listVisable()
 {
     ui->listWidget->setVisible(false);
 }
 
-void Admin_AddInfo::keyPressEvent ( QKeyEvent * keyevent )
+void Admin_ModifyInfo::keyPressEvent ( QKeyEvent * keyevent )
 {
 
 
@@ -168,4 +195,3 @@ void Admin_AddInfo::keyPressEvent ( QKeyEvent * keyevent )
         checkId(ui->lineEdit_id->text());
     }
 }
-

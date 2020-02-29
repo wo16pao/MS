@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QtSql/QSqlDatabase>
 
+
 namespace Ui {
 class Admin_AddInfo;
 }
@@ -20,7 +21,17 @@ public slots:
     void addInfo();
     void pushButton_back();
 
-    void checkId();
+    void showId(QString);
+    void checkId(QString);
+
+    void mouseClicked();
+
+    void listVisable();
+
+protected:
+    void keyPressEvent (QKeyEvent*);
+
+
 
 signals:
     void refresh();

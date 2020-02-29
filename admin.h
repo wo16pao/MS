@@ -10,7 +10,7 @@
 #include "admin/admin_modifydean.h"
 #include "admin/admin_modifydormitory.h"
 #include "admin/admin_modifyarchive.h"
-
+#include "admin/admin_modifyinfo.h"
 
 
 namespace Ui {
@@ -72,6 +72,7 @@ private:
     Admin_ModifyDean *m_adm_modifyDean;
     Admin_ModifyDormitory *m_adm_modifyDorm;
     Admin_ModifyArchive *m_adm_modifyArchive;
+    Admin_ModifyInfo *m_adm_modifyInfo;
 };
 
 #endif // ADMIN_H
