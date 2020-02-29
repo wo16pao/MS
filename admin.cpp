@@ -295,11 +295,13 @@ void Admin::pushButton_modify()
 
         break;
     case 2:
-
+        connect(m_adm_modifyArchive,SIGNAL(refresh()),this,SLOT(queryArchive()));
+        m_adm_modifyArchive->getArchive(ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text());
+        m_adm_modifyArchive->show();
         break;
     case 3:
         connect(m_adm_modifyDorm,SIGNAL(refresh()),this,SLOT(queryDormitory()));
-        m_adm_modifyDorm->getDean(ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),4)->text());
+        m_adm_modifyDorm->getDormitory(ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),4)->text());
         m_adm_modifyDorm->show();
         break;
     case 4:
@@ -327,6 +329,7 @@ void Admin::Init()
     //初始化修改信息类
     m_adm_modifyDean = new Admin_ModifyDean;
     m_adm_modifyDorm = new Admin_ModifyDormitory;
+    m_adm_modifyArchive = new Admin_ModifyArchive;
 }
 
 //初始化连接

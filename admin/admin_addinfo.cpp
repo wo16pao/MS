@@ -59,6 +59,8 @@ void Admin_AddInfo::pushButton_back()
     ui->lineEdit_name->clear();
     ui->lineEdit_temp->clear();
     ui->lineEdit_remark->clear();
+    ui->timeEdit->clear();
+    ui->timeEdit_2->clear();
     this->close();
 }
 

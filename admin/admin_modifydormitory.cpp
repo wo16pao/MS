@@ -54,7 +54,7 @@ void Admin_ModifyDormitory::modifyDormitory()
     }
 }
 
-void Admin_ModifyDormitory::getDean(QString area, QString building , QString big, QString small, QString bed)
+void Admin_ModifyDormitory::getDormitory(QString area, QString building , QString big, QString small, QString bed)
 {
     ui->comboBox->setCurrentText(area);
     ui->lineEdit->setText(building);

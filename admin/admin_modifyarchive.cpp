@@ -1,38 +1,24 @@
-#include "admin_addarchive.h"
-#include "ui_admin_addarchive.h"
+#include "admin_modifyarchive.h"
+#include "ui_admin_modifyarchive.h"
 #include <QtSql/QSqlQuery>
 
-Admin_AddArchive::Admin_AddArchive(QWidget *parent) :
+Admin_ModifyArchive::Admin_ModifyArchive(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Admin_AddArchive)
+    ui(new Ui::Admin_ModifyArchive)
 {
     ui->setupUi(this);
     db = QSqlDatabase::database("mysql_connect");
     initConnection();
     initCombobox();
+
 }
 
-Admin_AddArchive::~Admin_AddArchive()
+Admin_ModifyArchive::~Admin_ModifyArchive()
 {
     delete ui;
 }
 
-void Admin_AddArchive::initConnection()
-{
-    connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(addArchive()));
-    connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(pushButton_back()));
-
-    connect(ui->comboBox_dean,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDean2(QString)));
-    connect(ui->comboBox_dean2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDean3(QString)));
-    connect(ui->comboBox_dean3,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDean4(QString)));
-
-    connect(ui->comboBox_dorm,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDorm2(QString)));
-    connect(ui->comboBox_dorm2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDorm3(QString)));
-    connect(ui->comboBox_dorm3,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDorm4(QString)));
-    connect(ui->comboBox_dorm4,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDorm5(QString)));
-}
-
-void Admin_AddArchive::addArchive()
+void Admin_ModifyArchive::modifyArchive()
 {
     QString id =        ui->lineEdit_id->text();
     QString name =      ui->lineEdit_name->text();
@@ -58,22 +44,21 @@ void Admin_AddArchive::addArchive()
         return;
     }
 
-    QString str = "insert into `archive` values ('"+id+"','"+name+"','"+sex+"','"+phone+"','"+birth+"','"+adress+"','"+entrance+"','"+dean+"','"+dean2+"','"+dean3+"','"+dorm+"','"+dorm2+"','"+dorm3+"','"+dorm4+"','"+dorm5+"','"+dean4+"','"+num+"');";
+    QString str = "update `archive` set 学号='"+id+"',姓名='"+name+"',性别='"+sex+"',联系电话='"+phone+"',出生年月='"+birth+"',家庭住址='"+adress+"',入学时间='"+entrance+"',学院名称='"+dean+"',专业名称='"+dean2+"',班级号='"+dean3+"',宿舍区域='"+dorm+"',楼栋号='"+dorm2+"',大寝号='"+dorm3+"',小寝号='"+dorm4+"',床号='"+dorm5+"',辅导员='"+dean4+"',出入次数='"+num+"' where 学号='"+m_id+"';";
     QSqlDatabase db;
     db = QSqlDatabase::database("mysql_connect");
     QSqlQuery query(db);
     if(query.exec(str))
     {
-        ui->label_result->setText("添加成功");
+        ui->label_result->setText("修改成功");
         emit refresh();
     }
     else {
-        ui->label_result->setText("添加失败，请检查信息是否填写正确");
+        ui->label_result->setText("修改失败，请检查信息是否填写正确");
     }
-
 }
 
-void Admin_AddArchive::pushButton_back()
+void Admin_ModifyArchive::pushButton_back()
 {
     ui->label_result->clear();
     ui->lineEdit_id->clear();
@@ -93,7 +78,58 @@ void Admin_AddArchive::pushButton_back()
     this->close();
 }
 
-void Admin_AddArchive::initDean()
+
+//-----------------------同addArchive------------//
+void Admin_ModifyArchive::initConnection()
+{
+    connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(modifyArchive()));
+    connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(pushButton_back()));
+
+    connect(ui->comboBox_dean,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDean2(QString)));
+    connect(ui->comboBox_dean2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDean3(QString)));
+    connect(ui->comboBox_dean3,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDean4(QString)));
+
+    connect(ui->comboBox_dorm,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDorm2(QString)));
+    connect(ui->comboBox_dorm2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDorm3(QString)));
+    connect(ui->comboBox_dorm3,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDorm4(QString)));
+    connect(ui->comboBox_dorm4,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDorm5(QString)));
+}
+
+void Admin_ModifyArchive::getArchive(QString text)
+{
+    initArchive(text);
+    m_id = text;
+}
+
+void Admin_ModifyArchive::initArchive(QString text)
+{
+    QSqlQuery query(db);
+    QString str = "select * from `archive` where 学号='"+text+"'";
+    query.exec(str);
+    int index=0;
+    if(query.next())
+    {
+        ui->lineEdit_id->setText(query.value(index++).toString());
+        ui->lineEdit_name->setText(query.value(index++).toString());
+        ui->comboBox->setCurrentText(query.value(index++).toString());
+        ui->lineEdit_phone->setText(query.value(index++).toString());
+        ui->dateEdit->setDate(query.value(index++).toDate());
+        ui->lineEdit_address->setText(query.value(index++).toString());
+        ui->dateEdit_2->setDate(query.value(index++).toDate());
+        ui->comboBox_dean->setCurrentText(query.value(index++).toString());
+        ui->comboBox_dean2->setCurrentText(query.value(index++).toString());
+        ui->comboBox_dean3->setCurrentText(query.value(index++).toString());
+        ui->comboBox_dorm->setCurrentText(query.value(index++).toString());
+        ui->comboBox_dorm2->setCurrentText(query.value(index++).toString());
+        ui->comboBox_dorm3->setCurrentText(query.value(index++).toString());
+        ui->comboBox_dorm4->setCurrentText(query.value(index++).toString());
+        ui->comboBox_dorm5->setCurrentText(query.value(index++).toString());
+        ui->comboBox_dean4->setCurrentText(query.value(index++).toString());
+        ui->lineEdit_num->setText(query.value(index++).toString());
+    }
+}
+
+void Admin_ModifyArchive::initDean()
 {
     QSqlQuery query(db);
     QStringList header;
@@ -106,7 +142,7 @@ void Admin_AddArchive::initDean()
     ui->comboBox_dean->addItems(header);
 }
 
-void Admin_AddArchive::initDean2(QString text)
+void Admin_ModifyArchive::initDean2(QString text)
 {
     ui->comboBox_dean2->clear();
     QSqlQuery query(db);
@@ -120,7 +156,7 @@ void Admin_AddArchive::initDean2(QString text)
     ui->comboBox_dean2->addItems(header);
 }
 
-void Admin_AddArchive::initDean3(QString text)
+void Admin_ModifyArchive::initDean3(QString text)
 {
     ui->comboBox_dean3->clear();
     QSqlQuery query(db);
@@ -134,7 +170,7 @@ void Admin_AddArchive::initDean3(QString text)
     ui->comboBox_dean3->addItems(header);
 }
 
-void Admin_AddArchive::initDean4(QString text)
+void Admin_ModifyArchive::initDean4(QString text)
 {
     ui->comboBox_dean4->clear();
     QSqlQuery query(db);
@@ -148,7 +184,7 @@ void Admin_AddArchive::initDean4(QString text)
     ui->comboBox_dean4->addItems(header);
 }
 
-void Admin_AddArchive::initDorm()
+void Admin_ModifyArchive::initDorm()
 {
     ui->comboBox_dorm->clear();
     QSqlQuery query(db);
@@ -162,7 +198,7 @@ void Admin_AddArchive::initDorm()
     ui->comboBox_dorm->addItems(header);
 }
 
-void Admin_AddArchive::initDorm2(QString text)
+void Admin_ModifyArchive::initDorm2(QString text)
 {
     ui->comboBox_dorm2->clear();
     QSqlQuery query(db);
@@ -176,7 +212,7 @@ void Admin_AddArchive::initDorm2(QString text)
     ui->comboBox_dorm2->addItems(header);
 }
 
-void Admin_AddArchive::initDorm3(QString text)
+void Admin_ModifyArchive::initDorm3(QString text)
 {
     ui->comboBox_dorm3->clear();
     QSqlQuery query(db);
@@ -190,7 +226,7 @@ void Admin_AddArchive::initDorm3(QString text)
     ui->comboBox_dorm3->addItems(header);
 }
 
-void Admin_AddArchive::initDorm4(QString text)
+void Admin_ModifyArchive::initDorm4(QString text)
 {
     ui->comboBox_dorm4->clear();
     QSqlQuery query(db);
@@ -204,7 +240,7 @@ void Admin_AddArchive::initDorm4(QString text)
     ui->comboBox_dorm4->addItems(header);
 }
 
-void Admin_AddArchive::initDorm5(QString text)
+void Admin_ModifyArchive::initDorm5(QString text)
 {
     ui->comboBox_dorm5->clear();
     QSqlQuery query(db);
@@ -218,7 +254,7 @@ void Admin_AddArchive::initDorm5(QString text)
     ui->comboBox_dorm5->addItems(header);
 }
 
-void Admin_AddArchive::initCombobox()
+void Admin_ModifyArchive::initCombobox()
 {
     initDean();
     initDean2(ui->comboBox_dean->currentText());

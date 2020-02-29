@@ -9,6 +9,7 @@
 #include "admin/admin_addinfo.h"
 #include "admin/admin_modifydean.h"
 #include "admin/admin_modifydormitory.h"
+#include "admin/admin_modifyarchive.h"
 
 
 
@@ -70,6 +71,7 @@ private:
     //修改信息
     Admin_ModifyDean *m_adm_modifyDean;
     Admin_ModifyDormitory *m_adm_modifyDorm;
+    Admin_ModifyArchive *m_adm_modifyArchive;
 };
 
 #endif // ADMIN_H

@@ -34,7 +34,8 @@ SOURCES += \
     admin/admin_adddean.cpp \
     admin/admin_addarchive.cpp \
     admin/admin_modifydean.cpp \
-    admin/admin_modifydormitory.cpp
+    admin/admin_modifydormitory.cpp \
+    admin/admin_modifyarchive.cpp
 
 HEADERS += \
         widget.h \
@@ -45,7 +46,8 @@ HEADERS += \
     admin/admin_adddean.h \
     admin/admin_addarchive.h \
     admin/admin_modifydean.h \
-    admin/admin_modifydormitory.h
+    admin/admin_modifydormitory.h \
+    admin/admin_modifyarchive.h
 
 FORMS += \
         widget.ui \
@@ -56,7 +58,8 @@ FORMS += \
     admin/admin_adddean.ui \
     admin/admin_addarchive.ui \
     admin/admin_modifydean.ui \
-    admin/admin_modifydormitory.ui
+    admin/admin_modifydormitory.ui \
+    admin/admin_modifyarchive.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

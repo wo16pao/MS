@@ -19,7 +19,7 @@ public slots:
     void pushButton_back();
     void modifyDormitory();
 
-    void getDean(QString ,QString ,QString,QString,QString);
+    void getDormitory(QString ,QString ,QString,QString,QString);
 
 signals:
     void refresh();
