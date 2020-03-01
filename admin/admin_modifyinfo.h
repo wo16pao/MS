@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QTime>
 #include <QtSql/QSqlDatabase>
+#include <QListWidgetItem>
 
 namespace Ui {
 class Admin_ModifyInfo;
@@ -28,7 +29,7 @@ public slots:
     void showId(QString);
     void checkId(QString);
 
-    void mouseClicked();
+    void mouseClicked(QListWidgetItem*);
 
     void listVisable();
 

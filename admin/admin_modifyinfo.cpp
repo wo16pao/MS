@@ -9,13 +9,14 @@ Admin_ModifyInfo::Admin_ModifyInfo(QWidget *parent) :
 {
     ui->setupUi(this);
     db = QSqlDatabase::database("mysql_connect");
+    ui->listWidget->setMouseTracking(true);
 
     connect(ui->pushButton_confirm,SIGNAL(clicked()),this,SLOT(modifyInfo()));
     connect(ui->pushButton_quit,SIGNAL(clicked()),this,SLOT(pushButton_back()));
     connect(ui->lineEdit_id,SIGNAL(textChanged(QString)),this,SLOT(checkId(QString)));
     connect(ui->lineEdit_id,SIGNAL(textChanged (QString)),this,SLOT(showId(QString)));
     connect(ui->lineEdit_id,SIGNAL(editingFinished()),this,SLOT(listVisable()));
-    connect(ui->listWidget,SIGNAL(itemSelectionChanged()),this,SLOT(mouseClicked()));
+    connect(ui->listWidget,SIGNAL(itemSelectionChanged(QListWidgetItem*)),this,SLOT(mouseClicked(QListWidgetItem*)));
     ui->listWidget->setVisible(false);
 }
 
@@ -151,9 +152,9 @@ void Admin_ModifyInfo::checkId(QString text)
     ui->label_id->setText("学号不存在");
 }
 
-void Admin_ModifyInfo::mouseClicked()
+void Admin_ModifyInfo::mouseClicked(QListWidgetItem* item)
 {
-    ui->lineEdit_id->setText(ui->listWidget->currentItem()->text());
+    ui->lineEdit_id->setText(item);
     ui->listWidget->setVisible(false);
     ui->label_id->clear();
     checkId(ui->lineEdit_id->text());

@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QtSql/QSqlDatabase>
-
+#include <QListWidgetItem>
 
 namespace Ui {
 class Admin_AddInfo;
@@ -24,7 +24,7 @@ public slots:
     void showId(QString);
     void checkId(QString);
 
-    void mouseClicked();
+    void mouseClicked(QListWidgetItem*);
 
     void listVisable();
 
