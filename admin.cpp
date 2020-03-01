@@ -320,7 +320,7 @@ void Admin::pushButton_modify()
 //导出按钮
 void Admin::exportExcel()
 {
-    QString filepath=QFileDialog::getSaveFileName(this,tr("Save as"),"datafile",tr(" (.xlsx)"));
+    QString filepath=QFileDialog::getSaveFileName(this,tr("Save as"),"datafile",tr(" (*.xlsx)"));
     if(filepath.isEmpty())
         return;
 
@@ -354,33 +354,56 @@ void Admin::exportExcel()
         return;
     }
     exportThread->start();
-
-//    excelExport->newExcel(filepath);
-
-//    //设置表头
-//    for(int i=0;i<ui->tableWidget->columnCount();++i)
-//    {
-//        excelExport->setCellValue(1 , i+1 , ui->tableWidget->horizontalHeaderItem(i)->text());
-//    }
-
-//    //设置内容
-//    for(int i=1;i<ui->tableWidget->rowCount();++i)
-//    {
-//        for(int j=0;j<ui->tableWidget->columnCount();++j)
-//        {
-//            excelExport->setCellValue(i+1,j+1,ui->tableWidget->item(i,j)->text());
-//        }
-//    }
-
-//    excelExport->saveExcel(filepath);
-
-
 }
-
+//导出结束
 void Admin::exportExcelFinish()
 {
     loading->close();
+    exportThread->exit();
+    QMessageBox::information(this,"提示","导出完成",QMessageBox::Ok);
 }
+
+
+//导入按钮
+void Admin::importExcel()
+{
+    if(ui->comboBox->currentIndex()<1||ui->comboBox->currentIndex()>4)
+        return;
+    QString filepath=QFileDialog::getOpenFileName(this,tr("Open"),"",tr(" (*.xlsx)"));
+    if(filepath.isEmpty())
+        return;
+
+    importThread->getFilepath(filepath);
+    importThread->getIndex(ui->comboBox->currentIndex());
+    loading->show();
+
+    importThread->start();
+}
+//导入结束
+void Admin::importExcelFinish(int success,int failure)
+{
+    loading->close();
+    importThread->exit();
+    QString suc = QString::number(success);
+    QString fail = QString::number(failure);
+    QString str = "导入完成,成功"+suc+"个，失败"+fail+"个";
+    QMessageBox::information(this,"提示",str,QMessageBox::Ok);
+    switch (ui->comboBox->currentIndex()) {
+    case 1:
+        queryInfo();
+        break;
+    case 2:
+        queryArchive();
+        break;
+    case 3:
+        queryDormitory();
+        break;
+    case 4:
+        queryDean();
+        break;
+    }
+}
+
 
 //初始化
 void Admin::Init()
@@ -400,8 +423,9 @@ void Admin::Init()
     m_adm_modifyArchive = new Admin_ModifyArchive;
     m_adm_modifyInfo = new Admin_ModifyInfo;
 
-    excelExport = new ExcelExport;
+    //导入导出信息
     exportThread = new ExportThread;
+    importThread = new ImportThread;
     loading = new Loading(this);
 }
 
@@ -425,7 +449,9 @@ void Admin::InitConnection()
     connect(ui->pushButton_delete,SIGNAL(clicked()),this,SLOT(pushButton_delete()));//删除按钮
 
     connect(ui->pushButton_export,SIGNAL(clicked()),this,SLOT(exportExcel()));//导出按钮
+    connect(ui->pushButton_import,SIGNAL(clicked()),this,SLOT(importExcel()));//导入按钮
     connect(exportThread,SIGNAL(finish()),this,SLOT(exportExcelFinish()));
+    connect(importThread,SIGNAL(finish(int,int)),this,SLOT(importExcelFinish(int,int)));
 }
 
 //温度信息

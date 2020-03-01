@@ -45,12 +45,18 @@ void Admin_AddInfo::addInfo()
         return;
     }
 
-    QString str = "insert into `information` values ('"+id+"','"+name+"','"+out+"','"+in+"','"+sub+"','"+temp+"','"+normal+"','"+remark+"');";
+    QString str = "insert into `information` select '"+id+"','"+name+"','"+out+"','"+in+"','"+sub+"','"+temp+"','"+normal+"','"+remark+"' from dual where EXISTS(SELECT *FROM archive WHERE 学号='"+id+"' and 姓名='"+name+"');";
     QSqlQuery query(db);
     if(query.exec(str))
     {
-        ui->label_result->setText("添加成功");
-        emit refresh();
+        if(query.numRowsAffected()!=-1&&query.numRowsAffected()!=0)
+        {
+            ui->label_result->setText("添加成功");
+            emit refresh();
+        }
+        else {
+            ui->label_result->setText("添加失败，请检查信息是否填写正确");
+        }
     }
     else {
         ui->label_result->setText("添加失败，请检查信息是否填写正确");
@@ -88,7 +94,7 @@ void Admin_AddInfo::showId(QString text)
     if(ui->listWidget->count()>0)
         ui->listWidget->setVisible(true);
     else {
-         ui->listWidget->setVisible(false);
+        ui->listWidget->setVisible(false);
     }
 
     switch (ui->listWidget->count()) {

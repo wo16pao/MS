@@ -14,6 +14,8 @@
 
 #include "other/excelexport.h"
 #include "other/exportthread.h"
+#include "other/excelimport.h"
+#include "other/importthread.h"
 #include "other/loading.h"
 
 namespace Ui {
@@ -57,7 +59,9 @@ public slots:
     void pushButton_modify();//修改
 
     void exportExcel();//导出到excel表
+    void importExcel();//导入excel表到数据库
     void exportExcelFinish();
+    void importExcelFinish(int,int);
 
 signals:
     void signal_backWindow();//返回上个窗口的信号
@@ -80,8 +84,9 @@ private:
     Admin_ModifyArchive *m_adm_modifyArchive;
     Admin_ModifyInfo *m_adm_modifyInfo;
 
-    ExcelExport *excelExport;
+    //导入导出
     ExportThread *exportThread;
+    ImportThread *importThread;
     Loading *loading;//等待动画
 };
 

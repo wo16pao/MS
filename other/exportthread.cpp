@@ -52,7 +52,7 @@ void ExportThread::run()
             {
                 if(!m_flag)
                 {
-                    excelExport->setCellValue(i+1,j+1,query.value(j).toString());
+                    excelExport->setCellValue(i+2,j+1,query.value(j).toString());
                 }
                 else {
                     if(j==2||j==3||j==4)
@@ -61,11 +61,11 @@ void ExportThread::run()
                         time = query.value(j).toTime();
                         QString strBuffer;
                         strBuffer = time.toString("hh:mm:ss");
-                        excelExport->setCellValue(i+1,j+1,strBuffer);
+                        excelExport->setCellValue(i+2,j+1,strBuffer);
 
                     }
                     else {
-                        excelExport->setCellValue(i+1,j+1,query.value(j).toString());
+                        excelExport->setCellValue(i+2,j+1,query.value(j).toString());
                     }
                 }
             }

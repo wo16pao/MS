@@ -39,7 +39,9 @@ SOURCES += \
     admin/admin_modifyinfo.cpp \
     other/excelexport.cpp \
     other/loading.cpp \
-    other/exportthread.cpp
+    other/exportthread.cpp \
+    other/excelimport.cpp \
+    other/importthread.cpp
 
 HEADERS += \
         widget.h \
@@ -55,7 +57,9 @@ HEADERS += \
     admin/admin_modifyinfo.h \
     other/excelexport.h \
     other/loading.h \
-    other/exportthread.h
+    other/exportthread.h \
+    other/excelimport.h \
+    other/importthread.h
 
 FORMS += \
         widget.ui \
