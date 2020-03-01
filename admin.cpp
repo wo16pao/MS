@@ -320,32 +320,66 @@ void Admin::pushButton_modify()
 //导出按钮
 void Admin::exportExcel()
 {
-    QString filepath=QFileDialog::getSaveFileName(this,tr("Save as"),".",tr(" (*.xlsx)"));
+    QString filepath=QFileDialog::getSaveFileName(this,tr("Save as"),"datafile",tr(" (.xlsx)"));
     if(filepath.isEmpty())
         return;
 
-    loading->show();//开始动画
+    exportThread->getFilepath(filepath);
+    loading->show();
 
-    excelExport->newExcel(filepath);
+    QString get_row,str;
 
-    //设置表头
-    for(int i=0;i<ui->tableWidget->columnCount();++i)
-    {
-        excelExport->setCellValue(1 , i+1 , ui->tableWidget->horizontalHeaderItem(i)->text());
+    switch (ui->comboBox->currentIndex()) {
+    case 1:
+        get_row = "SELECT COUNT(*) FROM `information`;";
+        str="select * from `information` order by 学号 asc;";
+        exportThread->getInfo(get_row,str,"information",true);
+        break;
+    case 2:
+        get_row = "SELECT COUNT(*) FROM `archive`;";//获取行数
+        str = "select * from `archive` order by 学号 asc;";//全部数据
+        exportThread->getInfo(get_row,str,"archive");
+        break;
+    case 3:
+        get_row = "SELECT COUNT(*) FROM `dormitory`;";
+        str = "SELECT * FROM `dormitory` ORDER BY 楼栋号 ASC, 大寝号 asc, 小寝号 asc, 床号 asc;";
+        exportThread->getInfo(get_row,str,"dormitory");
+        break;
+    case 4:
+        get_row = "SELECT COUNT(*) FROM `dean`;";
+        str = "select * from `dean` order by 班级号 asc;";
+        exportThread->getInfo(get_row,str,"dean");
+        break;
+    default:
+        return;
     }
+    exportThread->start();
 
-    //设置内容
-    for(int i=1;i<ui->tableWidget->rowCount();++i)
-    {
-        for(int j=0;j<ui->tableWidget->columnCount();++j)
-        {
-            excelExport->setCellValue(i+1,j+1,ui->tableWidget->item(i,j)->text());
-        }
-    }
+//    excelExport->newExcel(filepath);
 
-    excelExport->saveExcel(filepath);
+//    //设置表头
+//    for(int i=0;i<ui->tableWidget->columnCount();++i)
+//    {
+//        excelExport->setCellValue(1 , i+1 , ui->tableWidget->horizontalHeaderItem(i)->text());
+//    }
 
-    loading->close();//结束动画
+//    //设置内容
+//    for(int i=1;i<ui->tableWidget->rowCount();++i)
+//    {
+//        for(int j=0;j<ui->tableWidget->columnCount();++j)
+//        {
+//            excelExport->setCellValue(i+1,j+1,ui->tableWidget->item(i,j)->text());
+//        }
+//    }
+
+//    excelExport->saveExcel(filepath);
+
+
+}
+
+void Admin::exportExcelFinish()
+{
+    loading->close();
 }
 
 //初始化
@@ -367,6 +401,7 @@ void Admin::Init()
     m_adm_modifyInfo = new Admin_ModifyInfo;
 
     excelExport = new ExcelExport;
+    exportThread = new ExportThread;
     loading = new Loading(this);
 }
 
@@ -390,6 +425,7 @@ void Admin::InitConnection()
     connect(ui->pushButton_delete,SIGNAL(clicked()),this,SLOT(pushButton_delete()));//删除按钮
 
     connect(ui->pushButton_export,SIGNAL(clicked()),this,SLOT(exportExcel()));//导出按钮
+    connect(exportThread,SIGNAL(finish()),this,SLOT(exportExcelFinish()));
 }
 
 //温度信息

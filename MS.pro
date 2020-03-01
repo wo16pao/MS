@@ -38,7 +38,8 @@ SOURCES += \
     admin/admin_modifyarchive.cpp \
     admin/admin_modifyinfo.cpp \
     other/excelexport.cpp \
-    other/loading.cpp
+    other/loading.cpp \
+    other/exportthread.cpp
 
 HEADERS += \
         widget.h \
@@ -53,7 +54,8 @@ HEADERS += \
     admin/admin_modifyarchive.h \
     admin/admin_modifyinfo.h \
     other/excelexport.h \
-    other/loading.h
+    other/loading.h \
+    other/exportthread.h
 
 FORMS += \
         widget.ui \

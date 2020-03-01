@@ -13,6 +13,7 @@
 #include "admin/admin_modifyinfo.h"
 
 #include "other/excelexport.h"
+#include "other/exportthread.h"
 #include "other/loading.h"
 
 namespace Ui {
@@ -56,6 +57,7 @@ public slots:
     void pushButton_modify();//修改
 
     void exportExcel();//导出到excel表
+    void exportExcelFinish();
 
 signals:
     void signal_backWindow();//返回上个窗口的信号
@@ -79,6 +81,7 @@ private:
     Admin_ModifyInfo *m_adm_modifyInfo;
 
     ExcelExport *excelExport;
+    ExportThread *exportThread;
     Loading *loading;//等待动画
 };
 

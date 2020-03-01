@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QFile>
 #include <qstring.h>
+#include <QThread>
 
 class ExcelExport
 {
@@ -25,5 +26,7 @@ public:
     QAxObject *pSheet;
 
 };
+
+
 
 #endif // EXCELEXPORT_H
