@@ -20,6 +20,11 @@ void ImportThread::run()
     case 4:
         excelImport->importDean(m_filepath);
         break;
+    case 5:
+        excelImport->importAunt(m_filepath);
+        break;
+    case 6:
+        excelImport->importManager(m_filepath);
     }
 
     m_success = excelImport->getSuccess();

@@ -36,6 +36,7 @@ void Admin::queryFunction(const QString &get_row, const QString &str, const QStr
         header << query.value(0).toString();
         index++;
     }
+            ui->tableWidget->setHorizontalHeaderLabels(header);//设置标头
     query.exec(get_row);
     if(query.first())
     {
@@ -45,7 +46,6 @@ void Admin::queryFunction(const QString &get_row, const QString &str, const QStr
     if(row)
     {
         ui->tableWidget->setColumnCount(index);//设置列数
-        ui->tableWidget->setHorizontalHeaderLabels(header);//设置标头
         //ui->tableWidget->horizontalHeader()->setStretchLastSection(true); //自动调整宽度
         ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
         ui->tableWidget->verticalHeader()->setVisible(false);//隐藏列头
@@ -60,12 +60,12 @@ void Admin::queryFunction(const QString &get_row, const QString &str, const QStr
                     ui->tableWidget->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
                 else
                 {
-                    if(j==2||j==3||j==4)
+                    if(j==2||j==3)
                     {
-                        QTime time;
-                        time = query.value(j).toTime();
+                        QDateTime time;
+                        time = query.value(j).toDateTime();
                         QString strBuffer;
-                        strBuffer = time.toString("hh:mm:ss");
+                        strBuffer = time.toString("yyyy-MM-dd hh:mm:ss");
                         ui->tableWidget->setItem(i,j,new QTableWidgetItem(strBuffer));
                     }
                     else
@@ -126,11 +126,18 @@ void Admin::combobox_query(int index)
     case 4:
         queryDean();
         break;
+    case 5:
+        queryAunt();
+        break;
+    case 6:
+        queryManager();
+        break;
     default:
         break;
     }
 }
 
+//--------------各个按钮----------------------------
 //搜索按钮
 void Admin::pushButton_search()
 {
@@ -201,12 +208,12 @@ void Admin::pushButton_search()
                     ui->tableWidget->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
                 else
                 {
-                    if(j==2||j==3||j==4)
+                    if(j==2||j==3)
                     {
-                        QTime time;
-                        time = query.value(j).toTime();
+                        QDateTime time;
+                        time = query.value(j).toDateTime();
                         QString strBuffer;
-                        strBuffer = time.toString("hh:mm:ss");
+                        strBuffer = time.toString("yyyy-MM-dd hh:mm:ss");
                         ui->tableWidget->setItem(i,j,new QTableWidgetItem(strBuffer));
                     }
                     else
@@ -272,6 +279,14 @@ void Admin::pushButton_delete()
         str="delete from `dean` where 学院名称='"+ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text()+"' and 专业名称='"+ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text()+"' and 班级号='"+ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text()+"' and 辅导员='"+ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text()+"';";
         break;
 
+    case 5:
+        str = "delete from `aunt` where 姓名='"+ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text()+"' and 账号='"+ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text()+"';";
+        break;
+
+    case 6:
+        str="delete from `manager` where 姓名='"+ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text()+"' and 账号='"+ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text()+"';";
+        break;
+
     default:
         return;
     }
@@ -320,7 +335,7 @@ void Admin::pushButton_modify()
 //导出按钮
 void Admin::exportExcel()
 {
-    QString filepath=QFileDialog::getSaveFileName(this,tr("Save as"),"datafile",tr(" (*.xlsx)"));
+    QString filepath=QFileDialog::getSaveFileName(this,tr("Save as"),"datafile",tr(" (*.xlsx);;(*.xls)"));
     if(filepath.isEmpty())
         return;
 
@@ -350,6 +365,16 @@ void Admin::exportExcel()
         str = "select * from `dean` order by 班级号 asc;";
         exportThread->getInfo(get_row,str,"dean");
         break;
+    case 5:
+        get_row = "SELECT COUNT(*) FROM `aunt`;";
+        str = "select * from `aunt` order by 宿舍区域 asc;";
+        exportThread->getInfo(get_row,str,"aunt");
+        break;
+    case 6:
+        get_row = "SELECT COUNT(*) FROM `manager`;";
+        str = "select * from `manager` order by 姓名 asc;";
+        exportThread->getInfo(get_row,str,"manager");
+        break;
     default:
         return;
     }
@@ -363,13 +388,12 @@ void Admin::exportExcelFinish()
     QMessageBox::information(this,"提示","导出完成",QMessageBox::Ok);
 }
 
-
 //导入按钮
 void Admin::importExcel()
 {
-    if(ui->comboBox->currentIndex()<1||ui->comboBox->currentIndex()>4)
+    if(ui->comboBox->currentIndex()<1||ui->comboBox->currentIndex()>6)
         return;
-    QString filepath=QFileDialog::getOpenFileName(this,tr("Open"),"",tr(" (*.xlsx)"));
+    QString filepath=QFileDialog::getOpenFileName(this,tr("Open"),"",tr(" (*.xlsx);;(*.xls)"));
     if(filepath.isEmpty())
         return;
 
@@ -401,9 +425,15 @@ void Admin::importExcelFinish(int success,int failure)
     case 4:
         queryDean();
         break;
+    case 5:
+        queryAunt();
+        break;
+    case 6:
+        queryManager();
+        break;
     }
 }
-
+//-----------------------各个按钮-------------------------------------------
 
 //初始化
 void Admin::Init()
@@ -454,6 +484,7 @@ void Admin::InitConnection()
     connect(importThread,SIGNAL(finish(int,int)),this,SLOT(importExcelFinish(int,int)));
 }
 
+//--------------------------------查询函数--------------------------
 //温度信息
 void Admin::queryInfo()
 {
@@ -485,3 +516,20 @@ void Admin::queryDean()
     QString str = "select * from `dean` order by 班级号 asc;";
     queryFunction(get_row,str,"dean");
 }
+
+//宿管信息
+void Admin::queryAunt()
+{
+    QString get_row = "select count(*) from `aunt`;";
+    QString str = "select * from `aunt` order by 宿舍区域 asc;";
+    queryFunction(get_row,str,"aunt");
+}
+
+//管理员信息
+void Admin::queryManager()
+{
+    QString get_row = "select count(*) from `manager`;";
+    QString str = "select * from `manager` order by 姓名 asc;";
+    queryFunction(get_row,str,"manager");
+}
+//--------------------------------查询函数--------------------------

@@ -489,6 +489,16 @@
        <string>学院信息</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>宿管信息</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>管理员信息</string>
+      </property>
+     </item>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_data">

@@ -41,6 +41,8 @@ public slots:
     void queryArchive();//查学生
     void queryDormitory();//查宿舍
     void queryDean();//查学院
+    void queryAunt();//查宿管
+    void queryManager();//查管理员
 
 public slots:
     void pushButton_back();//返回

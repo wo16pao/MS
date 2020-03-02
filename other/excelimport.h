@@ -12,6 +12,10 @@ public:
     void importArchive(QString);
     void importDormitory(QString);
     void importDean(QString);
+    void importAunt(QString);
+    void importManager(QString);
+
+    void importFunction(QString filepath,QString tableName);
 
     int getSuccess();
     int getFailure();

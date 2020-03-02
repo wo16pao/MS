@@ -16,7 +16,7 @@ Admin_ModifyInfo::Admin_ModifyInfo(QWidget *parent) :
     connect(ui->lineEdit_id,SIGNAL(textChanged(QString)),this,SLOT(checkId(QString)));
     connect(ui->lineEdit_id,SIGNAL(textChanged (QString)),this,SLOT(showId(QString)));
     connect(ui->lineEdit_id,SIGNAL(editingFinished()),this,SLOT(listVisable()));
-    connect(ui->listWidget,SIGNAL(itemSelectionChanged(QListWidgetItem*)),this,SLOT(mouseClicked(QListWidgetItem*)));
+    connect(ui->listWidget,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(mouseClicked(QListWidgetItem*)));
     ui->listWidget->setVisible(false);
 }
 
@@ -29,12 +29,19 @@ void Admin_ModifyInfo::modifyInfo()
 {
     QString id = ui->lineEdit_id->text();
     QString name = ui->lineEdit_name->text();
-    QString out = ui->timeEdit->time().toString("hh:mm:ss");
-    QString in = ui->timeEdit_2->time().toString("hh:mm:ss");
-    int hour = qAbs(ui->timeEdit->time().hour()-ui->timeEdit_2->time().hour());
-    int min = qAbs(ui->timeEdit->time().minute()-ui->timeEdit_2->time().minute());
-    int sec = qAbs(ui->timeEdit->time().second()-ui->timeEdit_2->time().second());
-    QString sub = QString::number(hour)+":"+QString::number(min)+":"+QString::number(sec);
+//    QString out = ui->timeEdit->time().toString("hh:mm:ss");
+//    QString in = ui->timeEdit_2->time().toString("hh:mm:ss");
+//    int hour = qAbs(ui->timeEdit->time().hour()-ui->timeEdit_2->time().hour());
+//    int min = qAbs(ui->timeEdit->time().minute()-ui->timeEdit_2->time().minute());
+//    int sec = qAbs(ui->timeEdit->time().second()-ui->timeEdit_2->time().second());
+//    QString sub = QString::number(hour)+":"+QString::number(min)+":"+QString::number(sec);
+
+    QString out = ui->dateTimeEdit->dateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString in = ui->dateTimeEdit_2->dateTime().toString("yyyy-MM-dd hh:mm:ss");
+
+
+    QString sub = QDateTime::fromSecsSinceEpoch(ui->dateTimeEdit_2->dateTime().toSecsSinceEpoch()-ui->dateTimeEdit->dateTime().toSecsSinceEpoch()).toUTC().toString("hh:mm:ss");
+
     QString temp = ui->lineEdit_temp->text();
     QString normal = ui->comboBox->currentText();
     QString remark = ui->lineEdit_remark->text();
@@ -45,7 +52,7 @@ void Admin_ModifyInfo::modifyInfo()
         return;
     }
 
-    QString str = "update `information` set 学号= '"+id+"',姓名='"+name+"',出门时间='"+out+"',进门时间='"+in+"',时间间隔='"+sub+"',体温='"+temp+"',是否正常='"+normal+"',备注='"+remark+"' where 学号='"+m_id+"' and 姓名='"+m_name+"' and 出门时间='"+m_out.toString("hh:mm:ss")+"' and 进门时间='"+m_in.toString("hh:mm:ss")+"';";
+    QString str = "update `information` set 学号= '"+id+"',姓名='"+name+"',出门时间='"+out+"',进门时间='"+in+"',时间间隔='"+sub+"',体温='"+temp+"',是否正常='"+normal+"',备注='"+remark+"' where 学号='"+m_id+"' and 姓名='"+m_name+"' and 出门时间='"+m_out.toString("yyyy-MM-d hh:mm:ss")+"' and 进门时间='"+m_in.toString("yyyy-MM-dd hh:mm:ss")+"';";
     QSqlQuery query(db);
     if(query.exec(str))
     {
@@ -65,8 +72,8 @@ void Admin_ModifyInfo::pushButton_back()
     ui->lineEdit_name->clear();
     ui->lineEdit_temp->clear();
     ui->lineEdit_remark->clear();
-    ui->timeEdit->clear();
-    ui->timeEdit_2->clear();
+    ui->dateTimeEdit->clear();
+    ui->dateTimeEdit_2->clear();
     this->close();
 }
 
@@ -74,8 +81,8 @@ void Admin_ModifyInfo::getInfo(QString id, QString name, QString out , QString i
 {
     m_id = id;
     m_name = name;
-    m_out = QTime::fromString(out,"hh:mm:ss");
-    m_in = QTime::fromString(in,"hh:mm:ss");
+    m_out = QDateTime::fromString(out,"yyyy-MM-dd hh:mm:ss");
+    m_in = QDateTime::fromString(in,"yyyy-MM-dd hh:mm:ss");
     initInfo();
 }
 
@@ -83,10 +90,10 @@ void Admin_ModifyInfo::initInfo()
 {
     ui->lineEdit_id->setText(m_id);
     ui->lineEdit_name->setText(m_name);
-    ui->timeEdit->setTime(m_out);
-    ui->timeEdit_2->setTime(m_in);
+    ui->dateTimeEdit->setDateTime(m_out);
+    ui->dateTimeEdit_2->setDateTime(m_in);
     QSqlQuery query(db);
-    QString str = "select * from `information` where 学号='"+m_id+"' and 姓名='"+m_name+"' and 出门时间='"+m_out.toString("hh:mm:ss")+"' and 进门时间='"+m_in.toString("hh:mm:ss")+"';";
+    QString str = "select * from `information` where 学号='"+m_id+"' and 姓名='"+m_name+"' and 出门时间='"+m_out.toString("yyyy-MM-dd hh:mm:ss")+"' and 进门时间='"+m_in.toString("yyyy-MM-dd hh:mm:ss")+"';";
     query.exec(str);
     int index = 5;
     if(query.next())
@@ -154,7 +161,7 @@ void Admin_ModifyInfo::checkId(QString text)
 
 void Admin_ModifyInfo::mouseClicked(QListWidgetItem* item)
 {
-    ui->lineEdit_id->setText(item);
+    ui->lineEdit_id->setText(item->text());
     ui->listWidget->setVisible(false);
     ui->label_id->clear();
     checkId(ui->lineEdit_id->text());

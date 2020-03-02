@@ -55,12 +55,12 @@ void ExportThread::run()
                     excelExport->setCellValue(i+2,j+1,query.value(j).toString());
                 }
                 else {
-                    if(j==2||j==3||j==4)
+                    if(j==2||j==3)
                     {
-                        QTime time;
-                        time = query.value(j).toTime();
+                        QDateTime time;
+                        time = query.value(j).toDateTime();
                         QString strBuffer;
-                        strBuffer = time.toString("hh:mm:ss");
+                        strBuffer = time.toString("yyyy-MM-dd hh:mm:ss");
                         excelExport->setCellValue(i+2,j+1,strBuffer);
 
                     }

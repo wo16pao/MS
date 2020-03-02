@@ -2,7 +2,8 @@
 #include "ui_admin_addinfo.h"
 #include <QtSql/QSqlQuery>
 #include <QKeyEvent>
-
+#include <QDateTime>
+#include <QDate>
 
 Admin_AddInfo::Admin_AddInfo(QWidget *parent) :
     QWidget(parent),
@@ -30,12 +31,18 @@ void Admin_AddInfo::addInfo()
 {
     QString id = ui->lineEdit_id->text();
     QString name = ui->lineEdit_name->text();
-    QString out = ui->timeEdit->time().toString("hh:mm:ss");
-    QString in = ui->timeEdit_2->time().toString("hh:mm:ss");
-    int hour = qAbs(ui->timeEdit->time().hour()-ui->timeEdit_2->time().hour());
-    int min = qAbs(ui->timeEdit->time().minute()-ui->timeEdit_2->time().minute());
-    int sec = qAbs(ui->timeEdit->time().second()-ui->timeEdit_2->time().second());
-    QString sub = QString::number(hour)+":"+QString::number(min)+":"+QString::number(sec);
+//    QString out = ui->timeEdit->time().toString("hh:mm:ss");
+//    QString in = ui->timeEdit_2->time().toString("hh:mm:ss");
+//    int hour = qAbs(ui->timeEdit->time().hour()-ui->timeEdit_2->time().hour());
+//    int min = qAbs(ui->timeEdit->time().minute()-ui->timeEdit_2->time().minute());
+//    int sec = qAbs(ui->timeEdit->time().second()-ui->timeEdit_2->time().second());
+    QString out = ui->dateTimeEdit->dateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString in = ui->dateTimeEdit_2->dateTime().toString("yyyy-MM-dd hh:mm:ss");
+
+
+    QString sub = QDateTime::fromSecsSinceEpoch(ui->dateTimeEdit_2->dateTime().toSecsSinceEpoch()-ui->dateTimeEdit->dateTime().toSecsSinceEpoch()).toUTC().toString("hh:mm:ss");
+
+    //QString sub = time;
     QString temp = ui->lineEdit_temp->text();
     QString normal = ui->comboBox->currentText();
     QString remark = ui->lineEdit_remark->text();
@@ -72,8 +79,8 @@ void Admin_AddInfo::pushButton_back()
     ui->lineEdit_name->clear();
     ui->lineEdit_temp->clear();
     ui->lineEdit_remark->clear();
-    ui->timeEdit->clear();
-    ui->timeEdit_2->clear();
+    ui->dateTimeEdit->clear();
+    ui->dateTimeEdit_2->clear();
     this->close();
 }
 

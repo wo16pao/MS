@@ -46,8 +46,8 @@ private:
 
     QString m_id;
     QString m_name;
-    QTime   m_out;
-    QTime   m_in;
+    QDateTime   m_out;
+    QDateTime   m_in;
 };
 
 #endif // ADMIN_MODIFYINFO_H
