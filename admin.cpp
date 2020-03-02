@@ -1,15 +1,15 @@
 #include "admin.h"
+#include <QtCharts>
+QT_CHARTS_USE_NAMESPACE//QtChart名空间
 #include "ui_admin.h"
 #include <QtSql/QSqlQuery>
 #include <QDebug>
 #include <QTime>
 #include <QMessageBox>
 #include <QFileDialog>
-#include <QChartView>//显示图表
 #include <QLineSeries>
-
-
-QT_CHARTS_USE_NAMESPACE//QtChart名空间
+#include <QDate>
+#include <QPointF>
 
 
 Admin::Admin(QWidget *parent) :
@@ -19,7 +19,7 @@ Admin::Admin(QWidget *parent) :
     ui->setupUi(this);
     Init();
     InitConnection();
-    initRelease();
+
 }
 
 Admin::~Admin()
@@ -109,6 +109,7 @@ void Admin::pushButton_data()
 void Admin::pushButton_release()
 {
     ui->tabWidget->setCurrentIndex(3);
+    drawChart();
 }
 
 void Admin::pushButton_other()
@@ -518,33 +519,44 @@ void Admin::initRelease()
 void Admin::drawChart()
 {
     QLineSeries *series1 = new QLineSeries();//实例化一个QLineSeries对象
-    series1->setName(QString("line " + QString::number(1)));
+    series1->setName("体温不正常人数");
     series1->setVisible(true);
     series1->setPointLabelsVisible(true);
-    series1->setPointLabelsFont(QFont("微软雅黑"));
+    series1->setPointLabelsFont(QFont("黑体"));
     series1->setPointLabelsFormat("(@xPoint,@yPoint)");
     series1->setPointsVisible(true);
 
-    series1->append(0, 6);
-    series1->append(2, 4);
-    series1->append(3, 8);
-    series1->append(7, 4);
-    series1->append(10, 5);
+    QList<QPointF> points;
+    QSqlQuery query(m_db);
+    QDate now = QDateTime::currentDateTime().date();
+
+    QDate ago;
+    QString str;
+    for(int i=0;i<7;++i)
+    {
+        ago = now.addDays(i-7);
+        str = "select count(是否正常) from `information` where 是否正常='不正常' and 进门时间 like '"+ago.toString("yyyy-MM-dd")+"%'";
+        query.exec(str);
+        if(query.next())
+            points.append(QPointF(i,query.value(0).toInt()));
+    }
+
+
+    series1->append(points);
+
 
     QChart *chart = new QChart();
-    chart->setLocalizeNumbers(true);//数字是否本地化
+    //chart->setLocalizeNumbers(true);//数字是否本地化
     chart->addSeries(series1);//添加系列到QChart上
     chart->createDefaultAxes();//创建默认轴
-    chart->setTitle("Simple line chart example");//设置标题
-    chart->setTitleFont(QFont("微软雅黑"));//设置标题字体
+    chart->setTitle("体温异常折线图");//设置标题
+    chart->setTitleFont(QFont("黑体"));//设置标题字体
     chart->legend()->setVisible(true);
     chart->legend()->setAlignment(Qt::AlignBottom);//底部对齐
     chart->legend()->setVisible(true);//设置是否可视
 
-    QChartView *chartView = new QChartView(chart);
-        chartView->setRenderHint(QPainter::Antialiasing);
 
-
+    ui->chartWidget->setChart(chart);
 }
 //-----------------------各个按钮-------------------------------------------
 
@@ -553,6 +565,8 @@ void Admin::Init()
 {
     m_db = QSqlDatabase::database("mysql_connect");
     ui->tabWidget->tabBar()->hide();//隐藏页头
+    initRelease();
+    drawChart();
 
     //初始化添加信息类
     m_adm_addDean = new Admin_AddDean;

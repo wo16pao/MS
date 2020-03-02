@@ -520,6 +520,16 @@
     <attribute name="title">
      <string>数据分析</string>
     </attribute>
+    <widget class="QChartView" name="chartWidget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>831</width>
+       <height>571</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_release">
     <attribute name="title">
@@ -579,6 +589,14 @@
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QWidget</extends>
+   <header>qchartview.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
