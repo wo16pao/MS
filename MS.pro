@@ -41,7 +41,11 @@ SOURCES += \
     other/loading.cpp \
     other/exportthread.cpp \
     other/excelimport.cpp \
-    other/importthread.cpp
+    other/importthread.cpp \
+    admin/admin_addaunt.cpp \
+    admin/admin_addmanager.cpp \
+    admin/admin_modifyaunt.cpp \
+    admin/admin_modifymanager.cpp
 
 HEADERS += \
         widget.h \
@@ -59,7 +63,11 @@ HEADERS += \
     other/loading.h \
     other/exportthread.h \
     other/excelimport.h \
-    other/importthread.h
+    other/importthread.h \
+    admin/admin_addaunt.h \
+    admin/admin_addmanager.h \
+    admin/admin_modifyaunt.h \
+    admin/admin_modifymanager.h
 
 FORMS += \
         widget.ui \
@@ -73,7 +81,11 @@ FORMS += \
     admin/admin_modifydormitory.ui \
     admin/admin_modifyarchive.ui \
     admin/admin_modifyinfo.ui \
-    other/loading.ui
+    other/loading.ui \
+    admin/admin_addaunt.ui \
+    admin/admin_addmanager.ui \
+    admin/admin_modifyaunt.ui \
+    admin/admin_modifymanager.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

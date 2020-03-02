@@ -97,7 +97,7 @@
             <string>宿管</string>
            </property>
            <property name="checked">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -112,6 +112,9 @@
           <widget class="QRadioButton" name="radioButton_admin">
            <property name="text">
             <string>管理员</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
            </property>
           </widget>
          </item>

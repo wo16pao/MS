@@ -7,10 +7,15 @@
 #include "admin/admin_adddean.h"
 #include "admin/admin_adddormitory.h"
 #include "admin/admin_addinfo.h"
+#include "admin/admin_addaunt.h"
+#include "admin/admin_addmanager.h"
+
 #include "admin/admin_modifydean.h"
 #include "admin/admin_modifydormitory.h"
 #include "admin/admin_modifyarchive.h"
 #include "admin/admin_modifyinfo.h"
+#include "admin/admin_modifyaunt.h"
+#include "admin/admin_modifymanager.h"
 
 #include "other/excelexport.h"
 #include "other/exportthread.h"
@@ -79,12 +84,16 @@ private:
     Admin_AddInfo *m_adm_addInfo;
     Admin_AddArchive *m_adm_addArchive;
     Admin_AddDormitory *m_adm_addDormitory;
+    Admin_AddAunt *m_adm_addAunt;
+    Admin_AddManager *m_adm_addManager;
 
     //修改信息
     Admin_ModifyDean *m_adm_modifyDean;
     Admin_ModifyDormitory *m_adm_modifyDorm;
     Admin_ModifyArchive *m_adm_modifyArchive;
     Admin_ModifyInfo *m_adm_modifyInfo;
+    Admin_ModifyAunt *m_adm_modifyAunt;
+    Admin_ModifyManager *m_adm_modifyManager;
 
     //导入导出
     ExportThread *exportThread;

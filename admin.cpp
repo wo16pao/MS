@@ -36,7 +36,8 @@ void Admin::queryFunction(const QString &get_row, const QString &str, const QStr
         header << query.value(0).toString();
         index++;
     }
-            ui->tableWidget->setHorizontalHeaderLabels(header);//设置标头
+     ui->tableWidget->setColumnCount(index);//设置列数
+    ui->tableWidget->setHorizontalHeaderLabels(header);//设置标头
     query.exec(get_row);
     if(query.first())
     {
@@ -45,7 +46,7 @@ void Admin::queryFunction(const QString &get_row, const QString &str, const QStr
     }
     if(row)
     {
-        ui->tableWidget->setColumnCount(index);//设置列数
+
         //ui->tableWidget->horizontalHeader()->setStretchLastSection(true); //自动调整宽度
         ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
         ui->tableWidget->verticalHeader()->setVisible(false);//隐藏列头
@@ -244,6 +245,14 @@ void Admin::pushButton_add()
         connect(m_adm_addDean,SIGNAL(refresh()),this,SLOT(queryDean()));
         m_adm_addDean->show();
         break;
+    case 5:
+        connect(m_adm_addAunt,SIGNAL(refresh()),this,SLOT(queryAunt()));
+        m_adm_addAunt->show();
+        break;
+    case 6:
+        connect(m_adm_addManager,SIGNAL(refresh()),this,SLOT(queryManager()));
+        m_adm_addManager->show();
+        break;
     default:
         return;
     }
@@ -296,7 +305,7 @@ void Admin::pushButton_delete()
         QMessageBox::information(this,"提示","删除成功",QMessageBox::Ok);
     }
     else {
-         QMessageBox::critical(this,"提示","删除失败",QMessageBox::Ok);
+        QMessageBox::critical(this,"提示","删除失败",QMessageBox::Ok);
     }
 }
 
@@ -326,6 +335,16 @@ void Admin::pushButton_modify()
         connect(m_adm_modifyDean,SIGNAL(refresh()),this,SLOT(queryDean()));
         m_adm_modifyDean->getDean(ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text());
         m_adm_modifyDean->show();
+        break;
+    case 5:
+        connect(m_adm_modifyAunt,SIGNAL(refresh()),this,SLOT(queryAunt()));
+        m_adm_modifyAunt->getAunt(ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text());
+        m_adm_modifyAunt->show();
+        break;
+    case 6:
+        connect(m_adm_modifyManager,SIGNAL(refresh()),this,SLOT(queryManager()));
+        m_adm_modifyManager->getManager(ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text());
+        m_adm_modifyManager->show();
         break;
     default:
         return;
@@ -446,12 +465,16 @@ void Admin::Init()
     m_adm_addInfo = new Admin_AddInfo;
     m_adm_addArchive = new Admin_AddArchive;
     m_adm_addDormitory = new Admin_AddDormitory;
+    m_adm_addAunt = new Admin_AddAunt;
+    m_adm_addManager = new Admin_AddManager;
 
     //初始化修改信息类
     m_adm_modifyDean = new Admin_ModifyDean;
     m_adm_modifyDorm = new Admin_ModifyDormitory;
     m_adm_modifyArchive = new Admin_ModifyArchive;
     m_adm_modifyInfo = new Admin_ModifyInfo;
+    m_adm_modifyAunt = new Admin_ModifyAunt;
+    m_adm_modifyManager = new Admin_ModifyManager;
 
     //导入导出信息
     exportThread = new ExportThread;
