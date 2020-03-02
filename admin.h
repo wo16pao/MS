@@ -70,6 +70,11 @@ public slots:
     void exportExcelFinish();
     void importExcelFinish(int,int);
 
+    void pushButton_release_confirm();//发布按钮
+    void initRelease();//初始化公告
+
+    void drawChart();//画折线图
+
 signals:
     void signal_backWindow();//返回上个窗口的信号
 

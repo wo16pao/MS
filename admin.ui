@@ -95,7 +95,10 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <widget class="QTextEdit" name="textEdit_5"/>
+         <widget class="QLineEdit" name="lineEdit_1"/>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="textEdit_1"/>
         </item>
        </layout>
       </widget>
@@ -113,7 +116,10 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
-         <widget class="QTextEdit" name="textEdit_4"/>
+         <widget class="QLineEdit" name="lineEdit_2"/>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="textEdit_2"/>
         </item>
        </layout>
       </widget>
@@ -130,6 +136,9 @@
         <string>页</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QLineEdit" name="lineEdit_3"/>
+        </item>
         <item>
          <widget class="QTextEdit" name="textEdit_3"/>
         </item>
@@ -149,7 +158,10 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QTextEdit" name="textEdit_2"/>
+         <widget class="QLineEdit" name="lineEdit_4"/>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="textEdit_4"/>
         </item>
        </layout>
       </widget>
@@ -167,7 +179,10 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QTextEdit" name="textEdit"/>
+         <widget class="QLineEdit" name="lineEdit_5"/>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="textEdit_5"/>
         </item>
        </layout>
       </widget>
@@ -280,7 +295,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -510,7 +525,7 @@
     <attribute name="title">
      <string>发布通知</string>
     </attribute>
-    <widget class="QLineEdit" name="lineEdit_2">
+    <widget class="QLineEdit" name="lineEdit_title">
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -520,7 +535,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QTextEdit" name="textEdit_6">
+    <widget class="QTextEdit" name="textEdit_content">
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -530,7 +545,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_7">
+    <widget class="QPushButton" name="pushButton_release_confirm">
      <property name="geometry">
       <rect>
        <x>320</x>
@@ -540,7 +555,20 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>发布</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_release_result">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>390</y>
+       <width>54</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </widget>

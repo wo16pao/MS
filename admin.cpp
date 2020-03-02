@@ -5,6 +5,12 @@
 #include <QTime>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QChartView>//显示图表
+#include <QLineSeries>
+
+
+QT_CHARTS_USE_NAMESPACE//QtChart名空间
+
 
 Admin::Admin(QWidget *parent) :
     QWidget(parent),
@@ -13,7 +19,7 @@ Admin::Admin(QWidget *parent) :
     ui->setupUi(this);
     Init();
     InitConnection();
-
+    initRelease();
 }
 
 Admin::~Admin()
@@ -36,7 +42,7 @@ void Admin::queryFunction(const QString &get_row, const QString &str, const QStr
         header << query.value(0).toString();
         index++;
     }
-     ui->tableWidget->setColumnCount(index);//设置列数
+    ui->tableWidget->setColumnCount(index);//设置列数
     ui->tableWidget->setHorizontalHeaderLabels(header);//设置标头
     query.exec(get_row);
     if(query.first())
@@ -452,6 +458,94 @@ void Admin::importExcelFinish(int success,int failure)
         break;
     }
 }
+
+//公告发布按钮
+void Admin::pushButton_release_confirm()
+{
+    if(QMessageBox::No == QMessageBox::information(this,"提示","确定要发布公告吗",QMessageBox::Yes|QMessageBox::No))
+        return;
+
+    QString title = ui->lineEdit_title->text();
+    QString content = ui->textEdit_content->toPlainText();
+    QString date = QDateTime::currentDateTime().toString("yyyy-MM-dd");
+    QSqlQuery query(m_db);
+    QString str = "insert into `announcement` values ('"+title+"','"+date+"','"+content+"');";
+    if(query.exec(str))
+    {
+        ui->label_release_result->setText("公告发布成功");
+        ui->lineEdit_title->clear();
+        ui->textEdit_content->clear();
+    }
+    else {
+        ui->label_release_result->setText("公告发布失败,请检查公告内容");
+    }
+    initRelease();
+}
+//初始化公告内容
+void Admin::initRelease()
+{
+    QSqlQuery query(m_db);
+    QString str = "select 公告标题,公告内容 from `announcement` order by 发布时间 desc;";
+    query.exec(str);
+    if(query.next())
+    {
+        ui->lineEdit_1->setText(query.value(0).toString());
+        ui->textEdit_1->setPlainText(query.value(1).toString());
+    }
+    if(query.next())
+    {
+        ui->lineEdit_2->setText(query.value(0).toString());
+        ui->textEdit_2->setPlainText(query.value(1).toString());
+    }
+    if(query.next())
+    {
+        ui->lineEdit_3->setText(query.value(0).toString());
+        ui->textEdit_3->setPlainText(query.value(1).toString());
+    }
+    if(query.next())
+    {
+        ui->lineEdit_4->setText(query.value(0).toString());
+        ui->textEdit_4->setPlainText(query.value(1).toString());
+    }
+    if(query.next())
+    {
+        ui->lineEdit_5->setText(query.value(0).toString());
+        ui->textEdit_5->setPlainText(query.value(1).toString());
+    }
+
+}
+
+void Admin::drawChart()
+{
+    QLineSeries *series1 = new QLineSeries();//实例化一个QLineSeries对象
+    series1->setName(QString("line " + QString::number(1)));
+    series1->setVisible(true);
+    series1->setPointLabelsVisible(true);
+    series1->setPointLabelsFont(QFont("微软雅黑"));
+    series1->setPointLabelsFormat("(@xPoint,@yPoint)");
+    series1->setPointsVisible(true);
+
+    series1->append(0, 6);
+    series1->append(2, 4);
+    series1->append(3, 8);
+    series1->append(7, 4);
+    series1->append(10, 5);
+
+    QChart *chart = new QChart();
+    chart->setLocalizeNumbers(true);//数字是否本地化
+    chart->addSeries(series1);//添加系列到QChart上
+    chart->createDefaultAxes();//创建默认轴
+    chart->setTitle("Simple line chart example");//设置标题
+    chart->setTitleFont(QFont("微软雅黑"));//设置标题字体
+    chart->legend()->setVisible(true);
+    chart->legend()->setAlignment(Qt::AlignBottom);//底部对齐
+    chart->legend()->setVisible(true);//设置是否可视
+
+    QChartView *chartView = new QChartView(chart);
+        chartView->setRenderHint(QPainter::Antialiasing);
+
+
+}
 //-----------------------各个按钮-------------------------------------------
 
 //初始化
@@ -505,6 +599,8 @@ void Admin::InitConnection()
     connect(ui->pushButton_import,SIGNAL(clicked()),this,SLOT(importExcel()));//导入按钮
     connect(exportThread,SIGNAL(finish()),this,SLOT(exportExcelFinish()));
     connect(importThread,SIGNAL(finish(int,int)),this,SLOT(importExcelFinish(int,int)));
+
+    connect(ui->pushButton_release_confirm,SIGNAL(clicked()),this,SLOT(pushButton_release_confirm()));//公告发布按钮
 }
 
 //--------------------------------查询函数--------------------------
