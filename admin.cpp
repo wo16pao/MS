@@ -44,6 +44,8 @@ void Admin::queryFunction(const QString &get_row, const QString &str, const QStr
     }
     ui->tableWidget->setColumnCount(index);//设置列数
     ui->tableWidget->setHorizontalHeaderLabels(header);//设置标头
+    for(int i=0;i<index;++i)
+        ui->tableWidget->setColumnWidth(i,130);
     query.exec(get_row);
     if(query.first())
     {
@@ -57,6 +59,8 @@ void Admin::queryFunction(const QString &get_row, const QString &str, const QStr
         ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
         ui->tableWidget->verticalHeader()->setVisible(false);//隐藏列头
         ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//只允许单选
+        ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+        ui->tableWidget->setAlternatingRowColors(true);
         query.exec(str);
         //设置内容
         for (int i = 0; query.next(); i++)
@@ -94,6 +98,8 @@ void Admin::pushButton_back()
 void Admin::pushButton_index()
 {
     ui->tabWidget->setCurrentIndex(0);
+    drawChart();
+    indexInfo();
 }
 
 void Admin::pushButton_info()
@@ -108,8 +114,7 @@ void Admin::pushButton_data()
 
 void Admin::pushButton_release()
 {
-    ui->tabWidget->setCurrentIndex(3);
-    drawChart();
+    ui->tabWidget->setCurrentIndex(2);
 }
 
 void Admin::pushButton_other()
@@ -188,6 +193,10 @@ void Admin::pushButton_search()
             concat += query.value(0).toString() + ",";
         index++;
     }
+    ui->tableWidget->setColumnCount(index);//设置列数
+    ui->tableWidget->setHorizontalHeaderLabels(header);//设置标头
+    for(int i=0;i<index;++i)
+        ui->tableWidget->setColumnWidth(i,130);
     concat.replace(concat.count()-1,1,' ');
     QString get_row = "SELECT count(*) FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%';";
     int row=0;
@@ -199,8 +208,7 @@ void Admin::pushButton_search()
     }
     if(row)
     {
-        ui->tableWidget->setColumnCount(index);//设置列数
-        ui->tableWidget->setHorizontalHeaderLabels(header);//设置标头
+
         //ui->tableWidget->horizontalHeader()->setStretchLastSection(true); //自动调整宽度
         ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
         ui->tableWidget->verticalHeader()->setVisible(false);//隐藏列头
@@ -516,13 +524,14 @@ void Admin::initRelease()
 
 }
 
+//绘制图表
 void Admin::drawChart()
 {
     QLineSeries *series1 = new QLineSeries();//实例化一个QLineSeries对象
-    series1->setName("体温不正常人数");
+    //series1->setName("体温不正常人数");
     series1->setVisible(true);
-    series1->setPointLabelsVisible(true);
-    series1->setPointLabelsFont(QFont("黑体"));
+    //series1->setPointLabelsVisible(true);
+    //series1->setPointLabelsFont(QFont("黑体"));
     series1->setPointLabelsFormat("(@xPoint,@yPoint)");
     series1->setPointsVisible(true);
 
@@ -538,7 +547,7 @@ void Admin::drawChart()
         str = "select count(是否正常) from `information` where 是否正常='不正常' and 进门时间 like '"+ago.toString("yyyy-MM-dd")+"%'";
         query.exec(str);
         if(query.next())
-            points.append(QPointF(i,query.value(0).toInt()));
+            points.append(QPointF(i+1,query.value(0).toInt()));
     }
 
 
@@ -567,6 +576,7 @@ void Admin::Init()
     ui->tabWidget->tabBar()->hide();//隐藏页头
     initRelease();
     drawChart();
+    indexInfo();
 
     //初始化添加信息类
     m_adm_addDean = new Admin_AddDean;
@@ -598,9 +608,9 @@ void Admin::InitConnection()
     //页面切换
     connect(ui->pushButton_index,SIGNAL(clicked()),this,SLOT(pushButton_index()));
     connect(ui->pushButton_info,SIGNAL(clicked()),this,SLOT(pushButton_info()));
-    connect(ui->pushButton_data,SIGNAL(clicked()),this,SLOT(pushButton_data()));
+    //connect(ui->pushButton_data,SIGNAL(clicked()),this,SLOT(pushButton_data()));
     connect(ui->pushButton_release,SIGNAL(clicked()),this,SLOT(pushButton_release()));
-    connect(ui->pushButton_other,SIGNAL(clicked()),this,SLOT(pushButton_other()));
+    //connect(ui->pushButton_other,SIGNAL(clicked()),this,SLOT(pushButton_other()));
 
     connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(combobox_query(int)));//查询切换
 
@@ -664,5 +674,72 @@ void Admin::queryManager()
     QString get_row = "select count(*) from `manager`;";
     QString str = "select * from `manager` order by 姓名 asc;";
     queryFunction(get_row,str,"manager");
+}
+
+//主页表格信息
+void Admin::indexInfo()
+{
+    ui->tableWidget_2->clearContents();
+    int row=0;
+    QSqlQuery query(m_db);
+    QStringList header;
+    QString head1 = "show columns from `information`;";
+    query.exec(head1);
+    int index=0;
+    while(query.next())
+    {
+        header << query.value(0).toString();
+        index++;
+    }
+    QString head2 = "show columns from `archive`;";
+    query.exec(head2);
+    while(query.next())
+    {
+        header << query.value(0).toString();
+        index++;
+    }
+    ui->tableWidget_2->setColumnCount(index);//设置列数
+    ui->tableWidget_2->setHorizontalHeaderLabels(header);//设置标头
+    for(int i=0;i<index;++i)
+        ui->tableWidget_2->setColumnWidth(i,130);
+
+    QString get_row = "SELECT COUNT(*) FROM `information` JOIN `archive` ON `archive`.`学号`=`information`.`学号` AND `archive`.`姓名`=`information`.`姓名` WHERE 是否正常='不正常' ORDER BY '学号' ASC";
+    query.exec(get_row);
+    if(query.first())
+    {
+        row=query.value("count(*)").toInt();//获取行数
+        ui->tableWidget_2->setRowCount(row);//设置行数
+    }
+    QString str = "select `information`.*,`archive`.* from `information` join `archive` on `archive`.`学号`=`information`.`学号` and `archive`.`姓名`=`information`.`姓名` where 是否正常='不正常' order by '学号' asc;";
+    if(row)
+    {
+
+        //ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true); //自动调整宽度
+        ui->tableWidget_2->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+        ui->tableWidget_2->verticalHeader()->setVisible(false);//隐藏列头
+        ui->tableWidget_2->setSelectionMode(QAbstractItemView::SingleSelection);//只允许单选
+        ui->tableWidget_2->setSelectionBehavior(QAbstractItemView::SelectRows);
+        ui->tableWidget_2->setAlternatingRowColors(true);
+        query.exec(str);
+        //设置内容
+        for (int i = 0; query.next(); i++)
+        {
+            for (int j = 0; j < index; j++)
+            {
+
+                    if(j==2||j==3)
+                    {
+                        QDateTime time;
+                        time = query.value(j).toDateTime();
+                        QString strBuffer;
+                        strBuffer = time.toString("yyyy-MM-dd hh:mm:ss");
+                        ui->tableWidget_2->setItem(i,j,new QTableWidgetItem(strBuffer));
+                    }
+                    else
+                        ui->tableWidget_2->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
+            }
+
+        }
+    }
 }
 //--------------------------------查询函数--------------------------

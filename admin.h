@@ -49,6 +49,8 @@ public slots:
     void queryAunt();//查宿管
     void queryManager();//查管理员
 
+    void indexInfo();//首页表信息
+
 public slots:
     void pushButton_back();//返回
 

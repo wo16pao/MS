@@ -10,6 +10,7 @@ Admin_AddArchive::Admin_AddArchive(QWidget *parent) :
     db = QSqlDatabase::database("mysql_connect");
     initConnection();
     initCombobox();
+
 }
 
 Admin_AddArchive::~Admin_AddArchive()
