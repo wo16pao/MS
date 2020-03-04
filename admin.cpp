@@ -19,7 +19,7 @@ Admin::Admin(QWidget *parent) :
     ui->setupUi(this);
     Init();
     InitConnection();
-
+    ui->tabWidget->setStyleSheet("QTabWidget::pane{border:none;}");
 }
 
 Admin::~Admin()
@@ -110,14 +110,11 @@ void Admin::pushButton_info()
 void Admin::pushButton_data()
 {
     ui->tabWidget->setCurrentIndex(2);
+    sort_lable(0);
+
 }
 
 void Admin::pushButton_release()
-{
-    ui->tabWidget->setCurrentIndex(2);
-}
-
-void Admin::pushButton_other()
 {
     ui->tabWidget->setCurrentIndex(4);
 }
@@ -471,6 +468,8 @@ void Admin::importExcelFinish(int success,int failure)
 //公告发布按钮
 void Admin::pushButton_release_confirm()
 {
+    if(ui->lineEdit_title->text().isEmpty()||ui->textEdit_content->toPlainText().isEmpty())
+        return;
     if(QMessageBox::No == QMessageBox::information(this,"提示","确定要发布公告吗",QMessageBox::Yes|QMessageBox::No))
         return;
 
@@ -577,6 +576,9 @@ void Admin::Init()
     initRelease();
     drawChart();
     indexInfo();
+    sort_lable(0);
+    ui->tabWidget->setStyleSheet("QTabWidget{border-top-color:rgba(255,255,255,0);}");
+
 
     //初始化添加信息类
     m_adm_addDean = new Admin_AddDean;
@@ -598,6 +600,9 @@ void Admin::Init()
     exportThread = new ExportThread;
     importThread = new ImportThread;
     loading = new Loading(this);
+
+    m_page = 0;//初始化公告当前页数
+    m_page_flag=false;
 }
 
 //初始化连接
@@ -608,7 +613,7 @@ void Admin::InitConnection()
     //页面切换
     connect(ui->pushButton_index,SIGNAL(clicked()),this,SLOT(pushButton_index()));
     connect(ui->pushButton_info,SIGNAL(clicked()),this,SLOT(pushButton_info()));
-    //connect(ui->pushButton_data,SIGNAL(clicked()),this,SLOT(pushButton_data()));
+    connect(ui->pushButton_data,SIGNAL(clicked()),this,SLOT(pushButton_data()));
     connect(ui->pushButton_release,SIGNAL(clicked()),this,SLOT(pushButton_release()));
     //connect(ui->pushButton_other,SIGNAL(clicked()),this,SLOT(pushButton_other()));
 
@@ -625,6 +630,12 @@ void Admin::InitConnection()
     connect(importThread,SIGNAL(finish(int,int)),this,SLOT(importExcelFinish(int,int)));
 
     connect(ui->pushButton_release_confirm,SIGNAL(clicked()),this,SLOT(pushButton_release_confirm()));//公告发布按钮
+
+    connect(ui->label_title1,SIGNAL(linkActivated(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
+    connect(ui->label_title2,SIGNAL(linkActivated(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
+    connect(ui->label_title3,SIGNAL(linkActivated(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
+    connect(ui->label_title4,SIGNAL(linkActivated(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
+    connect(ui->label_title5,SIGNAL(linkActivated(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
 }
 
 //--------------------------------查询函数--------------------------
@@ -743,3 +754,111 @@ void Admin::indexInfo()
     }
 }
 //--------------------------------查询函数--------------------------
+
+//查看公告信息
+void Admin::lable_look(const QString &title)
+{
+    ui->tabWidget->setCurrentIndex(3);
+    ui->lineEdit_look_title->setText(title);
+    QSqlQuery query(m_db);
+    QString str = "select 公告内容 from `announcement` where 公告标题='"+title+"';";
+    query.exec(str);
+    if(query.next())
+        ui->textEdit_look_content->setText(query.value(0).toString());
+
+
+}
+
+void Admin::sort_lable(int addOrSub)
+{
+    m_page+=addOrSub;
+
+    if(m_page<0)//判断是否为第一页
+    {
+        m_page = 0;
+        return;
+    }
+    if(m_page_flag)//判断是否已经是最后一页
+    {
+        --m_page;
+        return;
+    }
+
+    int num=m_page*5;
+    QString str = "select 公告标题 ,公告内容 from `announcement` order by 发布时间 desc;";
+    QSqlQuery query(m_db);
+    query.exec(str);
+    for(int i=0;i<num;++i)//定位到我所需要的地方
+        query.next();
+
+    if(query.next())
+    {
+        ui->label_title1->setText(query.value(0).toString());
+        ui->label_content1->setText(query.value(1).toString());
+    }
+    else {
+        m_page_flag = true;
+        sort_lable(false);//如果第一项就没有，则回到上一页
+    }
+
+    if(query.next())
+    {
+        ui->label_title2->setText(query.value(0).toString());
+        ui->label_content2->setText(query.value(1).toString());
+    }
+    else {
+        ui->label_title2->setVisible(false);
+        ui->label_content2->setVisible(false);
+        ui->label_title3->setVisible(false);
+        ui->label_content3->setVisible(false);
+        ui->label_title4->setVisible(false);
+        ui->label_content4->setVisible(false);
+        ui->label_title5->setVisible(false);
+        ui->label_content5->setVisible(false);
+        m_page_flag=true;
+        return;
+    }
+
+    if(query.next())
+    {
+        ui->label_title3->setText(query.value(0).toString());
+        ui->label_content3->setText(query.value(1).toString());
+    }
+    else {
+        ui->label_title3->setVisible(false);
+        ui->label_content3->setVisible(false);
+        ui->label_title4->setVisible(false);
+        ui->label_content4->setVisible(false);
+        ui->label_title5->setVisible(false);
+        ui->label_content5->setVisible(false);
+        m_page_flag=true;
+        return;
+    }
+
+    if(query.next())
+    {
+        ui->label_title4->setText(query.value(0).toString());
+        ui->label_content4->setText(query.value(1).toString());
+    }
+    else {
+        ui->label_title4->setVisible(false);
+        ui->label_content4->setVisible(false);
+        ui->label_title5->setVisible(false);
+        ui->label_content5->setVisible(false);
+        m_page_flag=true;
+        return;
+    }
+
+    if(query.next())
+    {
+        ui->label_title5->setText(query.value(0).toString());
+        ui->label_content5->setText(query.value(1).toString());
+    }
+    else {
+        ui->label_title5->setVisible(false);
+        ui->label_content5->setVisible(false);
+        m_page_flag=true;
+        return;
+    }
+
+}

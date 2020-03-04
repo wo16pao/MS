@@ -58,7 +58,6 @@ public slots:
     void pushButton_info();
     void pushButton_data();
     void pushButton_release();
-    void pushButton_other();
 
     void combobox_query(int);//查询切换
 
@@ -76,6 +75,9 @@ public slots:
     void initRelease();//初始化公告
 
     void drawChart();//画折线图
+
+    void lable_look(const QString&);//查看公告信息
+    void sort_lable(int addOrSub);//排序公告
 
 signals:
     void signal_backWindow();//返回上个窗口的信号
@@ -106,6 +108,9 @@ private:
     ExportThread *exportThread;
     ImportThread *importThread;
     Loading *loading;//等待动画
+
+    int m_page;//定位页数
+    bool m_page_flag;//定位页数是否为最后一页
 };
 
 #endif // ADMIN_H
