@@ -22,6 +22,7 @@
 #include "other/excelimport.h"
 #include "other/importthread.h"
 #include "other/loading.h"
+#include "other/mylabel.h"
 
 namespace Ui {
 class Admin;
@@ -78,6 +79,9 @@ public slots:
 
     void lable_look(const QString&);//查看公告信息
     void sort_lable(int addOrSub);//排序公告
+
+    void pushButton_next_page();
+    void pushButton_before_page();
 
 signals:
     void signal_backWindow();//返回上个窗口的信号

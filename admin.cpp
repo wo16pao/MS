@@ -2,7 +2,7 @@
 #include <QtCharts>
 QT_CHARTS_USE_NAMESPACE//QtChart名空间
 #include "ui_admin.h"
-#include <QtSql/QSqlQuery>
+#include <QSqlQuery>
 #include <QDebug>
 #include <QTime>
 #include <QMessageBox>
@@ -576,7 +576,6 @@ void Admin::Init()
     initRelease();
     drawChart();
     indexInfo();
-    sort_lable(0);
     ui->tabWidget->setStyleSheet("QTabWidget{border-top-color:rgba(255,255,255,0);}");
 
 
@@ -603,6 +602,7 @@ void Admin::Init()
 
     m_page = 0;//初始化公告当前页数
     m_page_flag=false;
+    sort_lable(0);
 }
 
 //初始化连接
@@ -615,6 +615,8 @@ void Admin::InitConnection()
     connect(ui->pushButton_info,SIGNAL(clicked()),this,SLOT(pushButton_info()));
     connect(ui->pushButton_data,SIGNAL(clicked()),this,SLOT(pushButton_data()));
     connect(ui->pushButton_release,SIGNAL(clicked()),this,SLOT(pushButton_release()));
+    connect(ui->pushButton_modify_back,SIGNAL(clicked()),this,SLOT(pushButton_data()));
+    connect(ui->pushButton_modify_back2,SIGNAL(clicked()),this,SLOT(pushButton_data()));
     //connect(ui->pushButton_other,SIGNAL(clicked()),this,SLOT(pushButton_other()));
 
     connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(combobox_query(int)));//查询切换
@@ -631,11 +633,14 @@ void Admin::InitConnection()
 
     connect(ui->pushButton_release_confirm,SIGNAL(clicked()),this,SLOT(pushButton_release_confirm()));//公告发布按钮
 
-    connect(ui->label_title1,SIGNAL(linkActivated(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
-    connect(ui->label_title2,SIGNAL(linkActivated(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
-    connect(ui->label_title3,SIGNAL(linkActivated(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
-    connect(ui->label_title4,SIGNAL(linkActivated(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
-    connect(ui->label_title5,SIGNAL(linkActivated(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
+    connect(ui->label_title1,SIGNAL(clicked(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
+    connect(ui->label_title2,SIGNAL(clicked(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
+    connect(ui->label_title3,SIGNAL(clicked(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
+    connect(ui->label_title4,SIGNAL(clicked(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
+    connect(ui->label_title5,SIGNAL(clicked(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
+
+    connect(ui->pushButton_next_page,SIGNAL(clicked()),this,SLOT(pushButton_next_page()));
+    connect(ui->pushButton_before_page,SIGNAL(clicked()),this,SLOT(pushButton_before_page()));
 }
 
 //--------------------------------查询函数--------------------------
@@ -780,9 +785,15 @@ void Admin::sort_lable(int addOrSub)
     }
     if(m_page_flag)//判断是否已经是最后一页
     {
+        m_page_flag=false;
         --m_page;
+        QString page = "当前页数：" + QString::number(m_page+1);
+        ui->label_page->setText(page);
         return;
     }
+
+    QString page = "当前页数：" + QString::number(m_page+1);
+    ui->label_page->setText(page);
 
     int num=m_page*5;
     QString str = "select 公告标题 ,公告内容 from `announcement` order by 发布时间 desc;";
@@ -798,7 +809,8 @@ void Admin::sort_lable(int addOrSub)
     }
     else {
         m_page_flag = true;
-        sort_lable(false);//如果第一项就没有，则回到上一页
+        this->sort_lable(0);//如果第一项就没有，则回到上一页
+        return;
     }
 
     if(query.next())
@@ -861,4 +873,14 @@ void Admin::sort_lable(int addOrSub)
         return;
     }
 
+}
+
+void Admin::pushButton_next_page()
+{
+    sort_lable(1);
+}
+
+void Admin::pushButton_before_page()
+{
+    sort_lable(-1);
 }
