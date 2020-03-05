@@ -2,12 +2,13 @@
 #define ADMIN_ADDMANAGER_H
 
 #include <QWidget>
+#include "other/basewindow.h"
 
 namespace Ui {
 class Admin_AddManager;
 }
 
-class Admin_AddManager : public QWidget
+class Admin_AddManager : public BaseWindow
 {
     Q_OBJECT
 
@@ -19,6 +20,7 @@ public slots:
     void addManager();
     void pushButton_back();
 
+    void initTitleBar();
 signals:
     void refresh();
 

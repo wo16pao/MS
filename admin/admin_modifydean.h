@@ -2,12 +2,13 @@
 #define ADMIN_MODIFYDEAN_H
 
 #include <QWidget>
+#include "other/basewindow.h"
 
 namespace Ui {
 class Admin_ModifyDean;
 }
 
-class Admin_ModifyDean : public QWidget
+class Admin_ModifyDean : public BaseWindow
 {
     Q_OBJECT
 
@@ -22,6 +23,7 @@ public slots:
 
     void getDean(QString ,QString ,QString,QString);
 
+    void initTitleBar();
 signals:
     void refresh();
 

@@ -2,12 +2,13 @@
 #define ADMIN_ADDDORMITORY_H
 
 #include <QWidget>
+#include "other/basewindow.h"
 
 namespace Ui {
 class Admin_AddDormitory;
 }
 
-class Admin_AddDormitory : public QWidget
+class Admin_AddDormitory : public BaseWindow
 {
     Q_OBJECT
 
@@ -19,6 +20,7 @@ public slots:
     void pushButton_back();
     void addDormitory();
 
+    void initTitleBar();
 signals:
     void refresh();
 

@@ -6,9 +6,10 @@
 #include <QString>
 
 Widget::Widget(QWidget *parent) :
-    QWidget(parent),
+    BaseWindow(parent),
     ui(new Ui::Widget)
 {
+    initTitleBar();
     ui->setupUi(this);
 
     SqlConnect();//首先连接数据库
@@ -59,10 +60,10 @@ void Widget::Login()
     {
         //宿管登录
     }
-    else if(ui->radioButton_teacher->isChecked())
-    {
-        //辅导员登录
-    }
+//    else if(ui->radioButton_teacher->isChecked())
+//    {
+//        //辅导员登录
+//    }
     else if(ui->radioButton_admin->isChecked())
     {
         //管理员登陆
@@ -113,4 +114,15 @@ void Widget::Reshow()
 void Widget::ClearUI()
 {
     ui->lineEdit_password->clear();
+}
+
+void Widget::initTitleBar()
+{
+    // 设置标题栏跑马灯效果，可以不设置;
+    //m_titleBar->setTitleRoll();
+    m_titleBar->setBackgroundColor(56,70,85);
+    m_titleBar->setTitleIcon(":/icon.png");
+    m_titleBar->setTitleContent(QStringLiteral("我的窗口"));
+    m_titleBar->setButtonType(MIN_BUTTON);
+    m_titleBar->setTitleWidth(this->width());
 }

@@ -3,13 +3,13 @@
 
 #include <QWidget>
 #include <QtSql/QSqlDatabase>
-
+#include "other/basewindow.h"
 
 namespace Ui {
 class Admin_AddArchive;
 }
 
-class Admin_AddArchive : public QWidget
+class Admin_AddArchive : public BaseWindow
 {
     Q_OBJECT
 
@@ -36,6 +36,8 @@ public slots:
     void initDorm5(QString);
 
     void initCombobox();
+
+    void initTitleBar();
 
 signals:
     void refresh();

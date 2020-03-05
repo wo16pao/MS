@@ -4,12 +4,13 @@
 #include <QWidget>
 #include <QtSql/QSqlDatabase>
 #include <QListWidgetItem>
+#include "other/basewindow.h"
 
 namespace Ui {
 class Admin_AddInfo;
 }
 
-class Admin_AddInfo : public QWidget
+class Admin_AddInfo : public BaseWindow
 {
     Q_OBJECT
 
@@ -27,6 +28,8 @@ public slots:
     void mouseClicked(QListWidgetItem*);
 
     void listVisable();
+
+    void initTitleBar();
 
 protected:
     void keyPressEvent (QKeyEvent*);

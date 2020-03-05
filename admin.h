@@ -24,11 +24,13 @@
 #include "other/loading.h"
 #include "other/mylabel.h"
 
+#include "other/basewindow.h"
+
 namespace Ui {
 class Admin;
 }
 
-class Admin : public QWidget
+class Admin : public BaseWindow
 {
     Q_OBJECT
 
@@ -80,8 +82,12 @@ public slots:
     void lable_look(const QString&);//查看公告信息
     void sort_lable(int addOrSub);//排序公告
 
-    void pushButton_next_page();
-    void pushButton_before_page();
+    void pushButton_next_page();//下一页
+    void pushButton_before_page();//上一页
+    void pushButton_bulletin_modify();//公告修改
+    void pushButton_bulletin_delete();//公告删除
+
+    void initTitleBar();
 
 signals:
     void signal_backWindow();//返回上个窗口的信号
@@ -115,6 +121,9 @@ private:
 
     int m_page;//定位页数
     bool m_page_flag;//定位页数是否为最后一页
+
+    QString m_bulletin_title;//公告标题
+    QString m_bulletin_content;//公告内容
 };
 
 #endif // ADMIN_H

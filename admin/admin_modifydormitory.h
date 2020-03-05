@@ -2,12 +2,13 @@
 #define ADMIN_MODIFYDORMITORY_H
 
 #include <QWidget>
+#include "other/basewindow.h"
 
 namespace Ui {
 class Admin_ModifyDormitory;
 }
 
-class Admin_ModifyDormitory : public QWidget
+class Admin_ModifyDormitory : public BaseWindow
 {
     Q_OBJECT
 
@@ -21,6 +22,7 @@ public slots:
 
     void getDormitory(QString ,QString ,QString,QString,QString);
 
+     void initTitleBar();
 signals:
     void refresh();
 

@@ -4,9 +4,10 @@
 #include <QtSql/QSqlQuery>
 
 Admin_AddManager::Admin_AddManager(QWidget *parent) :
-    QWidget(parent),
+    BaseWindow(parent),
     ui(new Ui::Admin_AddManager)
 {
+    initTitleBar();
     ui->setupUi(this);
     ui->setupUi(this);
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(addManager()));
@@ -53,4 +54,15 @@ void Admin_AddManager::pushButton_back()
     ui->lineEdit_2->clear();
     ui->lineEdit_3->clear();
     this->close();
+}
+
+void Admin_AddManager::initTitleBar()
+{
+    // 设置标题栏跑马灯效果，可以不设置;
+    //m_titleBar->setTitleRoll();
+    m_titleBar->setBackgroundColor(56,70,85);
+    m_titleBar->setTitleIcon(":/icon.png");
+    m_titleBar->setTitleContent(QStringLiteral("我的窗口"));
+    m_titleBar->setButtonType(MIN_BUTTON);
+    m_titleBar->setTitleWidth(this->width());
 }

@@ -2,12 +2,14 @@
 #define ADMIN_MODIFYMANAGER_H
 
 #include <QWidget>
+#include "other/basewindow.h"
 
 namespace Ui {
 class Admin_ModifyManager;
 }
 
-class Admin_ModifyManager : public QWidget
+class Admin_ModifyManager : public BaseWindow
+
 {
     Q_OBJECT
 
@@ -20,6 +22,8 @@ public slots:
     void pushButton_back();
 
     void getManager(QString ,QString ,QString);
+
+    void initTitleBar();
 
 signals:
     void refresh();

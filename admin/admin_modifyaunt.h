@@ -2,12 +2,13 @@
 #define ADMIN_MODIFYAUNT_H
 
 #include <QWidget>
+#include "other/basewindow.h"
 
 namespace Ui {
 class Admin_ModifyAunt;
 }
 
-class Admin_ModifyAunt : public QWidget
+class Admin_ModifyAunt : public BaseWindow
 {
     Q_OBJECT
 
@@ -21,6 +22,8 @@ public slots:
     void pushButton_back();
 
     void getAunt(QString ,QString ,QString,QString);
+
+    void initTitleBar();
 
 signals:
     void refresh();

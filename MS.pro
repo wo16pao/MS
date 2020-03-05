@@ -46,7 +46,9 @@ SOURCES += \
     admin/admin_addmanager.cpp \
     admin/admin_modifyaunt.cpp \
     admin/admin_modifymanager.cpp \
-    other/mylabel.cpp
+    other/mylabel.cpp \
+    other/basetitlebar.cpp \
+    other/basewindow.cpp
 
 HEADERS += \
         widget.h \
@@ -69,7 +71,9 @@ HEADERS += \
     admin/admin_addmanager.h \
     admin/admin_modifyaunt.h \
     admin/admin_modifymanager.h \
-    other/mylabel.h
+    other/mylabel.h \
+    other/basetitlebar.h \
+    other/basewindow.h
 
 FORMS += \
         widget.ui \

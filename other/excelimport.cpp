@@ -88,7 +88,7 @@ void ExcelImport::importArchive(QString filepath)
 
 void ExcelImport::importDormitory(QString filepath)
 {
-    importFunction(filepath,"domitory");
+    importFunction(filepath,"dormitory");
 }
 
 void ExcelImport::importDean(QString filepath)

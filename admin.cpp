@@ -12,10 +12,12 @@ QT_CHARTS_USE_NAMESPACE//QtChart名空间
 #include <QPointF>
 
 
+
 Admin::Admin(QWidget *parent) :
-    QWidget(parent),
+    BaseWindow(parent),
     ui(new Ui::Admin)
 {
+    initTitleBar();
     ui->setupUi(this);
     Init();
     InitConnection();
@@ -492,6 +494,17 @@ void Admin::pushButton_release_confirm()
 //初始化公告内容
 void Admin::initRelease()
 {
+    ui->lineEdit_1->clear();
+    ui->textEdit_1->clear();
+    ui->lineEdit_2->clear();
+    ui->textEdit_2->clear();
+    ui->lineEdit_3->clear();
+    ui->textEdit_3->clear();
+    ui->lineEdit_4->clear();
+    ui->textEdit_4->clear();
+    ui->lineEdit_5->clear();
+    ui->textEdit_5->clear();
+
     QSqlQuery query(m_db);
     QString str = "select 公告标题,公告内容 from `announcement` order by 发布时间 desc;";
     query.exec(str);
@@ -639,8 +652,10 @@ void Admin::InitConnection()
     connect(ui->label_title4,SIGNAL(clicked(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
     connect(ui->label_title5,SIGNAL(clicked(const QString &)),this,SLOT(lable_look(const QString &)));//公告栏查看
 
-    connect(ui->pushButton_next_page,SIGNAL(clicked()),this,SLOT(pushButton_next_page()));
-    connect(ui->pushButton_before_page,SIGNAL(clicked()),this,SLOT(pushButton_before_page()));
+    connect(ui->pushButton_next_page,SIGNAL(clicked()),this,SLOT(pushButton_next_page()));//下一页
+    connect(ui->pushButton_before_page,SIGNAL(clicked()),this,SLOT(pushButton_before_page()));//上一页
+    connect(ui->pushButton_modify_bulletin,SIGNAL(clicked()),this,SLOT(pushButton_bulletin_modify()));//修改公告
+    connect(ui->pushButton_bulletin_delete,SIGNAL(clicked()),this,SLOT(pushButton_bulletin_delete()));//修改公告
 }
 
 //--------------------------------查询函数--------------------------
@@ -760,23 +775,28 @@ void Admin::indexInfo()
 }
 //--------------------------------查询函数--------------------------
 
-//查看公告信息
+//-----------------------------公告信息--------------------------------
 void Admin::lable_look(const QString &title)
 {
     ui->tabWidget->setCurrentIndex(3);
     ui->lineEdit_look_title->setText(title);
+    m_bulletin_title = title;
     QSqlQuery query(m_db);
     QString str = "select 公告内容 from `announcement` where 公告标题='"+title+"';";
     query.exec(str);
     if(query.next())
+    {
         ui->textEdit_look_content->setText(query.value(0).toString());
-
-
+        m_bulletin_content = query.value(0).toString();
+    }
 }
 
 void Admin::sort_lable(int addOrSub)
 {
     m_page+=addOrSub;
+
+    if(addOrSub!=0)
+        m_page_flag = false;
 
     if(m_page<0)//判断是否为第一页
     {
@@ -815,6 +835,14 @@ void Admin::sort_lable(int addOrSub)
 
     if(query.next())
     {
+        ui->label_title2->setVisible(true);
+        ui->label_content2->setVisible(true);
+        ui->label_title3->setVisible(true);
+        ui->label_content3->setVisible(true);
+        ui->label_title4->setVisible(true);
+        ui->label_content4->setVisible(true);
+        ui->label_title5->setVisible(true);
+        ui->label_content5->setVisible(true);
         ui->label_title2->setText(query.value(0).toString());
         ui->label_content2->setText(query.value(1).toString());
     }
@@ -833,6 +861,7 @@ void Admin::sort_lable(int addOrSub)
 
     if(query.next())
     {
+
         ui->label_title3->setText(query.value(0).toString());
         ui->label_content3->setText(query.value(1).toString());
     }
@@ -883,4 +912,49 @@ void Admin::pushButton_next_page()
 void Admin::pushButton_before_page()
 {
     sort_lable(-1);
+}
+
+void Admin::pushButton_bulletin_modify()
+{
+    if(QMessageBox::No==QMessageBox::information(this,"提示","你确定要修改公告吗",QMessageBox::Yes|QMessageBox::No))
+        return;
+
+    QString str = "update `announcement` set 公告标题='"+ui->lineEdit_look_title->text()+"' , 公告内容='"+ui->textEdit_look_content->toPlainText()+"' where 公告标题='"+m_bulletin_title+"' and 公告内容='"+m_bulletin_content+"';";
+    QSqlQuery query(m_db);
+    if(query.exec(str))
+    {
+        QMessageBox::information(this,"提示","修改成功",QMessageBox::Ok);
+        initRelease();
+    }
+    else
+        QMessageBox::information(this,"提示","修改失败",QMessageBox::Ok);
+}
+
+void Admin::pushButton_bulletin_delete()
+{
+    if(QMessageBox::No==QMessageBox::information(this,"提示","你确定要删除公告吗",QMessageBox::Yes|QMessageBox::No))
+        return;
+
+     QString str = "delete from `announcement` where 公告标题='"+m_bulletin_title+"' and 公告内容='"+m_bulletin_content+"';";
+     QSqlQuery query(m_db);
+     if(query.exec(str))
+     {
+         QMessageBox::information(this,"提示","删除成功",QMessageBox::Ok);
+         initRelease();
+         pushButton_data();
+     }
+     else
+         QMessageBox::information(this,"提示","删除失败",QMessageBox::Ok);
+}
+//-----------------------------公告信息--------------------------------
+
+void Admin::initTitleBar()
+{
+    // 设置标题栏跑马灯效果，可以不设置;
+    //m_titleBar->setTitleRoll();
+    m_titleBar->setBackgroundColor(56,70,85);
+    m_titleBar->setTitleIcon(":/icon.png");
+    m_titleBar->setTitleContent(QStringLiteral("我的窗口"));
+    m_titleBar->setButtonType(MIN_BUTTON);
+    m_titleBar->setTitleWidth(this->width());
 }

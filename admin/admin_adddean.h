@@ -2,12 +2,13 @@
 #define ADMIN_ADDDEAN_H
 
 #include <QWidget>
+#include "other/basewindow.h"
 
 namespace Ui {
 class Admin_AddDean;
 }
 
-class Admin_AddDean : public QWidget
+class Admin_AddDean : public BaseWindow
 {
     Q_OBJECT
 
@@ -18,6 +19,8 @@ public:
 public slots:
     void addDean();
     void pushButton_back();
+
+    void initTitleBar();
 
 signals:
     void refresh();

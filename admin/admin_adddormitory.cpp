@@ -4,9 +4,10 @@
 #include <QtSql/QSqlQuery>
 
 Admin_AddDormitory::Admin_AddDormitory(QWidget *parent) :
-    QWidget(parent),
+    BaseWindow(parent),
     ui(new Ui::Admin_AddDormitory)
 {
+    initTitleBar();
     ui->setupUi(this);
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(addDormitory()));
     connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(pushButton_back()));
@@ -53,3 +54,15 @@ void Admin_AddDormitory::addDormitory()
         ui->label_result->setText("添加失败，请检查信息是否填写正确");
     }
 }
+
+void Admin_AddDormitory::initTitleBar()
+{
+    // 设置标题栏跑马灯效果，可以不设置;
+    //m_titleBar->setTitleRoll();
+    m_titleBar->setBackgroundColor(56,70,85);
+    m_titleBar->setTitleIcon(":/icon.png");
+    m_titleBar->setTitleContent(QStringLiteral("我的窗口"));
+    m_titleBar->setButtonType(MIN_BUTTON);
+    m_titleBar->setTitleWidth(this->width());
+}
+

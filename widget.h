@@ -5,12 +5,13 @@
 #include <QtSql/QSqlDatabase>
 #include "admin.h"
 #include "aunt.h"
+#include "other/basewindow.h"
 
 namespace Ui {
 class Widget;
 }
 
-class Widget : public QWidget
+class Widget : public BaseWindow
 {
     Q_OBJECT
 
@@ -28,7 +29,7 @@ private slots:
 
     void Reshow();//重现此窗口
 
-
+    void initTitleBar();
 
 private:
     Ui::Widget *ui;
