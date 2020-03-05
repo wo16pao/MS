@@ -47,7 +47,7 @@ void BaseWindow::paintEvent(QPaintEvent* event)
     pathBack.setFillRule(Qt::WindingFill);
     pathBack.addRoundedRect(QRect(0, 0, this->width(), this->height()), 3, 3);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-    painter.fillPath(pathBack, QBrush(QColor(215, 221, 228)));
+    painter.fillPath(pathBack, QBrush(QColor(66, 93, 138)));
 
     return QWidget::paintEvent(event);
 }

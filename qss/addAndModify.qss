@@ -1,3 +1,37 @@
-QLabel{
-font: bold;
+QLabel,QRadioButton{
+font-family:"Microsoft YaHei";
+color:#F7F4F4;
+}
+
+QPushButton{
+background-color: #ABBCDA;
+color:#F7F4F4;
+font-family: "Microsoft YaHei";
+border: 1px solid #333333;
+padding: 4px;
+}
+
+QPushButton:hover {
+background-color:#F7fcfd;
+border-color:#425d8a;
+color:#425d8a;
+}
+
+QPushButton:pressed {
+background-color:#a3caeb;
+border-color:#2d6970;
+color:#fcfcfc;
+}
+
+QRadioButton::indicator{
+border-radius: 8px;
+width: 12px;
+height: 12px;
+background-color:#ABBCDA;
+color:#F7F4F4;
+border: 1px solid #333333;
+}
+
+QRadioButton::indicator::checked{
+background-color: qradialgradient(cx:0.5, cy:0.5, fx:0.25, fy:0.15, radius:0.3, stop:0 #2d6907, stop:1 #fcfcfc);
 }
