@@ -16,35 +16,28 @@
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
   </property>
-  <widget class="QPushButton" name="pushButton_back">
-   <property name="geometry">
-    <rect>
-     <x>1030</x>
-     <y>60</y>
-     <width>51</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>返回</string>
-   </property>
-  </widget>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="widget_2" native="true">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>0</x>
      <y>60</y>
-     <width>141</width>
-     <height>521</height>
+     <width>130</width>
+     <height>551</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#3e6093;</string>
    </property>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>2</y>
-      <width>120</width>
-      <height>120</height>
+      <y>22</y>
+      <width>111</width>
+      <height>141</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -52,18 +45,22 @@
       <horstretch>0</horstretch>
       <verstretch>0</verstretch>
      </sizepolicy>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;
+border-radius:10px;</string>
     </property>
     <property name="text">
      <string>头像</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="label_name">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>140</y>
-      <width>36</width>
-      <height>16</height>
+      <x>20</x>
+      <y>170</y>
+      <width>91</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -72,18 +69,54 @@
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#ffffff;
+</string>
+    </property>
     <property name="text">
      <string>管理员</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_index">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>175</y>
-      <width>121</width>
+      <y>225</y>
+      <width>131</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+color:#ffffff;
+border:0;}
+
+QPushButton:pressed {
+color:#ffffff;
+background:qlineargradient(spread:pad, x1:1, y1:0.619318, x2:0.00568182, y2:0.4375, stop:0 rgba(186, 201, 224, 255), stop:0.636364 rgba(55, 85, 130, 255));
+border:0;}
+
+QPushButton:hover{
+color:#ffffff;
+background:qlineargradient(spread:pad, x1:1, y1:0.619318, x2:0.00568182, y2:0.4375, stop:0.318182 rgba(186, 201, 224, 255), stop:1 rgba(78, 121, 186, 255));
+border:0;}
+
+</string>
     </property>
     <property name="text">
      <string>首页</string>
@@ -93,10 +126,33 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>230</y>
-      <width>121</width>
+      <y>275</y>
+      <width>131</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+color:#ffffff;
+border:0;}
+
+QPushButton:pressed {
+color:#ffffff;
+background:qlineargradient(spread:pad, x1:1, y1:0.619318, x2:0.00568182, y2:0.4375, stop:0 rgba(186, 201, 224, 255), stop:0.636364 rgba(55, 85, 130, 255));
+border:0;}
+
+QPushButton:hover{
+color:#ffffff;
+background:qlineargradient(spread:pad, x1:1, y1:0.619318, x2:0.00568182, y2:0.4375, stop:0.318182 rgba(186, 201, 224, 255), stop:1 rgba(78, 121, 186, 255));
+border:0;}
+
+</string>
     </property>
     <property name="text">
      <string>信息管理</string>
@@ -106,13 +162,72 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>285</y>
-      <width>121</width>
+      <y>325</y>
+      <width>131</width>
       <height>51</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+color:#ffffff;
+border:0;}
+
+QPushButton:pressed {
+color:#ffffff;
+background:qlineargradient(spread:pad, x1:1, y1:0.619318, x2:0.00568182, y2:0.4375, stop:0 rgba(186, 201, 224, 255), stop:0.636364 rgba(55, 85, 130, 255));
+border:0;}
+
+QPushButton:hover{
+color:#ffffff;
+background:qlineargradient(spread:pad, x1:1, y1:0.619318, x2:0.00568182, y2:0.4375, stop:0.318182 rgba(186, 201, 224, 255), stop:1 rgba(78, 121, 186, 255));
+border:0;}
+
+</string>
+    </property>
     <property name="text">
      <string>公告查看</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_release">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>373</y>
+      <width>131</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+color:#ffffff;
+border:0;}
+
+QPushButton:pressed {
+color:#ffffff;
+background:qlineargradient(spread:pad, x1:1, y1:0.619318, x2:0.00568182, y2:0.4375, stop:0 rgba(186, 201, 224, 255), stop:0.636364 rgba(55, 85, 130, 255));
+border:0;}
+
+QPushButton:hover{
+color:#ffffff;
+background:qlineargradient(spread:pad, x1:1, y1:0.619318, x2:0.00568182, y2:0.4375, stop:0.318182 rgba(186, 201, 224, 255), stop:1 rgba(78, 121, 186, 255));
+border:0;}
+
+</string>
+    </property>
+    <property name="text">
+     <string>发布公告</string>
     </property>
    </widget>
   </widget>
@@ -120,13 +235,17 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>60</y>
-     <width>741</width>
-     <height>531</height>
+     <y>70</y>
+     <width>951</width>
+     <height>521</height>
     </rect>
    </property>
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-top-left-radius:8px;
+background-color: #ffffff;</string>
    </property>
    <property name="tabPosition">
     <enum>QTabWidget::West</enum>
@@ -135,7 +254,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>1</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -147,30 +266,6 @@
     <attribute name="title">
      <string>首页</string>
     </attribute>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>0</y>
-       <width>171</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>当前位置： 首页</string>
-     </property>
-    </widget>
     <widget class="QChartView" name="chartWidget" native="true">
      <property name="geometry">
       <rect>
@@ -191,6 +286,312 @@
       </rect>
      </property>
     </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>800</x>
+       <y>0</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>15</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>公告通知</string>
+     </property>
+    </widget>
+    <widget class="QToolBox" name="toolBox">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>30</y>
+       <width>201</width>
+       <height>498</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="lineWidth">
+      <number>1</number>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="page">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>201</width>
+        <height>368</height>
+       </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <attribute name="label">
+       <string>公告一</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QLineEdit" name="lineEdit_1">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="textEdit_1">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="html">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'SimSun'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>查看</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>87</width>
+        <height>133</height>
+       </rect>
+      </property>
+      <attribute name="label">
+       <string>公告二</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QLineEdit" name="lineEdit_2">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="textEdit_2">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>查看</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>87</width>
+        <height>133</height>
+       </rect>
+      </property>
+      <attribute name="label">
+       <string>公告三</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QLineEdit" name="lineEdit_3">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="textEdit_3">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>查看</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>87</width>
+        <height>133</height>
+       </rect>
+      </property>
+      <attribute name="label">
+       <string>公告四</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLineEdit" name="lineEdit_4">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="textEdit_4">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>查看</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_5">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>87</width>
+        <height>133</height>
+       </rect>
+      </property>
+      <attribute name="label">
+       <string>公告五</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLineEdit" name="lineEdit_5">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="textEdit_5">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_5">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>查看</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_info">
     <attribute name="title">
@@ -203,123 +604,88 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>60</y>
-       <width>681</width>
-       <height>451</height>
+       <y>40</y>
+       <width>931</width>
+       <height>471</height>
       </rect>
      </property>
-    </widget>
-    <widget class="QWidget" name="widget_3" native="true">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>20</y>
-       <width>591</width>
-       <height>41</height>
-      </rect>
+     <property name="styleSheet">
+      <string notr="true">QTableWidget{
+background-color: #ffffff;
+border:1px solid #bac9e0;
+border-top-left-radius:0px;
+color:#3e6093;
+gridline-color:#bac9e0;
+}
+QTableWidget::item:selected{
+color:#f3f6fb;
+background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #3e6093,stop:1 #3e6093);
+}
+QTableWidget::item:hover{
+background:#aac1e3;
+}
+
+QHeaderView::section{
+text-align:center;
+background:#e6ecf7;
+padding:3px;
+margin:0px;
+color:#3e6093;
+border:1px solid #bac9e0;
+border-left-width:0;
+}
+
+QScrollBar:vertical{
+background:#d9e2f0;
+padding:0px;
+max-width:12px;
+}
+ 
+QScrollBar::handle:vertical{
+background:#4b7cc4;
+border-radius:6px;
+}
+ 
+QScrollBar::handle:hover:vertical{
+background:#3e6093;
+}
+QScrollBar::handle:pressed:vertical{
+background:#2b4c7c;
+}
+
+QScrollBar:horizontal{
+background:#d9e2f0;
+padding:0px;
+max-height:12px;
+}
+ 
+QScrollBar::handle:horizontal{
+background:#4b7cc4;
+border-radius:6px;
+}
+ 
+QScrollBar::handle:hover:horizontal{
+background:#3e6093;
+}
+QScrollBar::handle:pressed:horizontal{
+background:#2b4c7c;
+}
+
+QTableView
+{
+    background-color:#ffffff;
+    alternate-background-color:#f3f6fb;
+}
+</string>
      </property>
-     <widget class="QPushButton" name="pushButton_search">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>9</y>
-        <width>60</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>搜索</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEdit_search">
-      <property name="geometry">
-       <rect>
-        <x>370</x>
-        <y>10</y>
-        <width>141</width>
-        <height>20</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_add">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>9</y>
-        <width>60</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>添加</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_modify">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>9</y>
-        <width>60</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>修改</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_delete">
-      <property name="geometry">
-       <rect>
-        <x>290</x>
-        <y>9</y>
-        <width>60</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>删除</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_export">
-      <property name="geometry">
-       <rect>
-        <x>9</x>
-        <y>9</y>
-        <width>60</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>导出</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_import">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>9</y>
-        <width>60</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>导入</string>
-      </property>
-     </widget>
     </widget>
     <widget class="QComboBox" name="comboBox">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
-       <width>91</width>
-       <height>20</height>
+       <y>5</y>
+       <width>101</width>
+       <height>30</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -328,8 +694,27 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="font">
+      <font>
+       <family>黑体</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: 2px solid #849dc5;
+border-top-left-radius:0px;
+color:#3e6093;
+
+</string>
+     </property>
      <property name="editable">
       <bool>false</bool>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
+     </property>
+     <property name="minimumContentsLength">
+      <number>30</number>
      </property>
      <item>
       <property name="text">
@@ -367,13 +752,39 @@
       </property>
      </item>
     </widget>
-    <widget class="QLabel" name="label_4">
+    <widget class="QPushButton" name="pushButton_export">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>120</x>
        <y>0</y>
-       <width>171</width>
-       <height>21</height>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>导出</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_import">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>0</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>导入</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_search">
+     <property name="geometry">
+      <rect>
+       <x>880</x>
+       <y>0</y>
+       <width>71</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -382,13 +793,70 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="text">
+      <string>搜索</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_search">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>5</y>
+       <width>131</width>
+       <height>30</height>
+      </rect>
+     </property>
      <property name="font">
       <font>
-       <pointsize>10</pointsize>
+       <family>黑体</family>
+       <pointsize>11</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: #ffffff;
+border-top-left-radius:0px;
+border:2px solid #849dc5;
+color:#3e6093;
+</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_modify">
+     <property name="geometry">
+      <rect>
+       <x>600</x>
+       <y>0</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
      <property name="text">
-      <string>当前位置： 信息管理</string>
+      <string>修改</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_add">
+     <property name="geometry">
+      <rect>
+       <x>530</x>
+       <y>0</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>添加</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_delete">
+     <property name="geometry">
+      <rect>
+       <x>670</x>
+       <y>0</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>删除</string>
      </property>
     </widget>
    </widget>
@@ -681,43 +1149,6 @@
       </item>
      </layout>
     </widget>
-    <widget class="QPushButton" name="pushButton_release">
-     <property name="geometry">
-      <rect>
-       <x>620</x>
-       <y>490</y>
-       <width>87</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>发布公告</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_20">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>0</y>
-       <width>171</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>当前位置： 公告导航</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -786,30 +1217,6 @@ p, li { white-space: pre-wrap; }
      </property>
      <property name="text">
       <string>修改</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_21">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>0</y>
-       <width>171</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>当前位置： 公告查看</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_modify_back">
@@ -908,30 +1315,6 @@ p, li { white-space: pre-wrap; }
       <string>发布</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_22">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>0</y>
-       <width>171</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>当前位置： 公告发布</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButton_modify_back2">
      <property name="geometry">
       <rect>
@@ -963,310 +1346,80 @@ p, li { white-space: pre-wrap; }
     </widget>
    </widget>
   </widget>
-  <widget class="QToolBox" name="toolBox">
+  <widget class="QWidget" name="widget_3" native="true">
    <property name="geometry">
     <rect>
-     <x>880</x>
-     <y>90</y>
-     <width>201</width>
-     <height>498</height>
+     <x>130</x>
+     <y>30</y>
+     <width>971</width>
+     <height>30</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>9</pointsize>
-    </font>
+   <property name="styleSheet">
+    <string notr="true">background-color:#ffffff;
+border-top-left-radius:8px;</string>
    </property>
-   <property name="frameShadow">
-    <enum>QFrame::Plain</enum>
-   </property>
-   <property name="lineWidth">
-    <number>1</number>
-   </property>
-   <property name="currentIndex">
-    <number>4</number>
-   </property>
-   <widget class="QWidget" name="page">
+   <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>0</y>
-      <width>201</width>
-      <height>368</height>
+      <width>141</width>
+      <height>28</height>
      </rect>
     </property>
-    <property name="layoutDirection">
-     <enum>Qt::RightToLeft</enum>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
-    <attribute name="label">
-     <string>公告一</string>
-    </attribute>
-    <layout class="QVBoxLayout" name="verticalLayout_6">
-     <item>
-      <widget class="QLineEdit" name="lineEdit_1">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QTextEdit" name="textEdit_1">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="html">
-        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'SimSun'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>查看</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>当前位置：首页</string>
+    </property>
    </widget>
-   <widget class="QWidget" name="page_2">
+   <widget class="QPushButton" name="pushButton_back">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>900</x>
       <y>0</y>
-      <width>201</width>
-      <height>368</height>
+      <width>80</width>
+      <height>30</height>
      </rect>
     </property>
-    <attribute name="label">
-     <string>公告二</string>
-    </attribute>
-    <layout class="QVBoxLayout" name="verticalLayout_5">
-     <item>
-      <widget class="QLineEdit" name="lineEdit_2">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QTextEdit" name="textEdit_2">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>查看</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="page_3">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>201</width>
-      <height>368</height>
-     </rect>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
-    <attribute name="label">
-     <string>公告三</string>
-    </attribute>
-    <layout class="QVBoxLayout" name="verticalLayout_4">
-     <item>
-      <widget class="QLineEdit" name="lineEdit_3">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QTextEdit" name="textEdit_3">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_3">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>查看</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="page_4">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>201</width>
-      <height>368</height>
-     </rect>
+    <property name="styleSheet">
+     <string notr="true">background: transparent;
+color:#000000;
+</string>
     </property>
-    <attribute name="label">
-     <string>公告四</string>
-    </attribute>
-    <layout class="QVBoxLayout" name="verticalLayout_3">
-     <item>
-      <widget class="QLineEdit" name="lineEdit_4">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QTextEdit" name="textEdit_4">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_4">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>查看</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="page_5">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>201</width>
-      <height>368</height>
-     </rect>
+    <property name="text">
+     <string>退出登录</string>
     </property>
-    <attribute name="label">
-     <string>公告五</string>
-    </attribute>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QLineEdit" name="lineEdit_5">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QTextEdit" name="textEdit_5">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_5">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>查看</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </widget>
   </widget>
-  <widget class="QLabel" name="label_6">
+  <widget class="QWidget" name="widget_10" native="true">
    <property name="geometry">
     <rect>
-     <x>880</x>
-     <y>60</y>
-     <width>101</width>
-     <height>21</height>
+     <x>0</x>
+     <y>30</y>
+     <width>130</width>
+     <height>30</height>
     </rect>
    </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>公告通知</string>
+   <property name="styleSheet">
+    <string notr="true">background-color:#aac1e3;</string>
    </property>
   </widget>
  </widget>

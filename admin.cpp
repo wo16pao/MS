@@ -16,12 +16,11 @@ QT_CHARTS_USE_NAMESPACE//QtChart名空间
 Admin::Admin(QWidget *parent) :
     BaseWindow(parent),
     ui(new Ui::Admin)
-{
-    initTitleBar();
+{ 
     ui->setupUi(this);
+    initTitleBar();
     Init();
     InitConnection();
-    ui->tabWidget->setStyleSheet("QTabWidget::pane{border:none;}");
 }
 
 Admin::~Admin()
@@ -437,7 +436,7 @@ void Admin::importExcel()
     importThread->start();
 }
 //导入结束
-void Admin::importExcelFinish(int success,int failure)
+void Admin::importExcelFinish(const int &success,const int &failure)
 {
     loading->close();
     importThread->exit();
@@ -632,7 +631,7 @@ void Admin::InitConnection()
     connect(ui->pushButton_modify_back2,SIGNAL(clicked()),this,SLOT(pushButton_data()));
     //connect(ui->pushButton_other,SIGNAL(clicked()),this,SLOT(pushButton_other()));
 
-    connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(combobox_query(int)));//查询切换
+    connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(combobox_query(const int&)));//查询切换
 
     connect(ui->pushButton_search,SIGNAL(clicked()),this,SLOT(pushButton_search()));//搜素按钮
     connect(ui->pushButton_add,SIGNAL(clicked()),this,SLOT(pushButton_add()));//添加按钮
@@ -642,7 +641,7 @@ void Admin::InitConnection()
     connect(ui->pushButton_export,SIGNAL(clicked()),this,SLOT(exportExcel()));//导出按钮
     connect(ui->pushButton_import,SIGNAL(clicked()),this,SLOT(importExcel()));//导入按钮
     connect(exportThread,SIGNAL(finish()),this,SLOT(exportExcelFinish()));
-    connect(importThread,SIGNAL(finish(int,int)),this,SLOT(importExcelFinish(int,int)));
+    connect(importThread,SIGNAL(finish(int,int)),this,SLOT(importExcelFinish(const int&,const int&)));
 
     connect(ui->pushButton_release_confirm,SIGNAL(clicked()),this,SLOT(pushButton_release_confirm()));//公告发布按钮
 
@@ -656,6 +655,8 @@ void Admin::InitConnection()
     connect(ui->pushButton_before_page,SIGNAL(clicked()),this,SLOT(pushButton_before_page()));//上一页
     connect(ui->pushButton_modify_bulletin,SIGNAL(clicked()),this,SLOT(pushButton_bulletin_modify()));//修改公告
     connect(ui->pushButton_bulletin_delete,SIGNAL(clicked()),this,SLOT(pushButton_bulletin_delete()));//修改公告
+
+    connect(ui->pushButton_index,SIGNAL(clicked()),this,SLOT(pushButton_indexStyle()));
 }
 
 //--------------------------------查询函数--------------------------
@@ -758,16 +759,16 @@ void Admin::indexInfo()
             for (int j = 0; j < index; j++)
             {
 
-                    if(j==2||j==3)
-                    {
-                        QDateTime time;
-                        time = query.value(j).toDateTime();
-                        QString strBuffer;
-                        strBuffer = time.toString("yyyy-MM-dd hh:mm:ss");
-                        ui->tableWidget_2->setItem(i,j,new QTableWidgetItem(strBuffer));
-                    }
-                    else
-                        ui->tableWidget_2->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
+                if(j==2||j==3)
+                {
+                    QDateTime time;
+                    time = query.value(j).toDateTime();
+                    QString strBuffer;
+                    strBuffer = time.toString("yyyy-MM-dd hh:mm:ss");
+                    ui->tableWidget_2->setItem(i,j,new QTableWidgetItem(strBuffer));
+                }
+                else
+                    ui->tableWidget_2->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
             }
 
         }
@@ -791,7 +792,7 @@ void Admin::lable_look(const QString &title)
     }
 }
 
-void Admin::sort_lable(int addOrSub)
+void Admin::sort_lable(const int &addOrSub)
 {
     m_page+=addOrSub;
 
@@ -935,16 +936,16 @@ void Admin::pushButton_bulletin_delete()
     if(QMessageBox::No==QMessageBox::information(this,"提示","你确定要删除公告吗",QMessageBox::Yes|QMessageBox::No))
         return;
 
-     QString str = "delete from `announcement` where 公告标题='"+m_bulletin_title+"' and 公告内容='"+m_bulletin_content+"';";
-     QSqlQuery query(m_db);
-     if(query.exec(str))
-     {
-         QMessageBox::information(this,"提示","删除成功",QMessageBox::Ok);
-         initRelease();
-         pushButton_data();
-     }
-     else
-         QMessageBox::information(this,"提示","删除失败",QMessageBox::Ok);
+    QString str = "delete from `announcement` where 公告标题='"+m_bulletin_title+"' and 公告内容='"+m_bulletin_content+"';";
+    QSqlQuery query(m_db);
+    if(query.exec(str))
+    {
+        QMessageBox::information(this,"提示","删除成功",QMessageBox::Ok);
+        initRelease();
+        pushButton_data();
+    }
+    else
+        QMessageBox::information(this,"提示","删除失败",QMessageBox::Ok);
 }
 //-----------------------------公告信息--------------------------------
 
@@ -958,3 +959,30 @@ void Admin::initTitleBar()
     m_titleBar->setButtonType(MIN_BUTTON);
     m_titleBar->setTitleWidth(this->width());
 }
+
+void Admin::setLabelName(const QString &name)
+{
+    ui->label_name->setText(name);
+}
+
+void Admin::pushButton_indexStyle()
+{
+
+}
+
+void Admin::pushButton_infoStyle()
+{
+
+}
+
+void Admin::pushButton_dataStyle()
+{
+
+}
+
+void Admin::pushButton_releaseStyle()
+{
+
+}
+
+

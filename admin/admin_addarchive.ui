@@ -332,6 +332,27 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_id</tabstop>
+  <tabstop>lineEdit_name</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>lineEdit_phone</tabstop>
+  <tabstop>dateEdit</tabstop>
+  <tabstop>lineEdit_address</tabstop>
+  <tabstop>dateEdit_2</tabstop>
+  <tabstop>lineEdit_num</tabstop>
+  <tabstop>comboBox_dean</tabstop>
+  <tabstop>comboBox_dean2</tabstop>
+  <tabstop>comboBox_dean3</tabstop>
+  <tabstop>comboBox_dean4</tabstop>
+  <tabstop>comboBox_dorm</tabstop>
+  <tabstop>comboBox_dorm2</tabstop>
+  <tabstop>comboBox_dorm3</tabstop>
+  <tabstop>comboBox_dorm4</tabstop>
+  <tabstop>comboBox_dorm5</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -286,6 +286,18 @@
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_id</tabstop>
+  <tabstop>lineEdit_name</tabstop>
+  <tabstop>dateTimeEdit</tabstop>
+  <tabstop>dateTimeEdit_2</tabstop>
+  <tabstop>lineEdit_temp</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>lineEdit_remark</tabstop>
+  <tabstop>pushButton_confirm</tabstop>
+  <tabstop>pushButton_quit</tabstop>
+  <tabstop>listWidget</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

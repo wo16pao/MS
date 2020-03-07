@@ -9,17 +9,16 @@ Widget::Widget(QWidget *parent) :
     BaseWindow(parent),
     ui(new Ui::Widget)
 {
-    QFile file(":/qss/addAndModify.qss");
-    if (file.open(QFile::ReadOnly)) {
-            QString qss = QLatin1String(file.readAll());
-            QString paletteColor = qss.mid(20, 7);
-            qApp->setPalette(QPalette(QColor(paletteColor)));
-            qApp->setStyleSheet(qss);
-            file.close();
-        }
+//    QFile file(":/qss/addAndModify.qss");
+//    if (file.open(QFile::ReadOnly)) {
+//            QString qss = QLatin1String(file.readAll());
+//            QString paletteColor = qss.mid(20, 7);
+//            qApp->setPalette(QPalette(QColor(paletteColor)));
+//            qApp->setStyleSheet(qss);
+//            file.close();
+//        }
+
     initTitleBar();
-
-
     ui->setupUi(this);
 
     SqlConnect();//首先连接数据库
@@ -101,7 +100,13 @@ void Widget::Login()
         else if(ui->radioButton_admin->isChecked())
         {
             //管理员登陆
+
             m_adm = new Admin;
+            QString temp = "管理员：";
+            QString get_name = "select 姓名 from `manager` where 账号= '"+userId+"' and 密码 = '"+userPsw+"';";
+            query.exec(get_name);
+            if(query.next())
+                m_adm->setLabelName(temp+query.value(0).toString());
             m_adm->show();
             connect(m_adm,SIGNAL(signal_backWindow()),this,SLOT(Reshow()));//接受重新打开窗口信号
 

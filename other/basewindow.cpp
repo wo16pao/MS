@@ -11,7 +11,7 @@ BaseWindow::BaseWindow(QWidget *parent)
     // WindowMinimizeButtonHint 属性设置在窗口最小化时，点击任务栏窗口可以显示出原窗口;
     this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMinimizeButtonHint);
     // 设置窗口背景透明;
-    setAttribute(Qt::WA_TranslucentBackground);
+    //setAttribute(Qt::WA_TranslucentBackground);
     // 初始化标题栏;
     initTitleBar();
 }
@@ -47,7 +47,7 @@ void BaseWindow::paintEvent(QPaintEvent* event)
     pathBack.setFillRule(Qt::WindingFill);
     pathBack.addRoundedRect(QRect(0, 0, this->width(), this->height()), 3, 3);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-    painter.fillPath(pathBack, QBrush(QColor(66, 93, 138)));
+    painter.fillPath(pathBack, QBrush(QColor(186, 201, 224)));
 
     return QWidget::paintEvent(event);
 }

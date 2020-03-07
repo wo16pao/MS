@@ -72,7 +72,7 @@ public slots:
     void exportExcel();//导出到excel表
     void importExcel();//导入excel表到数据库
     void exportExcelFinish();
-    void importExcelFinish(int,int);
+    void importExcelFinish(const int&,const int&);
 
     void pushButton_release_confirm();//发布按钮
     void initRelease();//初始化公告
@@ -80,14 +80,21 @@ public slots:
     void drawChart();//画折线图
 
     void lable_look(const QString&);//查看公告信息
-    void sort_lable(int addOrSub);//排序公告
+    void sort_lable(const int& addOrSub);//排序公告
 
     void pushButton_next_page();//下一页
     void pushButton_before_page();//上一页
     void pushButton_bulletin_modify();//公告修改
     void pushButton_bulletin_delete();//公告删除
 
-    void initTitleBar();
+    void initTitleBar();//初始化标题栏
+
+    void setLabelName(const QString&);//设置姓名
+
+    void pushButton_indexStyle();
+    void pushButton_infoStyle();
+    void pushButton_dataStyle();
+    void pushButton_releaseStyle();
 
 signals:
     void signal_backWindow();//返回上个窗口的信号
