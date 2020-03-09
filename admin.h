@@ -52,8 +52,6 @@ public slots:
     void queryAunt();//查宿管
     void queryManager();//查管理员
 
-    void indexInfo();//首页表信息
-
 public slots:
     void pushButton_back();//返回
 
@@ -77,6 +75,7 @@ public slots:
     void pushButton_release_confirm();//发布按钮
     void initRelease();//初始化公告
 
+    void drawBarChart();//画柱状图
     void drawChart();//画折线图
 
     void lable_look(const QString&);//查看公告信息
@@ -131,6 +130,11 @@ private:
 
     QString m_bulletin_title;//公告标题
     QString m_bulletin_content;//公告内容
+
+    QFile m_checkQss;
+    QFile m_uncheckQss;
+    QString m_checked;
+    QString m_unchecked;
 };
 
 #endif // ADMIN_H

@@ -8,6 +8,7 @@ QT_CHARTS_USE_NAMESPACE//QtChart名空间
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QLineSeries>
+#include <QBarSeries>
 #include <QDate>
 #include <QPointF>
 
@@ -21,6 +22,7 @@ Admin::Admin(QWidget *parent) :
     initTitleBar();
     Init();
     InitConnection();
+
 }
 
 Admin::~Admin()
@@ -46,7 +48,7 @@ void Admin::queryFunction(const QString &get_row, const QString &str, const QStr
     ui->tableWidget->setColumnCount(index);//设置列数
     ui->tableWidget->setHorizontalHeaderLabels(header);//设置标头
     for(int i=0;i<index;++i)
-        ui->tableWidget->setColumnWidth(i,130);
+        ui->tableWidget->setColumnWidth(i,160);
     query.exec(get_row);
     if(query.first())
     {
@@ -69,7 +71,10 @@ void Admin::queryFunction(const QString &get_row, const QString &str, const QStr
             for (int j = 0; j < index; j++)
             {
                 if(!flag)
+                {
                     ui->tableWidget->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
+                    ui->tableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                }
                 else
                 {
                     if(j==2||j==3)
@@ -79,9 +84,13 @@ void Admin::queryFunction(const QString &get_row, const QString &str, const QStr
                         QString strBuffer;
                         strBuffer = time.toString("yyyy-MM-dd hh:mm:ss");
                         ui->tableWidget->setItem(i,j,new QTableWidgetItem(strBuffer));
+                        ui->tableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
                     }
                     else
+                    {
                         ui->tableWidget->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
+                        ui->tableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                    }
                 }
             }
         }
@@ -100,24 +109,27 @@ void Admin::pushButton_index()
 {
     ui->tabWidget->setCurrentIndex(0);
     drawChart();
-    indexInfo();
+    drawBarChart();
+     ui->label_guide->setText("当前位置：首页");
 }
 
 void Admin::pushButton_info()
 {
     ui->tabWidget->setCurrentIndex(1);
+    ui->label_guide->setText("当前位置：信息管理");
 }
 
 void Admin::pushButton_data()
 {
     ui->tabWidget->setCurrentIndex(2);
     sort_lable(0);
-
+     ui->label_guide->setText("当前位置：公告查看");
 }
 
 void Admin::pushButton_release()
 {
     ui->tabWidget->setCurrentIndex(4);
+     ui->label_guide->setText("当前位置：发布公告");
 }
 //---------------------------------------------------
 
@@ -535,6 +547,132 @@ void Admin::initRelease()
 
 }
 
+void Admin::drawBarChart()
+{
+    QBarSeries *series = new QBarSeries();
+    QBarSet *set1 = new QBarSet("梅苑");
+    QBarSet *set2 = new QBarSet("兰苑");
+    QBarSet *set3 = new QBarSet("竹苑");
+    QBarSet *set4 = new QBarSet("菊苑");
+    QBarSet *set5 = new QBarSet("桃苑");
+    QBarSet *set6 = new QBarSet("李苑");
+    QBarSet *set7 = new QBarSet("柳苑");
+    QBarSet *set8 = new QBarSet("桂苑");
+    QBarSet *set9 = new QBarSet("荷苑");
+
+    int max=0;
+    QSqlQuery query(m_db);
+    QString str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='梅苑') and 是否正常='不正常';";
+    query.exec(str);
+    if(query.next())
+    {
+        set1->append(query.value(0).toInt());
+        if(query.value(0).toInt()>max)
+            max = query.value(0).toInt();
+    }
+
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='兰苑') and 是否正常='不正常';";
+    query.exec(str);
+    if(query.next())
+    {
+        set2->append(query.value(0).toInt());
+        if(query.value(0).toInt()>max)
+            max = query.value(0).toInt();
+    }
+
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='竹苑') and 是否正常='不正常';";
+    query.exec(str);
+    if(query.next())
+    {
+         set3->append(query.value(0).toInt());
+        if(query.value(0).toInt()>max)
+            max = query.value(0).toInt();
+    }
+
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='菊苑') and 是否正常='不正常';";
+    query.exec(str);
+    if(query.next())
+    {
+         set4->append(query.value(0).toInt());
+        if(query.value(0).toInt()>max)
+            max = query.value(0).toInt();
+    }
+
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='桃苑') and 是否正常='不正常';";
+    query.exec(str);
+    if(query.next())
+    {
+         set5->append(query.value(0).toInt());
+        if(query.value(0).toInt()>max)
+            max = query.value(0).toInt();
+    }
+
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='李苑') and 是否正常='不正常';";
+    query.exec(str);
+    if(query.next())
+    {
+         set6->append(query.value(0).toInt());
+        if(query.value(0).toInt()>max)
+            max = query.value(0).toInt();
+    }
+
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='柳苑') and 是否正常='不正常';";
+    query.exec(str);
+    if(query.next())
+    {
+         set7->append(query.value(0).toInt());
+        if(query.value(0).toInt()>max)
+            max = query.value(0).toInt();
+    }
+
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='桂苑') and 是否正常='不正常';";
+    query.exec(str);
+    if(query.next())
+    {
+         set8->append(query.value(0).toInt());
+        if(query.value(0).toInt()>max)
+            max = query.value(0).toInt();
+    }
+
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='荷苑') and 是否正常='不正常';";
+    query.exec(str);
+    if(query.next())
+    {
+        set9->append(query.value(0).toInt());
+        if(query.value(0).toInt()>max)
+            max = query.value(0).toInt();
+    }
+
+    series->append(set1);
+    series->append(set2);
+    series->append(set3);
+    series->append(set4);
+    series->append(set5);
+    series->append(set6);
+    series->append(set7);
+    series->append(set8);
+    series->append(set9);
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);//添加系列到QChart上
+    chart->createDefaultAxes();//创建默认轴
+
+    QStringList bottom;
+    bottom<<"梅苑"<<"兰苑"<<"竹苑"<<"菊苑"<<"桃苑"<<"李苑"<<"柳苑"<<"桂苑"<<"荷苑";
+//    QBarCategoryAxis *axisx = new QBarCategoryAxis();
+//    axisx->append(bottom);
+//    chart->setAxisX(axisx);
+    chart->axes(Qt::Vertical).first()->setRange(0,max);
+
+    QValueAxis *axisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).first());
+    Q_ASSERT(axisY);
+    axisY->setLabelFormat("%.1f ");
+    chart->axisX()->hide();
+    chart->legend()->setVisible(true);
+    ui->chartWidget_2->setChart(chart);
+    //ui->chartWidget_2->chart()->legend()->hide();
+}
+
 //绘制图表
 void Admin::drawChart()
 {
@@ -552,13 +690,18 @@ void Admin::drawChart()
 
     QDate ago;
     QString str;
+    int max = 0;
     for(int i=0;i<7;++i)
     {
         ago = now.addDays(i-7);
         str = "select count(是否正常) from `information` where 是否正常='不正常' and 进门时间 like '"+ago.toString("yyyy-MM-dd")+"%'";
         query.exec(str);
         if(query.next())
+        {
             points.append(QPointF(i+1,query.value(0).toInt()));
+            if(query.value(0).toInt()>max)
+                max=query.value(0).toInt();
+        }
     }
 
 
@@ -569,14 +712,24 @@ void Admin::drawChart()
     //chart->setLocalizeNumbers(true);//数字是否本地化
     chart->addSeries(series1);//添加系列到QChart上
     chart->createDefaultAxes();//创建默认轴
-    chart->setTitle("体温异常折线图");//设置标题
-    chart->setTitleFont(QFont("黑体"));//设置标题字体
-    chart->legend()->setVisible(true);
+    //chart->setTitle("体温异常折线图");//设置标题
+   // chart->setTitleFont(QFont("黑体"));//设置标题字体
+    //chart->legend()->setVisible(true);
     chart->legend()->setAlignment(Qt::AlignBottom);//底部对齐
-    chart->legend()->setVisible(true);//设置是否可视
+    //chart->legend()->setVisible(true);//设置是否可视
+    QStringList bottom;
+    bottom<<"7天前"<<"6天前"<<"5天前"<<"4天前"<<"3天前"<<"2天前"<<"1天前";
+    QBarCategoryAxis *axisx = new QBarCategoryAxis();
+    axisx->append(bottom);
+    chart->setAxisX(axisx);
+    chart->axes(Qt::Vertical).first()->setRange(0,max);
 
+    QValueAxis *axisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).first());
+    Q_ASSERT(axisY);
+    axisY->setLabelFormat("%.1f ");
 
     ui->chartWidget->setChart(chart);
+    ui->chartWidget->chart()->legend()->hide();
 }
 //-----------------------各个按钮-------------------------------------------
 
@@ -587,8 +740,7 @@ void Admin::Init()
     ui->tabWidget->tabBar()->hide();//隐藏页头
     initRelease();
     drawChart();
-    indexInfo();
-    ui->tabWidget->setStyleSheet("QTabWidget{border-top-color:rgba(255,255,255,0);}");
+    drawBarChart();
 
 
     //初始化添加信息类
@@ -615,6 +767,10 @@ void Admin::Init()
     m_page = 0;//初始化公告当前页数
     m_page_flag=false;
     sort_lable(0);
+
+    QStyledItemDelegate* itemDelegate = new QStyledItemDelegate();
+        ui->comboBox->setItemDelegate(itemDelegate);
+
 }
 
 //初始化连接
@@ -626,6 +782,7 @@ void Admin::InitConnection()
     connect(ui->pushButton_index,SIGNAL(clicked()),this,SLOT(pushButton_index()));
     connect(ui->pushButton_info,SIGNAL(clicked()),this,SLOT(pushButton_info()));
     connect(ui->pushButton_data,SIGNAL(clicked()),this,SLOT(pushButton_data()));
+    connect(ui->pushButton_data2,SIGNAL(clicked()),this,SLOT(pushButton_data()));
     connect(ui->pushButton_release,SIGNAL(clicked()),this,SLOT(pushButton_release()));
     connect(ui->pushButton_modify_back,SIGNAL(clicked()),this,SLOT(pushButton_data()));
     connect(ui->pushButton_modify_back2,SIGNAL(clicked()),this,SLOT(pushButton_data()));
@@ -657,6 +814,10 @@ void Admin::InitConnection()
     connect(ui->pushButton_bulletin_delete,SIGNAL(clicked()),this,SLOT(pushButton_bulletin_delete()));//修改公告
 
     connect(ui->pushButton_index,SIGNAL(clicked()),this,SLOT(pushButton_indexStyle()));
+    connect(ui->pushButton_info,SIGNAL(clicked()),this,SLOT(pushButton_infoStyle()));
+    connect(ui->pushButton_data,SIGNAL(clicked()),this,SLOT(pushButton_dataStyle()));
+    connect(ui->pushButton_data2,SIGNAL(clicked()),this,SLOT(pushButton_dataStyle()));
+    connect(ui->pushButton_release,SIGNAL(clicked()),this,SLOT(pushButton_releaseStyle()));
 }
 
 //--------------------------------查询函数--------------------------
@@ -708,72 +869,6 @@ void Admin::queryManager()
     queryFunction(get_row,str,"manager");
 }
 
-//主页表格信息
-void Admin::indexInfo()
-{
-    ui->tableWidget_2->clearContents();
-    int row=0;
-    QSqlQuery query(m_db);
-    QStringList header;
-    QString head1 = "show columns from `information`;";
-    query.exec(head1);
-    int index=0;
-    while(query.next())
-    {
-        header << query.value(0).toString();
-        index++;
-    }
-    QString head2 = "show columns from `archive`;";
-    query.exec(head2);
-    while(query.next())
-    {
-        header << query.value(0).toString();
-        index++;
-    }
-    ui->tableWidget_2->setColumnCount(index);//设置列数
-    ui->tableWidget_2->setHorizontalHeaderLabels(header);//设置标头
-    for(int i=0;i<index;++i)
-        ui->tableWidget_2->setColumnWidth(i,130);
-
-    QString get_row = "SELECT COUNT(*) FROM `information` JOIN `archive` ON `archive`.`学号`=`information`.`学号` AND `archive`.`姓名`=`information`.`姓名` WHERE 是否正常='不正常' ORDER BY '学号' ASC";
-    query.exec(get_row);
-    if(query.first())
-    {
-        row=query.value("count(*)").toInt();//获取行数
-        ui->tableWidget_2->setRowCount(row);//设置行数
-    }
-    QString str = "select `information`.*,`archive`.* from `information` join `archive` on `archive`.`学号`=`information`.`学号` and `archive`.`姓名`=`information`.`姓名` where 是否正常='不正常' order by '学号' asc;";
-    if(row)
-    {
-
-        //ui->tableWidget_2->horizontalHeader()->setStretchLastSection(true); //自动调整宽度
-        ui->tableWidget_2->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
-        ui->tableWidget_2->verticalHeader()->setVisible(false);//隐藏列头
-        ui->tableWidget_2->setSelectionMode(QAbstractItemView::SingleSelection);//只允许单选
-        ui->tableWidget_2->setSelectionBehavior(QAbstractItemView::SelectRows);
-        ui->tableWidget_2->setAlternatingRowColors(true);
-        query.exec(str);
-        //设置内容
-        for (int i = 0; query.next(); i++)
-        {
-            for (int j = 0; j < index; j++)
-            {
-
-                if(j==2||j==3)
-                {
-                    QDateTime time;
-                    time = query.value(j).toDateTime();
-                    QString strBuffer;
-                    strBuffer = time.toString("yyyy-MM-dd hh:mm:ss");
-                    ui->tableWidget_2->setItem(i,j,new QTableWidgetItem(strBuffer));
-                }
-                else
-                    ui->tableWidget_2->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
-            }
-
-        }
-    }
-}
 //--------------------------------查询函数--------------------------
 
 //-----------------------------公告信息--------------------------------
@@ -949,6 +1044,7 @@ void Admin::pushButton_bulletin_delete()
 }
 //-----------------------------公告信息--------------------------------
 
+//初始化标题栏
 void Admin::initTitleBar()
 {
     // 设置标题栏跑马灯效果，可以不设置;
@@ -960,29 +1056,44 @@ void Admin::initTitleBar()
     m_titleBar->setTitleWidth(this->width());
 }
 
+//设置名字
 void Admin::setLabelName(const QString &name)
 {
     ui->label_name->setText(name);
 }
 
+//---------------------------按钮样式改变--------------------------
 void Admin::pushButton_indexStyle()
 {
+        ui->pushButton_index->setChecked(true);
+        ui->pushButton_info->setChecked(false);
+        ui->pushButton_data->setChecked(false);
+        ui->pushButton_release->setChecked(false);
 
 }
 
 void Admin::pushButton_infoStyle()
 {
-
+    ui->pushButton_index->setChecked(false);
+    ui->pushButton_info->setChecked(true);
+    ui->pushButton_data->setChecked(false);
+    ui->pushButton_release->setChecked(false);
 }
 
 void Admin::pushButton_dataStyle()
 {
-
+    ui->pushButton_index->setChecked(false);
+    ui->pushButton_info->setChecked(false);
+    ui->pushButton_data->setChecked(true);
+    ui->pushButton_release->setChecked(false);
 }
 
 void Admin::pushButton_releaseStyle()
 {
-
+    ui->pushButton_index->setChecked(false);
+    ui->pushButton_info->setChecked(false);
+    ui->pushButton_data->setChecked(false);
+    ui->pushButton_release->setChecked(true);
 }
-
+//---------------------------按钮样式改变--------------------------
 
