@@ -18,5 +18,14 @@
         <file>res/search.png</file>
         <file>res/upload(2).png</file>
         <file>res/user-add.png</file>
+        <file>res/公告管理头图.jpg</file>
+        <file>res/弹框界面 (2).png</file>
+        <file>res/弹框界面 (3).png</file>
+        <file>res/弹框界面.png</file>
+        <file>res/公告界面.png</file>
+        <file>res/公告界面1.png</file>
+        <file>res/公告界面2.png</file>
+        <file>res/所有下拉框.png</file>
+        <file>res/信息界面.png</file>
     </qresource>
 </RCC>

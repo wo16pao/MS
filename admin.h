@@ -78,9 +78,8 @@ public slots:
     void drawBarChart();//画柱状图
     void drawChart();//画折线图
 
-    void lable_look(const QString&);//查看公告信息
-    void sort_lable(const int& addOrSub);//排序公告
-
+    void label_look(const QString&);//查看公告信息
+    void refresh_label();
     void pushButton_next_page();//下一页
     void pushButton_before_page();//上一页
     void pushButton_bulletin_modify();//公告修改
@@ -126,7 +125,8 @@ private:
     Loading *loading;//等待动画
 
     int m_page;//定位页数
-    bool m_page_flag;//定位页数是否为最后一页
+    bool m_page_begin_flag;//定位页数是否是第一页
+    bool m_page_end_flag;//定位页数是否为最后一页
 
     QString m_bulletin_title;//公告标题
     QString m_bulletin_content;//公告内容
