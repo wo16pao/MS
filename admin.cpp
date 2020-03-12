@@ -478,6 +478,23 @@ void Admin::importExcelFinish(const int &success,const int &failure)
     }
 }
 
+void Admin::readWord()
+{
+    QString filepath=QFileDialog::getOpenFileName(this,tr("Open"),"",tr(" (*.docx);;(*.doc)"));
+    if(filepath.isEmpty())
+        return;
+
+    ui->textEdit_content->setText(wordThread->readContent(filepath));
+    //loading->show();
+
+}
+
+void Admin::readWordFinish(const QString& text)
+{
+    loading->close();
+    ui->textEdit_content->setText(text);
+}
+
 //公告发布按钮
 void Admin::pushButton_release_confirm()
 {
@@ -507,15 +524,15 @@ void Admin::pushButton_release_confirm()
 //初始化公告内容
 void Admin::initRelease()
 {
-    ui->toolBox->itemText(0).clear();
+    ui->toolBox->setItemText(0,"");
     ui->textEdit_1->clear();
-    ui->toolBox->itemText(1).clear();
+    ui->toolBox->setItemText(1,"");
     ui->textEdit_2->clear();
-    ui->toolBox->itemText(2).clear();
+    ui->toolBox->setItemText(2,"");
     ui->textEdit_3->clear();
-    ui->toolBox->itemText(3).clear();
+    ui->toolBox->setItemText(3,"");
     ui->textEdit_4->clear();
-    ui->toolBox->itemText(4).clear();
+    ui->toolBox->setItemText(4,"");
     ui->textEdit_5->clear();
 
     QSqlQuery query(m_db);
@@ -764,6 +781,7 @@ void Admin::Init()
     //导入导出信息
     exportThread = new ExportThread;
     importThread = new ImportThread;
+    wordThread = new WordRead;
     loading = new Loading(this);
 
     m_page = 0;//初始化公告当前页数
@@ -802,6 +820,8 @@ void Admin::InitConnection()
     connect(ui->pushButton_import,SIGNAL(clicked()),this,SLOT(importExcel()));//导入按钮
     connect(exportThread,SIGNAL(finish()),this,SLOT(exportExcelFinish()));
     connect(importThread,SIGNAL(finish(int,int)),this,SLOT(importExcelFinish(const int&,const int&)));
+    connect(ui->pushButton_read_word,SIGNAL(clicked()),this,SLOT(readWord()));
+    //connect(wordThread,SIGNAL(finish(QString)),this,SLOT(readWordFinish(const QString&)));
 
     connect(ui->pushButton_release_confirm,SIGNAL(clicked()),this,SLOT(pushButton_release_confirm()));//公告发布按钮
 

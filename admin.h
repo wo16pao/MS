@@ -21,6 +21,7 @@
 #include "other/exportthread.h"
 #include "other/excelimport.h"
 #include "other/importthread.h"
+#include "other/wordread.h"
 #include "other/loading.h"
 #include "other/mylabel.h"
 
@@ -71,6 +72,8 @@ public slots:
     void importExcel();//导入excel表到数据库
     void exportExcelFinish();
     void importExcelFinish(const int&,const int&);
+    void readWord();//读取word内容
+    void readWordFinish(const QString&);
 
     void pushButton_release_confirm();//发布按钮
     void initRelease();//初始化公告
@@ -122,6 +125,7 @@ private:
     //导入导出
     ExportThread *exportThread;
     ImportThread *importThread;
+    WordRead *wordThread;
     Loading *loading;//等待动画
 
     int m_page;//定位页数

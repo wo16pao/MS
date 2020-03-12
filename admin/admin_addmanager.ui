@@ -7,20 +7,76 @@
     <x>0</x>
     <y>0</y>
     <width>370</width>
-    <height>270</height>
+    <height>280</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>黑体</family>
+    <pointsize>12</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QLabel{
+color:#3e6093;
+}
+
+
+QLineEdit{
+border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;
+color:#3e6093;}
+QComboBox{border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+
+QComboBox::drop-down {
+width:24px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}</string>
+  </property>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>200</x>
      <y>230</y>
      <width>71</width>
-     <height>21</height>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>黑体</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+color:#ffffff;
+background-color:#3e6093;
+border-radius:7px;
+}
+
+QPushButton:hover{
+background:#2c466c;
+}
+
+QPushButton:pressed{
+background:#253b5b;
+}</string>
    </property>
    <property name="text">
     <string>取消</string>
@@ -29,11 +85,32 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>110</x>
      <y>230</y>
      <width>75</width>
-     <height>23</height>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>黑体</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+color:#ffffff;
+background-color:#3e6093;
+border-radius:7px;
+}
+
+QPushButton:hover{
+background:#2c466c;
+}
+
+QPushButton:pressed{
+background:#253b5b;
+}</string>
    </property>
    <property name="text">
     <string>确定</string>
@@ -43,9 +120,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>230</y>
-     <width>81</width>
-     <height>21</height>
+     <y>220</y>
+     <width>101</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="text">
@@ -56,16 +133,17 @@
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>30</y>
+     <y>40</y>
      <width>161</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>15</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <family>黑体</family>
+     <pointsize>16</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -78,45 +156,102 @@
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>60</y>
-     <width>181</width>
-     <height>151</height>
+     <x>70</x>
+     <y>70</y>
+     <width>241</width>
+     <height>161</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>姓名</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>账号</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit_2"/>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>密码</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="lineEdit_3"/>
-    </item>
-   </layout>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>31</y>
+      <width>32</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>姓名</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>26</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>71</y>
+      <width>32</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>账号</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>66</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>111</y>
+      <width>32</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>密码</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_3">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>106</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
+  <widget class="QWidget" name="widget_2" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>30</y>
+     <width>370</width>
+     <height>250</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:#f2f6fd;
+border:1px solid #3e6093;</string>
+   </property>
+  </widget>
+  <zorder>widget_2</zorder>
+  <zorder>pushButton_2</zorder>
+  <zorder>pushButton</zorder>
+  <zorder>label_result</zorder>
+  <zorder>label</zorder>
+  <zorder>widget</zorder>
  </widget>
  <tabstops>
   <tabstop>lineEdit</tabstop>

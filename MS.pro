@@ -27,7 +27,6 @@ CONFIG += c++11 qaxcontainer
 SOURCES += \
         main.cpp \
         widget.cpp \
-    admin.cpp \
     aunt.cpp \
     admin/admin_addinfo.cpp \
     admin/admin_adddormitory.cpp \
@@ -48,7 +47,10 @@ SOURCES += \
     admin/admin_modifymanager.cpp \
     other/mylabel.cpp \
     other/basetitlebar.cpp \
-    other/basewindow.cpp
+    other/basewindow.cpp \
+    other/wordread.cpp \
+    other/wordreadthread.cpp \
+    admin.cpp
 
 HEADERS += \
         widget.h \
@@ -73,7 +75,9 @@ HEADERS += \
     admin/admin_modifymanager.h \
     other/mylabel.h \
     other/basetitlebar.h \
-    other/basewindow.h
+    other/basewindow.h \
+    other/wordread.h \
+    other/wordreadthread.h
 
 FORMS += \
         widget.ui \
@@ -98,5 +102,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+
 RESOURCES += \
-    resource.qrc
+    res.qrc
+

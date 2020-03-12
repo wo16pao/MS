@@ -6,27 +6,37 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>370</width>
-    <height>500</height>
+    <width>410</width>
+    <height>460</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>黑体</family>
+    <pointsize>12</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">color:#3e6093;</string>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>30</y>
+     <x>140</x>
+     <y>40</y>
      <width>161</width>
      <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>15</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <family>黑体</family>
+     <pointsize>16</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
@@ -39,11 +49,17 @@
   <widget class="QLabel" name="label_result">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>450</y>
-     <width>91</width>
-     <height>21</height>
+     <x>20</x>
+     <y>406</y>
+     <width>111</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>黑体</family>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string/>
@@ -52,11 +68,32 @@
   <widget class="QPushButton" name="pushButton_confirm">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>450</y>
+     <x>130</x>
+     <y>410</y>
      <width>75</width>
-     <height>23</height>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>黑体</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+color:#ffffff;
+background-color:#3e6093;
+border-radius:7px;
+}
+
+QPushButton:hover{
+background:#2c466c;
+}
+
+QPushButton:pressed{
+background:#253b5b;
+}</string>
    </property>
    <property name="text">
     <string>确定</string>
@@ -65,11 +102,32 @@
   <widget class="QPushButton" name="pushButton_quit">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>450</y>
+     <x>230</x>
+     <y>410</y>
      <width>75</width>
-     <height>23</height>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>黑体</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+color:#ffffff;
+background-color:#3e6093;
+border-radius:7px;
+}
+
+QPushButton:hover{
+background:#2c466c;
+}
+
+QPushButton:pressed{
+background:#253b5b;
+}</string>
    </property>
    <property name="text">
     <string>取消</string>
@@ -80,18 +138,56 @@
     <rect>
      <x>50</x>
      <y>70</y>
-     <width>291</width>
-     <height>361</height>
+     <width>361</width>
+     <height>331</height>
     </rect>
    </property>
    <widget class="QDateTimeEdit" name="dateTimeEdit_2">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>167</y>
-      <width>142</width>
-      <height>20</height>
+      <x>100</x>
+      <y>146</y>
+      <width>181</width>
+      <height>26</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QDateTimeEdit{
+border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+QDateTimeEdit::down-button{
+width:19px;
+border-image:url(:/res/弹框界面 (2).png);
+}
+
+QDateTimeEdit::up-button {
+width:20px;
+border-image:url(:/res/弹框界面 (3).png);
+}
+
+QDateTimeEdit::down-button:hover{
+background:#d9e4f5;
+}
+
+QDateTimeEdit::down-button:pressed{
+background:#bac9e0;
+}
+
+QDateTimeEdit::up-button:hover{
+background:#d9e4f5;
+}
+
+QDateEdit::up-button:pressed{
+background:#bac9e0;
+}</string>
     </property>
     <property name="displayFormat">
      <string>yyyy/MM/dd HH:mm:ss</string>
@@ -101,10 +197,16 @@
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>167</y>
-      <width>48</width>
+      <y>151</y>
+      <width>71</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>进门时间</string>
@@ -114,10 +216,16 @@
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>29</y>
-      <width>24</width>
+      <y>31</y>
+      <width>61</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>学号</string>
@@ -126,11 +234,37 @@
    <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>259</y>
-      <width>131</width>
-      <height>20</height>
+      <x>100</x>
+      <y>226</y>
+      <width>181</width>
+      <height>26</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{
+border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+
+QComboBox::drop-down {
+width:24px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}</string>
     </property>
     <item>
      <property name="text">
@@ -147,10 +281,16 @@
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>305</y>
-      <width>24</width>
+      <y>271</y>
+      <width>61</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>备注</string>
@@ -159,31 +299,93 @@
    <widget class="QLineEdit" name="lineEdit_temp">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>213</y>
-      <width>133</width>
-      <height>20</height>
+      <x>100</x>
+      <y>186</y>
+      <width>181</width>
+      <height>26</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;
+color:#3e6093;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_id">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>29</y>
-      <width>133</width>
-      <height>20</height>
+      <x>100</x>
+      <y>26</y>
+      <width>181</width>
+      <height>26</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;
+color:#3e6093;</string>
     </property>
    </widget>
    <widget class="QDateTimeEdit" name="dateTimeEdit">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>121</y>
-      <width>142</width>
-      <height>20</height>
+      <x>100</x>
+      <y>106</y>
+      <width>181</width>
+      <height>26</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QDateTimeEdit{
+border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+QDateTimeEdit::down-button{
+width:19px;
+border-image:url(:/res/弹框界面 (2).png);
+}
+
+QDateTimeEdit::up-button {
+width:20px;
+border-image:url(:/res/弹框界面 (3).png);
+}
+
+QDateTimeEdit::down-button:hover{
+background:#d9e4f5;
+}
+
+QDateTimeEdit::down-button:pressed{
+background:#bac9e0;
+}
+
+QDateTimeEdit::up-button:hover{
+background:#d9e4f5;
+}
+
+QDateEdit::up-button:pressed{
+background:#bac9e0;
+}</string>
     </property>
     <property name="displayFormat">
      <string>yyyy/MM/dd HH:mm:ss</string>
@@ -193,10 +395,16 @@
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>75</y>
-      <width>24</width>
+      <y>71</y>
+      <width>41</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>姓名</string>
@@ -205,31 +413,61 @@
    <widget class="QLineEdit" name="lineEdit_name">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>75</y>
-      <width>133</width>
-      <height>20</height>
+      <x>100</x>
+      <y>66</y>
+      <width>181</width>
+      <height>26</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;
+color:#3e6093;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_remark">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>305</y>
-      <width>133</width>
-      <height>20</height>
+      <x>100</x>
+      <y>266</y>
+      <width>181</width>
+      <height>26</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;
+color:#3e6093;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>213</y>
-      <width>24</width>
+      <y>191</y>
+      <width>51</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>体温</string>
@@ -239,10 +477,16 @@
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>121</y>
-      <width>48</width>
+      <y>111</y>
+      <width>71</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>出门时间</string>
@@ -252,10 +496,16 @@
     <property name="geometry">
      <rect>
       <x>9</x>
-      <y>259</y>
-      <width>48</width>
+      <y>231</y>
+      <width>71</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>是否正常</string>
@@ -264,27 +514,65 @@
    <widget class="QListWidget" name="listWidget">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>50</y>
-      <width>133</width>
+      <x>100</x>
+      <y>52</y>
+      <width>181</width>
       <height>80</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;
+color:#3e6093;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_id">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>280</x>
       <y>30</y>
-      <width>61</width>
+      <width>81</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string/>
     </property>
    </widget>
   </widget>
+  <widget class="QWidget" name="widget_2" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>30</y>
+     <width>410</width>
+     <height>430</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:#f2f6fd;
+border:1px solid #3e6093;</string>
+   </property>
+  </widget>
+  <zorder>widget_2</zorder>
+  <zorder>label</zorder>
+  <zorder>label_result</zorder>
+  <zorder>pushButton_confirm</zorder>
+  <zorder>pushButton_quit</zorder>
+  <zorder>widget</zorder>
  </widget>
  <tabstops>
   <tabstop>lineEdit_id</tabstop>

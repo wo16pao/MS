@@ -6,20 +6,29 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
+    <width>580</width>
     <height>520</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>黑体</family>
+    <pointsize>12</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">color:#3e6093;</string>
   </property>
   <widget class="QWidget" name="widget_3" native="true">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>80</y>
-     <width>221</width>
-     <height>370</height>
+     <y>69</y>
+     <width>261</width>
+     <height>361</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -28,170 +37,485 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>姓名</string>
-      </property>
-     </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>71</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>姓名</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>111</y>
+      <width>41</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>性别</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>156</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>联系电话</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_phone">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>151</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>196</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>出生年月</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>236</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>家庭住址</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>276</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>入学时间</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_18">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>316</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>出入次数</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_num">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>311</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>31</y>
+      <width>41</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>学号</string>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="dateEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>271</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QDateEdit{
+border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+QDateEdit::down-button{
+width:19px;
+border-image:url(:/res/弹框界面 (2).png);
+}
+
+QDateEdit::up-button {
+width:20px;
+border-image:url(:/res/弹框界面 (3).png);
+}
+
+QDateEdit::down-button:hover{
+background:#d9e4f5;
+}
+
+QDateEdit::down-button:pressed{
+background:#bac9e0;
+}
+
+QDateEdit::up-button:hover{
+background:#d9e4f5;
+}
+
+QDateEdit::up-button:pressed{
+background:#bac9e0;
+}</string>
+    </property>
+    <property name="dateTime">
+     <datetime>
+      <hour>0</hour>
+      <minute>0</minute>
+      <second>0</second>
+      <year>2018</year>
+      <month>1</month>
+      <day>1</day>
+     </datetime>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_address">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>231</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;</string>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="dateEdit">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>191</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QDateEdit{
+border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+QDateEdit::down-button{
+width:19px;
+border-image:url(:/res/弹框界面 (2).png);
+}
+
+QDateEdit::up-button {
+width:20px;
+border-image:url(:/res/弹框界面 (3).png);
+}
+
+QDateEdit::down-button:hover{
+background:#d9e4f5;
+}
+
+QDateEdit::down-button:pressed{
+background:#bac9e0;
+}
+
+QDateEdit::up-button:hover{
+background:#d9e4f5;
+}
+
+QDateEdit::up-button:pressed{
+background:#bac9e0;
+}</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>108</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+
+QComboBox::drop-down {
+width:24px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>男</string>
+     </property>
     </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="QLabel" name="label_5">
-      <property name="text">
-       <string>性别</string>
-      </property>
-     </widget>
+    <item>
+     <property name="text">
+      <string>女</string>
+     </property>
     </item>
-    <item row="3" column="0" colspan="3">
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>联系电话</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="3">
-     <widget class="QLineEdit" name="lineEdit_phone"/>
-    </item>
-    <item row="4" column="0" colspan="2">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>出生年月</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string>家庭住址</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0" colspan="2">
-     <widget class="QLabel" name="label_8">
-      <property name="text">
-       <string>入学时间</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0" colspan="3">
-     <widget class="QLabel" name="label_18">
-      <property name="text">
-       <string>出入次数</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="3">
-     <widget class="QLineEdit" name="lineEdit_num"/>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>学号</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="3">
-     <widget class="QDateEdit" name="dateEdit_2">
-      <property name="dateTime">
-       <datetime>
-        <hour>0</hour>
-        <minute>0</minute>
-        <second>0</second>
-        <year>2018</year>
-        <month>1</month>
-        <day>1</day>
-       </datetime>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="3">
-     <widget class="QLineEdit" name="lineEdit_address"/>
-    </item>
-    <item row="4" column="3">
-     <widget class="QDateEdit" name="dateEdit"/>
-    </item>
-    <item row="2" column="3">
-     <widget class="QComboBox" name="comboBox">
-      <item>
-       <property name="text">
-        <string>男</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>女</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item row="1" column="3">
-     <widget class="QLineEdit" name="lineEdit_name"/>
-    </item>
-    <item row="0" column="3">
-     <widget class="QLineEdit" name="lineEdit_id"/>
-    </item>
-   </layout>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_name">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>67</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_id">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>26</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="label_result">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>460</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>黑体</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:#3e6093;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
   </widget>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>470</y>
-     <width>351</width>
-     <height>41</height>
+     <x>0</x>
+     <y>30</y>
+     <width>580</width>
+     <height>490</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QLabel" name="label_result">
-      <property name="text">
-       <string/>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton">
-      <property name="text">
-       <string>确定</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>28</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="text">
-       <string>返回</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <property name="styleSheet">
+    <string notr="true">background:#f2f6fd;
+border:1px solid #3e6093;</string>
+   </property>
   </widget>
   <widget class="QWidget" name="widget_2" native="true">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>80</y>
-     <width>221</width>
-     <height>371</height>
+     <x>290</x>
+     <y>70</y>
+     <width>261</width>
+     <height>381</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -200,103 +524,518 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="6" column="0">
-     <widget class="QLabel" name="label_15">
-      <property name="text">
-       <string>大寝号</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1" colspan="2">
-     <widget class="QComboBox" name="comboBox_dorm2"/>
-    </item>
-    <item row="3" column="1" colspan="2">
-     <widget class="QComboBox" name="comboBox_dean4"/>
-    </item>
-    <item row="4" column="1" colspan="2">
-     <widget class="QComboBox" name="comboBox_dorm"/>
-    </item>
-    <item row="1" column="1" colspan="2">
-     <widget class="QComboBox" name="comboBox_dean2"/>
-    </item>
-    <item row="6" column="1" colspan="2">
-     <widget class="QComboBox" name="comboBox_dorm3"/>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="label_13">
-      <property name="text">
-       <string>宿舍区域</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="0">
-     <widget class="QLabel" name="label_17">
-      <property name="text">
-       <string>床号</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1" colspan="2">
-     <widget class="QComboBox" name="comboBox_dean3"/>
-    </item>
-    <item row="7" column="0">
-     <widget class="QLabel" name="label_16">
-      <property name="text">
-       <string>小寝号</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="label_14">
-      <property name="text">
-       <string>楼栋号</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_10">
-      <property name="text">
-       <string>专业名称</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="1" colspan="2">
-     <widget class="QComboBox" name="comboBox_dorm4"/>
-    </item>
-    <item row="0" column="1" colspan="2">
-     <widget class="QComboBox" name="comboBox_dean"/>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_12">
-      <property name="text">
-       <string>辅导员</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="1" colspan="2">
-     <widget class="QComboBox" name="comboBox_dorm5"/>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_11">
-      <property name="text">
-       <string>班级号</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_9">
-      <property name="text">
-       <string>学院名称</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <widget class="QLabel" name="label_15">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>261</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>大寝号</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_dorm2">
+    <property name="geometry">
+     <rect>
+      <x>94</x>
+      <y>217</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+
+QComboBox::drop-down {
+width:24px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_dean4">
+    <property name="geometry">
+     <rect>
+      <x>94</x>
+      <y>139</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+
+QComboBox::drop-down {
+width:24px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_dorm">
+    <property name="geometry">
+     <rect>
+      <x>94</x>
+      <y>178</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+
+QComboBox::drop-down {
+width:24px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_dean2">
+    <property name="geometry">
+     <rect>
+      <x>94</x>
+      <y>61</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+
+QComboBox::drop-down {
+width:24px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_dorm3">
+    <property name="geometry">
+     <rect>
+      <x>94</x>
+      <y>256</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+
+QComboBox::drop-down {
+width:24px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_13">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>181</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>宿舍区域</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_17">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>341</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>床号</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_dean3">
+    <property name="geometry">
+     <rect>
+      <x>94</x>
+      <y>100</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+
+QComboBox::drop-down {
+width:24px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>301</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>小寝号</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>221</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>楼栋号</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>66</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>专业名称</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_dorm4">
+    <property name="geometry">
+     <rect>
+      <x>94</x>
+      <y>295</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+
+QComboBox::drop-down {
+width:24px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_dean">
+    <property name="geometry">
+     <rect>
+      <x>94</x>
+      <y>22</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+
+QComboBox::drop-down {
+width:24px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>141</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>辅导员</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_dorm5">
+    <property name="geometry">
+     <rect>
+      <x>94</x>
+      <y>334</y>
+      <width>141</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{border-radius:3px;
+border:1px solid #3e6093;
+background:#f2f6fd;}
+
+
+QComboBox::drop-down {
+width:24px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>105</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>班级号</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>26</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>黑体</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#3e6093;</string>
+    </property>
+    <property name="text">
+     <string>学院名称</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>220</x>
      <y>30</y>
      <width>151</width>
      <height>41</height>
@@ -304,10 +1043,14 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>15</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
+     <family>黑体</family>
+     <pointsize>16</pointsize>
+     <weight>50</weight>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:#3e6093;</string>
    </property>
    <property name="lineWidth">
     <number>1</number>
@@ -331,28 +1074,82 @@
     <number>-1</number>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>460</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>黑体</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+color:#ffffff;
+background-color:#3e6093;
+border-radius:7px;
+}
+
+QPushButton:hover{
+background:#2c466c;
+}
+
+QPushButton:pressed{
+background:#253b5b;
+}</string>
+   </property>
+   <property name="text">
+    <string>确定</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>460</y>
+     <width>75</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>黑体</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+color:#ffffff;
+background-color:#3e6093;
+border-radius:7px;
+}
+
+QPushButton:hover{
+background:#2c466c;
+}
+
+QPushButton:pressed{
+background:#253b5b;
+}</string>
+   </property>
+   <property name="text">
+    <string>返回</string>
+   </property>
+  </widget>
+  <zorder>widget</zorder>
+  <zorder>widget_3</zorder>
+  <zorder>label_result</zorder>
+  <zorder>widget_2</zorder>
+  <zorder>label</zorder>
+  <zorder>pushButton</zorder>
+  <zorder>pushButton_2</zorder>
  </widget>
- <tabstops>
-  <tabstop>lineEdit_id</tabstop>
-  <tabstop>lineEdit_name</tabstop>
-  <tabstop>comboBox</tabstop>
-  <tabstop>lineEdit_phone</tabstop>
-  <tabstop>dateEdit</tabstop>
-  <tabstop>lineEdit_address</tabstop>
-  <tabstop>dateEdit_2</tabstop>
-  <tabstop>lineEdit_num</tabstop>
-  <tabstop>comboBox_dean</tabstop>
-  <tabstop>comboBox_dean2</tabstop>
-  <tabstop>comboBox_dean3</tabstop>
-  <tabstop>comboBox_dean4</tabstop>
-  <tabstop>comboBox_dorm</tabstop>
-  <tabstop>comboBox_dorm2</tabstop>
-  <tabstop>comboBox_dorm3</tabstop>
-  <tabstop>comboBox_dorm4</tabstop>
-  <tabstop>comboBox_dorm5</tabstop>
-  <tabstop>pushButton</tabstop>
-  <tabstop>pushButton_2</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

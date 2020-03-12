@@ -48,10 +48,11 @@
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: white;
-border-radius:10px;</string>
+border-radius:0px;
+border-image:url(:/res/头像.png);</string>
     </property>
     <property name="text">
-     <string>头像</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_name">
@@ -238,7 +239,7 @@ border:0px;
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -349,8 +350,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>209</width>
-        <height>276</height>
+        <width>100</width>
+        <height>30</height>
        </rect>
       </property>
       <attribute name="label">
@@ -393,8 +394,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>209</width>
-        <height>276</height>
+        <width>100</width>
+        <height>30</height>
        </rect>
       </property>
       <attribute name="label">
@@ -437,8 +438,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>209</width>
-        <height>276</height>
+        <width>100</width>
+        <height>30</height>
        </rect>
       </property>
       <attribute name="label">
@@ -481,8 +482,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>209</width>
-        <height>276</height>
+        <width>100</width>
+        <height>30</height>
        </rect>
       </property>
       <attribute name="label">
@@ -855,7 +856,7 @@ color:#3e6093;
 
 QComboBox::drop-down {
 width:24px;
-border-image:url(:/res/弹框界面 (2).png);
+border-image:url(:/res/所有下拉框.png);
 }  
 
 QComboBox:hover{
@@ -2192,7 +2193,7 @@ border:2px solid #566b8a;</string>
     <widget class="QPushButton" name="pushButton_modify_back_2">
      <property name="geometry">
       <rect>
-       <x>680</x>
+       <x>600</x>
        <y>480</y>
        <width>75</width>
        <height>31</height>
@@ -2223,6 +2224,40 @@ background:#253b5b;
       <string>返回</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_read_word">
+     <property name="geometry">
+      <rect>
+       <x>835</x>
+       <y>433</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>黑体</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+color:#ffffff;
+background-color:#3e6093;
+border-radius:7px;
+}
+
+QPushButton:hover{
+background:#2c466c;
+}
+
+QPushButton:pressed{
+background:#253b5b;
+}</string>
+     </property>
+     <property name="text">
+      <string>导入word</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QWidget" name="widget_3" native="true">
@@ -2236,7 +2271,7 @@ background:#253b5b;
    </property>
    <property name="styleSheet">
     <string notr="true">background-color:#ffffff;
-border-top-left-radius:8px;</string>
+border-top-left-radius:0px;</string>
    </property>
    <widget class="QLabel" name="label_guide">
     <property name="geometry">
@@ -2311,7 +2346,10 @@ background:#738db6;
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color:#aac1e3;</string>
+    <string notr="true">background-color:#ffffff;
+image:url(:/res/logo.png);
+padding-right:3px;
+padding-left:3px;</string>
    </property>
   </widget>
  </widget>
