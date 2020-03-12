@@ -21,20 +21,6 @@ color:#3e6093;
 QComboBox{
 color:#3e6093;
 }
-
-QPushButton{
-color:#ffffff;
-background-color:#3e6093;
-border-radius:7px;
-}
-
-QPushButton:hover{
-background:#2c466c;
-}
-
-QPushButton:pressed{
-background:#253b5b;
-}
 </string>
   </property>
   <widget class="QWidget" name="widget" native="true">
@@ -309,6 +295,23 @@ color:#3e6093;</string>
      <pointsize>14</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">
+QPushButton{
+color:#ffffff;
+background-color:#3e6093;
+border-radius:7px;
+}
+
+QPushButton:hover{
+background:#2c466c;
+}
+
+QPushButton:pressed{
+background:#253b5b;
+}
+</string>
+   </property>
    <property name="text">
     <string>取消</string>
    </property>
@@ -327,6 +330,23 @@ color:#3e6093;</string>
      <family>黑体</family>
      <pointsize>14</pointsize>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+QPushButton{
+color:#ffffff;
+background-color:#3e6093;
+border-radius:7px;
+}
+
+QPushButton:hover{
+background:#2c466c;
+}
+
+QPushButton:pressed{
+background:#253b5b;
+}
+</string>
    </property>
    <property name="text">
     <string>确定</string>

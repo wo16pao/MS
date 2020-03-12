@@ -64,11 +64,11 @@ void Admin_AddInfo::addInfo()
             emit refresh();
         }
         else {
-            ui->label_result->setText("添加失败，请检查信息是否填写正确");
+            ui->label_result->setText("添加失败");
         }
     }
     else {
-        ui->label_result->setText("添加失败，请检查信息是否填写正确");
+        ui->label_result->setText("添加失败");
     }
 }
 

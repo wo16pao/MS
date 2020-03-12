@@ -137,6 +137,9 @@ void Admin::pushButton_release()
 void Admin::combobox_query(int index)
 {
     switch (index) {
+    case 0:
+        queryUnusual();
+        break;
     case 1:
         queryInfo();
         break;
@@ -168,10 +171,17 @@ void Admin::pushButton_search()
     QString concat = nullptr;
     QString tableName;//表名
     bool flag = false;
+    bool case0 = false;
     if(line.isEmpty())//直接搜索不进行搜索
         return;
     //获取表名
     switch (ui->comboBox->currentIndex()) {
+    case 0:
+        case0 = true;
+        tableName = "information";
+        concat = "学号,姓名,出门时间,进门时间,时间间隔,体温,是否正常,IFNULL(`备注`,''),";
+        flag = true;
+        break;
     case 1:
         tableName = "information";
         concat = "学号,姓名,出门时间,进门时间,时间间隔,体温,是否正常,IFNULL(`备注`,''),";
@@ -206,9 +216,11 @@ void Admin::pushButton_search()
     ui->tableWidget->setColumnCount(index);//设置列数
     ui->tableWidget->setHorizontalHeaderLabels(header);//设置标头
     for(int i=0;i<index;++i)
-        ui->tableWidget->setColumnWidth(i,130);
+        ui->tableWidget->setColumnWidth(i,160);
     concat.replace(concat.count()-1,1,' ');
     QString get_row = "SELECT count(*) FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%';";
+    if(case0)
+        get_row = "SELECT count(*) FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 是否正常='不正常';";
     int row=0;
     query.exec(get_row);
     if(query.first())
@@ -224,6 +236,8 @@ void Admin::pushButton_search()
         ui->tableWidget->verticalHeader()->setVisible(false);//隐藏列头
         ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//只允许单选
         QString str = "SELECT * FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%';";
+        if(case0)
+            str = "SELECT * FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 是否正常='不正常';";
         query.exec(str);
         //设置内容
         for (int i = 0; query.next(); i++)
@@ -231,7 +245,10 @@ void Admin::pushButton_search()
             for (int j = 0; j < index; j++)
             {
                 if(!flag)
+                {
                     ui->tableWidget->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
+                    ui->tableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                }
                 else
                 {
                     if(j==2||j==3)
@@ -241,9 +258,13 @@ void Admin::pushButton_search()
                         QString strBuffer;
                         strBuffer = time.toString("yyyy-MM-dd hh:mm:ss");
                         ui->tableWidget->setItem(i,j,new QTableWidgetItem(strBuffer));
+                        ui->tableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
                     }
                     else
+                    {
                         ui->tableWidget->setItem(i, j, new QTableWidgetItem(query.value(j).toString()));
+                        ui->tableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                    }
                 }
             }
         }
@@ -254,6 +275,10 @@ void Admin::pushButton_search()
 void Admin::pushButton_add()
 {
     switch (ui->comboBox->currentIndex()) {
+    case 0:
+        connect(m_adm_addInfo,SIGNAL(refresh()),this,SLOT(queryInfo()));
+        m_adm_addInfo->show();
+        break;
     case 1:
         connect(m_adm_addInfo,SIGNAL(refresh()),this,SLOT(queryInfo()));
         m_adm_addInfo->show();
@@ -297,6 +322,10 @@ void Admin::pushButton_delete()
     QString str;
 
     switch (ui->comboBox->currentIndex()) {
+    case 0:
+        str="delete from `information` where 学号='"+ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text()+"' and 姓名='"+ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text()+"' and 出门时间='"+ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text()+"' and 进门时间='"+ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text()+"';";
+        break;
+
     case 1:
         str="delete from `information` where 学号='"+ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text()+"' and 姓名='"+ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text()+"' and 出门时间='"+ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text()+"' and 进门时间='"+ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text()+"';";
         break;
@@ -341,6 +370,11 @@ void Admin::pushButton_modify()
         return;
 
     switch (ui->comboBox->currentIndex()) {
+    case 0:
+        connect(m_adm_modifyInfo,SIGNAL(refresh()),this,SLOT(queryInfo()));
+        m_adm_modifyInfo->getInfo(ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text());
+        m_adm_modifyInfo->show();
+        break;
     case 1:
         connect(m_adm_modifyInfo,SIGNAL(refresh()),this,SLOT(queryInfo()));
         m_adm_modifyInfo->getInfo(ui->tableWidget->item(ui->tableWidget->currentRow(),0)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),1)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),2)->text(),ui->tableWidget->item(ui->tableWidget->currentRow(),3)->text());
@@ -484,14 +518,15 @@ void Admin::readWord()
     if(filepath.isEmpty())
         return;
 
-    ui->textEdit_content->setText(wordThread->readContent(filepath));
-    //loading->show();
-
+    wordThread->getFilepath(filepath);
+    loading->show();
+    wordThread->start();
 }
 
 void Admin::readWordFinish(const QString& text)
 {
     loading->close();
+    wordThread->exit();
     ui->textEdit_content->setText(text);
 }
 
@@ -781,7 +816,7 @@ void Admin::Init()
     //导入导出信息
     exportThread = new ExportThread;
     importThread = new ImportThread;
-    wordThread = new WordRead;
+    wordThread = new WordReadThread;
     loading = new Loading(this);
 
     m_page = 0;//初始化公告当前页数
@@ -792,6 +827,7 @@ void Admin::Init()
     QStyledItemDelegate* itemDelegate = new QStyledItemDelegate();
         ui->comboBox->setItemDelegate(itemDelegate);
 
+    queryUnusual();
 }
 
 //初始化连接
@@ -821,7 +857,7 @@ void Admin::InitConnection()
     connect(exportThread,SIGNAL(finish()),this,SLOT(exportExcelFinish()));
     connect(importThread,SIGNAL(finish(int,int)),this,SLOT(importExcelFinish(const int&,const int&)));
     connect(ui->pushButton_read_word,SIGNAL(clicked()),this,SLOT(readWord()));
-    //connect(wordThread,SIGNAL(finish(QString)),this,SLOT(readWordFinish(const QString&)));
+    connect(wordThread,SIGNAL(finish(const QString&)),this,SLOT(readWordFinish(const QString&)));
 
     connect(ui->pushButton_release_confirm,SIGNAL(clicked()),this,SLOT(pushButton_release_confirm()));//公告发布按钮
 
@@ -839,6 +875,13 @@ void Admin::InitConnection()
     connect(ui->pushButton_data,SIGNAL(clicked()),this,SLOT(pushButton_dataStyle()));
     connect(ui->pushButton_data2,SIGNAL(clicked()),this,SLOT(pushButton_dataStyle()));
     connect(ui->pushButton_release,SIGNAL(clicked()),this,SLOT(pushButton_releaseStyle()));
+}
+
+void Admin::queryUnusual()
+{
+    QString get_row = "SELECT COUNT(*) FROM `information` where 是否正常='不正常';";
+    QString str="select * from `information` where 是否正常='不正常' order by 学号 asc;";
+    queryFunction(get_row,str,"information",true);
 }
 
 //--------------------------------查询函数--------------------------
@@ -895,6 +938,7 @@ void Admin::queryManager()
 //-----------------------------公告信息--------------------------------
 void Admin::label_look(const QString &title)
 {
+    ui->label_release_result_2->clear();
     ui->label_guide->setText("公告修改");
     ui->tabWidget->setCurrentIndex(3);
     ui->lineEdit_look_title->setText(title);
@@ -1070,6 +1114,7 @@ void Admin::pushButton_before_page()
 
 void Admin::pushButton_bulletin_modify()
 {
+
     if(ui->lineEdit_look_subject->text().isEmpty()||ui->lineEdit_look_title->text().isEmpty()||ui->textEdit_look_content->toPlainText().isEmpty())
         return;
     if(QMessageBox::No==QMessageBox::information(this,"提示","你确定要修改公告吗",QMessageBox::Yes|QMessageBox::No))
@@ -1159,4 +1204,12 @@ void Admin::pushButton_releaseStyle()
     ui->pushButton_data->setChecked(false);
     ui->pushButton_release->setChecked(true);
 }
+
 //---------------------------按钮样式改变--------------------------
+void Admin::keyPressEvent(QKeyEvent *event)
+{
+    if( event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return )
+    {
+         pushButton_search();
+    }
+}

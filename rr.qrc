@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>icon.png</file>
         <file>res/arrow_down.png</file>
         <file>res/check more.png</file>
         <file>res/delete.png</file>
@@ -20,5 +21,10 @@
         <file>res/所有下拉框.png</file>
         <file>res/头像.png</file>
         <file>res/信息界面.png</file>
+        <file>MyTitle.css</file>
+        <file>MyTitle/close.png</file>
+        <file>MyTitle/max.png</file>
+        <file>MyTitle/min.png</file>
+        <file>MyTitle/restore.png</file>
     </qresource>
 </RCC>

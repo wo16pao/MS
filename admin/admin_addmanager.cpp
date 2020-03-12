@@ -43,7 +43,7 @@ void Admin_AddManager::addManager()
         emit refresh();
     }
     else {
-        ui->label_result->setText("添加失败，请检查信息是否填写正确");
+        ui->label_result->setText("添加失败");
     }
 }
 

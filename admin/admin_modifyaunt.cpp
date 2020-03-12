@@ -41,7 +41,7 @@ void Admin_ModifyAunt::modifyAunt()
         emit refresh();
     }
     else {
-        ui->label_result->setText("修改失败，请检查信息是否填写正确");
+        ui->label_result->setText("修改失败");
     }
 
 }

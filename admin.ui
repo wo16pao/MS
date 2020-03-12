@@ -91,7 +91,7 @@ border-image:url(:/res/头像.png);</string>
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>225</y>
+      <y>220</y>
       <width>131</width>
       <height>51</height>
      </rect>
@@ -135,7 +135,7 @@ background:qlineargradient(spread:pad, x1:1, y1:0.619318, x2:0.00568182, y2:0.43
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>273</y>
+      <y>280</y>
       <width>131</width>
       <height>51</height>
      </rect>
@@ -176,7 +176,7 @@ background:qlineargradient(spread:pad, x1:1, y1:0.619318, x2:0.00568182, y2:0.43
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>321</y>
+      <y>340</y>
       <width>131</width>
       <height>51</height>
      </rect>
@@ -239,7 +239,7 @@ border:0px;
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -326,9 +326,29 @@ border:2px solid #5d86c7;
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:#f3f5f8;
+        <string notr="true">QTextEdit{
+background-color:#f3f5f8;
 color:#3e6093;
-border:0px;</string>
+border:0px;}
+
+
+
+QScrollBar:vertical{
+background:#d9e2f0;
+padding:0px;
+}
+ 
+QScrollBar::handle:vertical{
+background:#4b7cc4;
+border-radius:6px;
+}
+ 
+QScrollBar::handle:hover:vertical{
+background:#3e6093;
+}
+QScrollBar::handle:pressed:vertical{
+background:#2b4c7c;
+}</string>
        </property>
        <property name="readOnly">
         <bool>true</bool>
@@ -350,8 +370,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>100</width>
-        <height>30</height>
+        <width>209</width>
+        <height>276</height>
        </rect>
       </property>
       <attribute name="label">
@@ -373,9 +393,29 @@ p, li { white-space: pre-wrap; }
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:#f3f5f8;
+        <string notr="true">QTextEdit{
+background-color:#f3f5f8;
 color:#3e6093;
-border:0px;</string>
+border:0px;}
+
+
+
+QScrollBar:vertical{
+background:#d9e2f0;
+padding:0px;
+}
+ 
+QScrollBar::handle:vertical{
+background:#4b7cc4;
+border-radius:6px;
+}
+ 
+QScrollBar::handle:hover:vertical{
+background:#3e6093;
+}
+QScrollBar::handle:pressed:vertical{
+background:#2b4c7c;
+}</string>
        </property>
        <property name="readOnly">
         <bool>true</bool>
@@ -394,8 +434,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>100</width>
-        <height>30</height>
+        <width>209</width>
+        <height>276</height>
        </rect>
       </property>
       <attribute name="label">
@@ -417,9 +457,29 @@ p, li { white-space: pre-wrap; }
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:#f3f5f8;
+        <string notr="true">QTextEdit{
+background-color:#f3f5f8;
 color:#3e6093;
-border:0px;</string>
+border:0px;}
+
+
+
+QScrollBar:vertical{
+background:#d9e2f0;
+padding:0px;
+}
+ 
+QScrollBar::handle:vertical{
+background:#4b7cc4;
+border-radius:6px;
+}
+ 
+QScrollBar::handle:hover:vertical{
+background:#3e6093;
+}
+QScrollBar::handle:pressed:vertical{
+background:#2b4c7c;
+}</string>
        </property>
        <property name="readOnly">
         <bool>true</bool>
@@ -438,8 +498,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>100</width>
-        <height>30</height>
+        <width>209</width>
+        <height>276</height>
        </rect>
       </property>
       <attribute name="label">
@@ -461,9 +521,29 @@ p, li { white-space: pre-wrap; }
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:#f3f5f8;
+        <string notr="true">QTextEdit{
+background-color:#f3f5f8;
 color:#3e6093;
-border:0px;</string>
+border:0px;}
+
+
+
+QScrollBar:vertical{
+background:#d9e2f0;
+padding:0px;
+}
+ 
+QScrollBar::handle:vertical{
+background:#4b7cc4;
+border-radius:6px;
+}
+ 
+QScrollBar::handle:hover:vertical{
+background:#3e6093;
+}
+QScrollBar::handle:pressed:vertical{
+background:#2b4c7c;
+}</string>
        </property>
        <property name="readOnly">
         <bool>true</bool>
@@ -482,8 +562,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>100</width>
-        <height>30</height>
+        <width>209</width>
+        <height>276</height>
        </rect>
       </property>
       <attribute name="label">
@@ -505,9 +585,29 @@ p, li { white-space: pre-wrap; }
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color:#f3f5f8;
+        <string notr="true">QTextEdit{
+background-color:#f3f5f8;
 color:#3e6093;
-border:0px;</string>
+border:0px;}
+
+
+
+QScrollBar:vertical{
+background:#d9e2f0;
+padding:0px;
+}
+ 
+QScrollBar::handle:vertical{
+background:#4b7cc4;
+border-radius:6px;
+}
+ 
+QScrollBar::handle:hover:vertical{
+background:#3e6093;
+}
+QScrollBar::handle:pressed:vertical{
+background:#2b4c7c;
+}</string>
        </property>
        <property name="readOnly">
         <bool>true</bool>
@@ -831,7 +931,7 @@ QTableView
       <rect>
        <x>10</x>
        <y>5</y>
-       <width>111</width>
+       <width>131</width>
        <height>30</height>
       </rect>
      </property>
@@ -905,7 +1005,7 @@ background:#bac9e0;
      </property>
      <item>
       <property name="text">
-       <string>请选择信息</string>
+       <string>异常体温信息</string>
       </property>
      </item>
      <item>
@@ -1041,9 +1141,9 @@ background:#738db6;
     <widget class="QLineEdit" name="lineEdit_search">
      <property name="geometry">
       <rect>
-       <x>750</x>
+       <x>720</x>
        <y>5</y>
-       <width>131</width>
+       <width>161</width>
        <height>30</height>
       </rect>
      </property>
@@ -1237,9 +1337,9 @@ color:#2b5aa1;
        <property name="geometry">
         <rect>
          <x>59</x>
-         <y>39</y>
+         <y>48</y>
          <width>711</width>
-         <height>41</height>
+         <height>21</height>
         </rect>
        </property>
        <property name="font">
@@ -1257,6 +1357,9 @@ color:#3e6093;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
        </property>
       </widget>
       <widget class="QLabel" name="label">
@@ -1344,9 +1447,9 @@ color:#2b5aa1;
        <property name="geometry">
         <rect>
          <x>59</x>
-         <y>39</y>
+         <y>48</y>
          <width>711</width>
-         <height>41</height>
+         <height>21</height>
         </rect>
        </property>
        <property name="font">
@@ -1364,6 +1467,9 @@ color:#3e6093;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
        </property>
       </widget>
       <widget class="QLabel" name="label_17">
@@ -1451,9 +1557,9 @@ color:#2b5aa1;
        <property name="geometry">
         <rect>
          <x>59</x>
-         <y>39</y>
+         <y>48</y>
          <width>711</width>
-         <height>41</height>
+         <height>21</height>
         </rect>
        </property>
        <property name="font">
@@ -1474,6 +1580,9 @@ color:#3e6093;</string>
        </property>
        <property name="text">
         <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
        </property>
       </widget>
       <widget class="QLabel" name="label_18">
@@ -1832,9 +1941,30 @@ border:2px solid #566b8a;</string>
       <bool>true</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">color:#3e6093;
+      <string notr="true">QTextEdit{
+color:#3e6093;
 border-radius:5px;
-border:2px solid #566b8a;</string>
+border:2px solid #566b8a;}
+
+
+
+QScrollBar:vertical{
+background:#d9e2f0;
+padding:0px;
+}
+ 
+QScrollBar::handle:vertical{
+background:#4b7cc4;
+border-radius:6px;
+}
+ 
+QScrollBar::handle:hover:vertical{
+background:#3e6093;
+}
+QScrollBar::handle:pressed:vertical{
+background:#2b4c7c;
+}
+</string>
      </property>
      <property name="lineWrapMode">
       <enum>QTextEdit::WidgetWidth</enum>
@@ -1998,9 +2128,30 @@ border:2px solid #566b8a;</string>
       <bool>true</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">color:#3e6093;
+      <string notr="true">QTextEdit{
+color:#3e6093;
 border-radius:5px;
-border:2px solid #566b8a;</string>
+border:2px solid #566b8a;}
+
+
+
+QScrollBar:vertical{
+background:#d9e2f0;
+padding:0px;
+}
+ 
+QScrollBar::handle:vertical{
+background:#4b7cc4;
+border-radius:6px;
+}
+ 
+QScrollBar::handle:hover:vertical{
+background:#3e6093;
+}
+QScrollBar::handle:pressed:vertical{
+background:#2b4c7c;
+}
+</string>
      </property>
      <property name="lineWrapMode">
       <enum>QTextEdit::WidgetWidth</enum>
@@ -2193,7 +2344,7 @@ border:2px solid #566b8a;</string>
     <widget class="QPushButton" name="pushButton_modify_back_2">
      <property name="geometry">
       <rect>
-       <x>600</x>
+       <x>680</x>
        <y>480</y>
        <width>75</width>
        <height>31</height>

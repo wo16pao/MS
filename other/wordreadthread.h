@@ -5,15 +5,16 @@
 
 class WordReadThread : public QThread
 {
+    Q_OBJECT
 public:
     WordReadThread();
 protected:
     void run() Q_DECL_OVERRIDE;
 public:
-    void getFilepath(QString);
+    void getFilepath(const QString&);
 
-//signals:
-//    void finish(const QString& text);
+signals:
+    void finish(const QString& text);
 
 private:
     WordRead* m_wordRead;

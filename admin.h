@@ -21,7 +21,7 @@
 #include "other/exportthread.h"
 #include "other/excelimport.h"
 #include "other/importthread.h"
-#include "other/wordread.h"
+#include "other/wordreadthread.h"
 #include "other/loading.h"
 #include "other/mylabel.h"
 
@@ -46,6 +46,7 @@ private:
     void InitConnection();//绑定控件
 
 public slots:
+    void queryUnusual();//查不正常
     void queryInfo();//查体温
     void queryArchive();//查学生
     void queryDormitory();//查宿舍
@@ -97,6 +98,8 @@ public slots:
     void pushButton_dataStyle();
     void pushButton_releaseStyle();
 
+    void keyPressEvent(QKeyEvent *event);
+
 signals:
     void signal_backWindow();//返回上个窗口的信号
 
@@ -125,7 +128,7 @@ private:
     //导入导出
     ExportThread *exportThread;
     ImportThread *importThread;
-    WordRead *wordThread;
+    WordReadThread *wordThread;
     Loading *loading;//等待动画
 
     int m_page;//定位页数

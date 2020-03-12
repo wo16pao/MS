@@ -316,7 +316,7 @@ border:1px solid #3e6093;</string>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>110</x>
      <y>330</y>
      <width>75</width>
      <height>31</height>
@@ -350,7 +350,7 @@ background:#253b5b;
   <widget class="QLabel" name="label_result">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>10</x>
      <y>330</y>
      <width>101</width>
      <height>31</height>
@@ -372,7 +372,7 @@ background:#253b5b;
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>200</x>
      <y>330</y>
      <width>75</width>
      <height>31</height>
