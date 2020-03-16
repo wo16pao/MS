@@ -83,15 +83,6 @@ void Admin_AddArchive::pushButton_back()
     ui->lineEdit_name->clear();
     ui->lineEdit_phone->clear();
     ui->lineEdit_address->clear();
-    ui->comboBox_dean->clear();
-    ui->comboBox_dean2->clear();
-    ui->comboBox_dean3->clear();
-    ui->comboBox_dean4->clear();
-    ui->comboBox_dorm->clear();
-    ui->comboBox_dorm2->clear();
-    ui->comboBox_dorm3->clear();
-    ui->comboBox_dorm4->clear();
-    ui->comboBox_dorm5->clear();
     this->close();
 }
 

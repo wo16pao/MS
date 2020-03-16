@@ -220,7 +220,7 @@ void Admin::pushButton_search()
     concat.replace(concat.count()-1,1,' ');
     QString get_row = "SELECT count(*) FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%';";
     if(case0)
-        get_row = "SELECT count(*) FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 是否正常='不正常';";
+        get_row = "SELECT count(*) FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 是否正常='异常';";
     int row=0;
     query.exec(get_row);
     if(query.first())
@@ -237,7 +237,7 @@ void Admin::pushButton_search()
         ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//只允许单选
         QString str = "SELECT * FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%';";
         if(case0)
-            str = "SELECT * FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 是否正常='不正常';";
+            str = "SELECT * FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 是否正常='异常';";
         query.exec(str);
         //设置内容
         for (int i = 0; query.next(); i++)
@@ -423,6 +423,11 @@ void Admin::exportExcel()
     QString get_row,str;
 
     switch (ui->comboBox->currentIndex()) {
+   case 0:
+        get_row = "SELECT COUNT(*) FROM `information` where 是否正常='异常';";
+    str="select * from `information` where 是否正常='异常' order by 学号 asc;";
+    exportThread->getInfo(get_row,str,"information",true);
+    break;
     case 1:
         get_row = "SELECT COUNT(*) FROM `information`;";
         str="select * from `information` order by 学号 asc;";
@@ -560,15 +565,15 @@ void Admin::pushButton_release_confirm()
 void Admin::initRelease()
 {
     ui->toolBox->setItemText(0,"");
-    ui->textEdit_1->clear();
+    ui->textEdit_1->setText("");
     ui->toolBox->setItemText(1,"");
-    ui->textEdit_2->clear();
+    ui->textEdit_2->setText("");
     ui->toolBox->setItemText(2,"");
-    ui->textEdit_3->clear();
+    ui->textEdit_3->setText("");
     ui->toolBox->setItemText(3,"");
-    ui->textEdit_4->clear();
+    ui->textEdit_4->setText("");
     ui->toolBox->setItemText(4,"");
-    ui->textEdit_5->clear();
+    ui->textEdit_5->setText("");
 
     QSqlQuery query(m_db);
     QString str = "select 公告主题,公告标题,公告内容 from `announcement` order by 发布时间 desc;";
@@ -617,7 +622,7 @@ void Admin::drawBarChart()
 
     int max=0;
     QSqlQuery query(m_db);
-    QString str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='梅苑') and 是否正常='不正常';";
+    QString str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='梅苑') and 是否正常='异常';";
     query.exec(str);
     if(query.next())
     {
@@ -626,7 +631,7 @@ void Admin::drawBarChart()
             max = query.value(0).toInt();
     }
 
-    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='兰苑') and 是否正常='不正常';";
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='兰苑') and 是否正常='异常';";
     query.exec(str);
     if(query.next())
     {
@@ -635,7 +640,7 @@ void Admin::drawBarChart()
             max = query.value(0).toInt();
     }
 
-    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='竹苑') and 是否正常='不正常';";
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='竹苑') and 是否正常='异常';";
     query.exec(str);
     if(query.next())
     {
@@ -644,7 +649,7 @@ void Admin::drawBarChart()
             max = query.value(0).toInt();
     }
 
-    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='菊苑') and 是否正常='不正常';";
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='菊苑') and 是否正常='异常';";
     query.exec(str);
     if(query.next())
     {
@@ -653,7 +658,7 @@ void Admin::drawBarChart()
             max = query.value(0).toInt();
     }
 
-    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='桃苑') and 是否正常='不正常';";
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='桃苑') and 是否正常='异常';";
     query.exec(str);
     if(query.next())
     {
@@ -662,7 +667,7 @@ void Admin::drawBarChart()
             max = query.value(0).toInt();
     }
 
-    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='李苑') and 是否正常='不正常';";
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='李苑') and 是否正常='异常';";
     query.exec(str);
     if(query.next())
     {
@@ -671,7 +676,7 @@ void Admin::drawBarChart()
             max = query.value(0).toInt();
     }
 
-    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='柳苑') and 是否正常='不正常';";
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='柳苑') and 是否正常='异常';";
     query.exec(str);
     if(query.next())
     {
@@ -680,7 +685,7 @@ void Admin::drawBarChart()
             max = query.value(0).toInt();
     }
 
-    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='桂苑') and 是否正常='不正常';";
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='桂苑') and 是否正常='异常';";
     query.exec(str);
     if(query.next())
     {
@@ -689,7 +694,7 @@ void Admin::drawBarChart()
             max = query.value(0).toInt();
     }
 
-    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='荷苑') and 是否正常='不正常';";
+    str = "select count(*) from `information` where 学号 in (select 学号 from `archive` where 宿舍区域='荷苑') and 是否正常='异常';";
     query.exec(str);
     if(query.next())
     {
@@ -717,7 +722,7 @@ void Admin::drawBarChart()
 //    QBarCategoryAxis *axisx = new QBarCategoryAxis();
 //    axisx->append(bottom);
 //    chart->setAxisX(axisx);
-    chart->axes(Qt::Vertical).first()->setRange(0,max);
+    chart->axes(Qt::Vertical).first()->setRange(0,max+2);
 
     QValueAxis *axisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).first());
     Q_ASSERT(axisY);
@@ -731,7 +736,7 @@ void Admin::drawBarChart()
 void Admin::drawChart()
 {
     QLineSeries *series1 = new QLineSeries();//实例化一个QLineSeries对象
-    //series1->setName("体温不正常人数");
+    //series1->setName("体温异常人数");
     series1->setVisible(true);
     //series1->setPointLabelsVisible(true);
     //series1->setPointLabelsFont(QFont("黑体"));
@@ -748,7 +753,7 @@ void Admin::drawChart()
     for(int i=0;i<7;++i)
     {
         ago = now.addDays(i-7);
-        str = "select count(是否正常) from `information` where 是否正常='不正常' and 进门时间 like '"+ago.toString("yyyy-MM-dd")+"%'";
+        str = "select count(是否正常) from `information` where 是否正常='异常' and 进门时间 like '"+ago.toString("yyyy-MM-dd")+"%'";
         query.exec(str);
         if(query.next())
         {
@@ -776,7 +781,7 @@ void Admin::drawChart()
     QBarCategoryAxis *axisx = new QBarCategoryAxis();
     axisx->append(bottom);
     chart->setAxisX(axisx);
-    chart->axes(Qt::Vertical).first()->setRange(0,max);
+    chart->axes(Qt::Vertical).first()->setRange(0,max+2);
 
     QValueAxis *axisY = qobject_cast<QValueAxis*>(chart->axes(Qt::Vertical).first());
     Q_ASSERT(axisY);
@@ -879,8 +884,8 @@ void Admin::InitConnection()
 
 void Admin::queryUnusual()
 {
-    QString get_row = "SELECT COUNT(*) FROM `information` where 是否正常='不正常';";
-    QString str="select * from `information` where 是否正常='不正常' order by 学号 asc;";
+    QString get_row = "SELECT COUNT(*) FROM `information` where 是否正常='异常';";
+    QString str="select * from `information` where 是否正常='异常' order by 学号 asc;";
     queryFunction(get_row,str,"information",true);
 }
 
@@ -889,7 +894,7 @@ void Admin::queryUnusual()
 void Admin::queryInfo()
 {
     QString get_row = "SELECT COUNT(*) FROM `information`;";
-    QString str="select * from `information` order by 学号 asc;";
+    QString str="select * from `information` order by 学号 asc ORDER BY 学号 ASC;";
     queryFunction(get_row,str,"information",true);
 }
 

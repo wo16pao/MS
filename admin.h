@@ -39,7 +39,7 @@ public:
     explicit Admin(QWidget *parent = nullptr);
     ~Admin();
 
-    void queryFunction(const QString &row ,const QString &str,const QString &tableName,bool flag = false);
+    void queryFunction(const QString &get_row ,const QString &str,const QString &tableName,bool flag = false);
 
 private:
     void Init();//初始化

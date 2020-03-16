@@ -281,7 +281,7 @@ background:#bac9e0;
     </item>
     <item>
      <property name="text">
-      <string>不正常</string>
+      <string>异常</string>
      </property>
     </item>
    </widget>

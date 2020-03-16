@@ -95,13 +95,15 @@ void Widget::Login()
         {
             //宿管登录
             m_aunt = new Aunt;
-            QString temp = "管理员：";
+            QString temp = "宿管：";
             QString get_name = "select 姓名,宿舍区域 from `aunt` where 账号= '"+userId+"' and 密码 = '"+userPsw+"';";
             query.exec(get_name);
             if(query.next())
             {
                 m_aunt->setLabelName(temp+query.value(0).toString());
                 m_aunt->setArea(query.value(1).toString());
+                m_aunt->queryIndoor();
+                m_aunt->queryUnusual();
             }
             m_aunt->show();
             connect(m_aunt,SIGNAL(signal_backWindow()),this,SLOT(Reshow()));//接受重新打开窗口信号
