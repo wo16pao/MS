@@ -27,6 +27,9 @@ private:
     void init();//初始化
     void initConnection();//绑定控件
 
+public:
+    void afterInit();//有了m_area之后的初始化
+
 public slots:
 
     void pushButtonBack();//返回按键
@@ -59,6 +62,24 @@ public slots:
     void getTabIndex(const int&);//切换tab
     void queryIndoor();//最近进门记录
     void queryOutdoor();//最近出门记录
+
+    void initDormitory1();//设置楼栋
+    void initDormitory2(const QString& text);//设置大寝号
+    void initDormitory3(const QString& text);//设置小寝号
+    void initDormitory4(const QString& text);//设置床位
+
+    void initDormitory1_2();//设置楼栋
+    void initDormitory2_2(const QString& text);//设置大寝号
+    void initDormitory3_2(const QString& text);//设置小寝号
+    void initDormitory4_2(const QString& text);//设置床位
+
+    void initId();
+    void initId_2();
+
+    void pushButton_indoor();//进门提交
+    void pushButton_outdoor();//出门提交
+
+
 signals:
 
     void signal_backWindow();//窗口返回信号
@@ -72,6 +93,11 @@ private:
     bool m_page_end_flag;//定位页数是否为最后一页
 
     QString m_area;
+    QString m_building;
+    QString m_big;
+
+    QString m_building_2;
+    QString m_big_2;
 
     ExportThread *exportThread;//导出
     Loading *loading;//等待动画

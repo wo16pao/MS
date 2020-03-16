@@ -79,6 +79,28 @@ void Aunt::initConnection()
     connect(ui->pushButton_search,SIGNAL(clicked()),this,SLOT(pushButton_search()));//搜素按钮
 
     connect(ui->tabWidget_2,SIGNAL(tabBarClicked(int)),this,SLOT(getTabIndex(const int&)));
+
+
+    //------------combobox链接-----------------
+    connect(ui->comboBox_dormitory1,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDormitory2(const QString&)));
+    connect(ui->comboBox_dormitory2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDormitory3(const QString&)));
+    connect(ui->comboBox_dormitory3,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDormitory4(const QString&)));
+    connect(ui->comboBox_dormitory1_2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDormitory2_2(const QString&)));
+    connect(ui->comboBox_dormitory2_2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDormitory3_2(const QString&)));
+    connect(ui->comboBox_dormitory3_2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDormitory4_2(const QString&)));
+    //------------combobox链接-----------------
+
+    connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(pushButton_indoor()));//进门提交按钮
+    connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(pushButton_outdoor()));//出门提交按钮
+}
+
+void Aunt::afterInit()
+{
+    initDormitory1();
+    initDormitory1_2();
+    queryUnusual();
+    queryIndoor();
+    queryOutdoor();
 }
 
 //返回按键
@@ -632,9 +654,11 @@ void Aunt::getTabIndex(const int& index)
 {
     switch (index) {
     case 0:
+        ui->label_confirm->clear();
         queryIndoor();
         break;
     case 1:
+        ui->label_confirm_2->clear();
         queryOutdoor();
         break;
     default:
@@ -756,3 +780,197 @@ void Aunt::queryOutdoor()
     }
 }
 //-----------信息查询-------------------
+
+
+//----------------combobox链接-------------------
+void Aunt::initDormitory1()
+{
+    ui->comboBox_dormitory1->clear();
+    QSqlQuery query(m_db);
+    QStringList header;
+    QString str = "select distinct(楼栋号) from `dormitory` where 宿舍区域='"+m_area+"' order by 楼栋号 asc;";
+    query.exec(str);
+    while (query.next()) {
+        header << query.value(0).toString();
+    }
+    ui->comboBox_dormitory1->addItems(header);
+}
+
+void Aunt::initDormitory2(const QString &text)
+{
+    m_building = text;
+    ui->comboBox_dormitory2->clear();
+    QSqlQuery query(m_db);
+    QStringList header;
+    QString str = "select distinct(大寝号) from `dormitory` where 宿舍区域='"+m_area+"' and 楼栋号='"+m_building+"' order by 大寝号 asc;";
+    query.exec(str);
+    while (query.next()) {
+        header << query.value(0).toString();
+    }
+    ui->comboBox_dormitory2->addItems(header);
+}
+
+void Aunt::initDormitory3(const QString &text)
+{
+    m_big = text;
+    ui->comboBox_dormitory3->clear();
+    QSqlQuery query(m_db);
+    QStringList header;
+    QString str = "select distinct(小寝号) from `dormitory` where 宿舍区域='"+m_area+"' and 楼栋号='"+m_building+"' and 大寝号 ='"+m_big+"' order by 小寝号 asc;";
+    query.exec(str);
+    while (query.next()) {
+        header << query.value(0).toString();
+    }
+    ui->comboBox_dormitory3->addItems(header);
+}
+
+void Aunt::initDormitory4(const QString &text)
+{
+    ui->comboBox_dormitory4->clear();
+    QSqlQuery query(m_db);
+    QStringList header;
+    QString str = "select distinct(床号) from `dormitory` where 宿舍区域='"+m_area+"' and 楼栋号='"+m_building+"' and 大寝号 ='"+m_big+"' and 小寝号 ='"+text+"' order by 床号 asc;";
+    query.exec(str);
+    while (query.next()) {
+        header << query.value(0).toString();
+    }
+    ui->comboBox_dormitory4->addItems(header);
+    initId();
+}
+
+void Aunt::initDormitory1_2()
+{
+    ui->comboBox_dormitory1_2->clear();
+    QSqlQuery query(m_db);
+    QStringList header;
+    QString str = "select distinct(楼栋号) from `dormitory` where 宿舍区域='"+m_area+"' order by 楼栋号 asc;";
+    query.exec(str);
+    while (query.next()) {
+        header << query.value(0).toString();
+    }
+    ui->comboBox_dormitory1_2->addItems(header);
+}
+
+void Aunt::initDormitory2_2(const QString &text)
+{
+    m_building_2 = text;
+    ui->comboBox_dormitory2_2->clear();
+    QSqlQuery query(m_db);
+    QStringList header;
+    QString str = "select distinct(大寝号) from `dormitory` where 宿舍区域='"+m_area+"' and 楼栋号='"+m_building_2+"' order by 大寝号 asc;";
+    query.exec(str);
+    while (query.next()) {
+        header << query.value(0).toString();
+    }
+    ui->comboBox_dormitory2_2->addItems(header);
+}
+
+void Aunt::initDormitory3_2(const QString &text)
+{
+    m_big_2 = text;
+    ui->comboBox_dormitory3_2->clear();
+    QSqlQuery query(m_db);
+    QStringList header;
+    QString str = "select distinct(小寝号) from `dormitory` where 宿舍区域='"+m_area+"' and 楼栋号='"+m_building_2+"' and 大寝号 ='"+m_big_2+"' order by 小寝号 asc;";
+    query.exec(str);
+    while (query.next()) {
+        header << query.value(0).toString();
+    }
+    ui->comboBox_dormitory3_2->addItems(header);
+}
+
+void Aunt::initDormitory4_2(const QString &text)
+{
+    ui->comboBox_dormitory4_2->clear();
+    QSqlQuery query(m_db);
+    QStringList header;
+    QString str = "select distinct(床号) from `dormitory` where 宿舍区域='"+m_area+"' and 楼栋号='"+m_building_2+"' and 大寝号 ='"+m_big_2+"' and 小寝号 ='"+text+"' order by 床号 asc;";
+    query.exec(str);
+    while (query.next()) {
+        header << query.value(0).toString();
+    }
+    ui->comboBox_dormitory4_2->addItems(header);
+    initId_2();
+}
+
+//----------------combobox链接-------------------
+//----------------设置自动链接----------------------
+void Aunt::initId()
+{
+    QString building = ui->comboBox_dormitory1->currentText();
+    QString big = ui->comboBox_dormitory2->currentText();
+    QString small = ui->comboBox_dormitory3->currentText();
+    QString bed = ui->comboBox_dormitory4->currentText();
+    QSqlQuery query(m_db);
+    QString str = "select 学号,姓名 from `archive` where 宿舍区域='"+m_area+"' and 楼栋号='"+building+"' and 大寝号='"+big+"' and 小寝号='"+small+"' and 床号='"+bed+"';";
+    query.exec(str);
+    while(query.next()){
+        ui->lineEdit_id->setText(query.value(0).toString());
+        ui->lineEdit_name->setText(query.value(1).toString());
+    }
+}
+
+void Aunt::initId_2()
+{
+    QString building = ui->comboBox_dormitory1_2->currentText();
+    QString big = ui->comboBox_dormitory2_2->currentText();
+    QString small = ui->comboBox_dormitory3_2->currentText();
+    QString bed = ui->comboBox_dormitory4_2->currentText();
+    QSqlQuery query(m_db);
+    QString str = "select 学号,姓名 from `archive` where 宿舍区域='"+m_area+"' and 楼栋号='"+building+"' and 大寝号='"+big+"' and 小寝号='"+small+"' and 床号='"+bed+"';";
+    query.exec(str);
+    while(query.next()){
+        ui->lineEdit_id_2->setText(query.value(0).toString());
+        ui->lineEdit_name_2->setText(query.value(1).toString());
+    }
+}
+
+//----------------设置自动链接----------------------
+void Aunt::pushButton_indoor()
+{
+    QString id = ui->lineEdit_id->text();
+    QString name = ui->lineEdit_name->text();
+    QString inTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QString temp = ui->lineEdit_tem->text();
+    QString normal = ui->comboBox_normal->currentText();
+    QString remark = ui->lineEdit_remark->text();
+    if(id.isEmpty()||name.isEmpty()||temp.isEmpty())
+    {
+        ui->label_confirm->setText("提交失败");
+        return;
+    }
+    QString str = "insert into `indoor` values ('"+id+"','"+name+"','"+inTime+"','"+temp+"','"+normal+"','"+remark+"');";
+    QSqlQuery query(m_db);
+    if(query.exec(str))
+    {
+        ui->label_confirm->setText("提交成功");
+        ui->lineEdit_tem->clear();
+        ui->lineEdit_remark->clear();
+        queryIndoor();
+    }
+    else {
+        ui->label_confirm->setText("提交失败");
+    }
+}
+
+void Aunt::pushButton_outdoor()
+{
+    QString id = ui->lineEdit_id_2->text();
+    QString name = ui->lineEdit_name_2->text();
+    QString outTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    if(id.isEmpty()||name.isEmpty())
+    {
+        ui->label_confirm_2->setText("提交失败");
+        return;
+    }
+    QString str = "insert into `outdoor` values ('"+id+"','"+name+"','"+outTime+"');";
+    QSqlQuery query(m_db);
+    if(query.exec(str))
+    {
+        ui->label_confirm_2->setText("提交成功");
+        queryOutdoor();
+    }
+    else {
+        ui->label_confirm_2->setText("提交失败");
+    }
+}

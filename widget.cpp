@@ -102,8 +102,7 @@ void Widget::Login()
             {
                 m_aunt->setLabelName(temp+query.value(0).toString());
                 m_aunt->setArea(query.value(1).toString());
-                m_aunt->queryIndoor();
-                m_aunt->queryUnusual();
+                m_aunt->afterInit();
             }
             m_aunt->show();
             connect(m_aunt,SIGNAL(signal_backWindow()),this,SLOT(Reshow()));//接受重新打开窗口信号

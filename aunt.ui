@@ -752,7 +752,7 @@ border-radius:10px;</string>
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QComboBox" name="comboBox_2">
+        <widget class="QComboBox" name="comboBox_dormitory1">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -834,7 +834,7 @@ background:#bac9e0;
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QComboBox" name="comboBox_3">
+        <widget class="QComboBox" name="comboBox_dormitory2">
          <property name="geometry">
           <rect>
            <x>200</x>
@@ -894,7 +894,7 @@ background:#bac9e0;
         <widget class="QLabel" name="label_10">
          <property name="geometry">
           <rect>
-           <x>270</x>
+           <x>280</x>
            <y>40</y>
            <width>41</width>
            <height>21</height>
@@ -910,16 +910,16 @@ background:#bac9e0;
           <string notr="true">color:#3e6093;</string>
          </property>
          <property name="text">
-          <string>寝</string>
+          <string>大寝</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QComboBox" name="comboBox_4">
+        <widget class="QComboBox" name="comboBox_dormitory3">
          <property name="geometry">
           <rect>
-           <x>310</x>
+           <x>330</x>
            <y>40</y>
            <width>69</width>
            <height>22</height>
@@ -976,7 +976,7 @@ background:#bac9e0;
         <widget class="QLabel" name="label_11">
          <property name="geometry">
           <rect>
-           <x>380</x>
+           <x>410</x>
            <y>40</y>
            <width>41</width>
            <height>21</height>
@@ -992,7 +992,7 @@ background:#bac9e0;
           <string notr="true">color:#3e6093;</string>
          </property>
          <property name="text">
-          <string>床</string>
+          <string>小寝</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -1098,7 +1098,7 @@ background:#bac9e0;
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLineEdit" name="lineEdit">
+        <widget class="QLineEdit" name="lineEdit_id">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -1119,7 +1119,7 @@ border-radius:3px;
 border:2px solid #849dc5;</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="lineEdit_2">
+        <widget class="QLineEdit" name="lineEdit_name">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -1140,12 +1140,12 @@ border-radius:3px;
 border:2px solid #849dc5;</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="lineEdit_3">
+        <widget class="QLineEdit" name="lineEdit_tem">
          <property name="geometry">
           <rect>
            <x>90</x>
            <y>160</y>
-           <width>151</width>
+           <width>71</width>
            <height>22</height>
           </rect>
          </property>
@@ -1161,12 +1161,12 @@ border-radius:3px;
 border:2px solid #849dc5;</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="lineEdit_4">
+        <widget class="QLineEdit" name="lineEdit_remark">
          <property name="geometry">
           <rect>
            <x>90</x>
            <y>200</y>
-           <width>151</width>
+           <width>311</width>
            <height>22</height>
           </rect>
          </property>
@@ -1216,10 +1216,10 @@ background:#253b5b;
           <string>提交</string>
          </property>
         </widget>
-        <widget class="QComboBox" name="comboBox_8">
+        <widget class="QComboBox" name="comboBox_normal">
          <property name="geometry">
           <rect>
-           <x>250</x>
+           <x>170</x>
            <y>160</y>
            <width>69</width>
            <height>22</height>
@@ -1282,6 +1282,113 @@ background:#bac9e0;
            <string>异常</string>
           </property>
          </item>
+        </widget>
+        <widget class="QLabel" name="label_31">
+         <property name="geometry">
+          <rect>
+           <x>530</x>
+           <y>40</y>
+           <width>41</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#3e6093;</string>
+         </property>
+         <property name="text">
+          <string>床</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="comboBox_dormitory4">
+         <property name="geometry">
+          <rect>
+           <x>460</x>
+           <y>40</y>
+           <width>69</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox{
+border: 2px solid #849dc5;
+border-radius:4px;
+color:#3e6093;
+}
+
+QComboBox::drop-down {
+width:18px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}
+
+QComboBox QAbstractItemView::item
+{
+color:#3e6093;
+height:30px;
+}
+
+QComboBox QAbstractItemView::item:hover
+{
+border:1px solid #849dc5;
+background:#d9e4f5;
+}
+
+QComboBox QAbstractItemView::item:pressed
+{
+border:1px solid #849dc5;
+background:#bac9e0;
+}
+
+
+</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_confirm">
+         <property name="geometry">
+          <rect>
+           <x>531</x>
+           <y>215</y>
+           <width>91</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#3e6093;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
         </widget>
        </widget>
        <widget class="QWidget" name="widget_11" native="true">
@@ -1526,259 +1633,6 @@ border-radius:10px;</string>
           <string/>
          </property>
         </widget>
-        <widget class="QLabel" name="label_25">
-         <property name="geometry">
-          <rect>
-           <x>40</x>
-           <y>40</y>
-           <width>41</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>黑体</family>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color:#3e6093;</string>
-         </property>
-         <property name="text">
-          <string>宿舍</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-        <widget class="QComboBox" name="comboBox_5">
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>40</y>
-           <width>69</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QComboBox{
-border: 2px solid #849dc5;
-border-radius:4px;
-color:#3e6093;
-}
-
-QComboBox::drop-down {
-width:18px;
-border-image:url(:/res/所有下拉框.png);
-}  
-
-QComboBox:hover{
-background:#d9e4f5;
-}
-
-QComboBox:pressed{
-background:#bac9e0;
-}
-
-QComboBox QAbstractItemView::item
-{
-color:#3e6093;
-height:30px;
-}
-
-QComboBox QAbstractItemView::item:hover
-{
-border:1px solid #849dc5;
-background:#d9e4f5;
-}
-
-QComboBox QAbstractItemView::item:pressed
-{
-border:1px solid #849dc5;
-background:#bac9e0;
-}
-
-
-</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_26">
-         <property name="geometry">
-          <rect>
-           <x>160</x>
-           <y>40</y>
-           <width>41</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>黑体</family>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color:#3e6093;</string>
-         </property>
-         <property name="text">
-          <string>栋</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-        <widget class="QComboBox" name="comboBox_6">
-         <property name="geometry">
-          <rect>
-           <x>200</x>
-           <y>40</y>
-           <width>69</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QComboBox{
-border: 2px solid #849dc5;
-border-radius:4px;
-color:#3e6093;
-}
-
-QComboBox::drop-down {
-width:18px;
-border-image:url(:/res/所有下拉框.png);
-}  
-
-QComboBox:hover{
-background:#d9e4f5;
-}
-
-QComboBox:pressed{
-background:#bac9e0;
-}
-
-QComboBox QAbstractItemView::item
-{
-color:#3e6093;
-height:30px;
-}
-
-QComboBox QAbstractItemView::item:hover
-{
-border:1px solid #849dc5;
-background:#d9e4f5;
-}
-
-QComboBox QAbstractItemView::item:pressed
-{
-border:1px solid #849dc5;
-background:#bac9e0;
-}
-
-
-</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_27">
-         <property name="geometry">
-          <rect>
-           <x>270</x>
-           <y>40</y>
-           <width>41</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>黑体</family>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color:#3e6093;</string>
-         </property>
-         <property name="text">
-          <string>寝</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-        <widget class="QComboBox" name="comboBox_7">
-         <property name="geometry">
-          <rect>
-           <x>310</x>
-           <y>40</y>
-           <width>69</width>
-           <height>22</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QComboBox{
-border: 2px solid #849dc5;
-border-radius:4px;
-color:#3e6093;
-}
-
-QComboBox::drop-down {
-width:18px;
-border-image:url(:/res/所有下拉框.png);
-}  
-
-QComboBox:hover{
-background:#d9e4f5;
-}
-
-QComboBox:pressed{
-background:#bac9e0;
-}
-
-QComboBox QAbstractItemView::item
-{
-color:#3e6093;
-height:30px;
-}
-
-QComboBox QAbstractItemView::item:hover
-{
-border:1px solid #849dc5;
-background:#d9e4f5;
-}
-
-QComboBox QAbstractItemView::item:pressed
-{
-border:1px solid #849dc5;
-background:#bac9e0;
-}
-
-
-</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_28">
-         <property name="geometry">
-          <rect>
-           <x>380</x>
-           <y>40</y>
-           <width>41</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>黑体</family>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color:#3e6093;</string>
-         </property>
-         <property name="text">
-          <string>床</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
         <widget class="QLabel" name="label_29">
          <property name="geometry">
           <rect>
@@ -1829,7 +1683,7 @@ background:#bac9e0;
           <set>Qt::AlignCenter</set>
          </property>
         </widget>
-        <widget class="QLineEdit" name="lineEdit_5">
+        <widget class="QLineEdit" name="lineEdit_id_2">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -1838,13 +1692,19 @@ background:#bac9e0;
            <height>22</height>
           </rect>
          </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">color:#3e6093;
 border-radius:3px;
 border:2px solid #849dc5;</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="lineEdit_6">
+        <widget class="QLineEdit" name="lineEdit_name_2">
          <property name="geometry">
           <rect>
            <x>90</x>
@@ -1852,6 +1712,12 @@ border:2px solid #849dc5;</string>
            <width>151</width>
            <height>22</height>
           </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">color:#3e6093;
@@ -1891,6 +1757,384 @@ background:#253b5b;
          </property>
          <property name="text">
           <string>提交</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_28">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>40</y>
+           <width>41</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#3e6093;</string>
+         </property>
+         <property name="text">
+          <string>宿舍</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="comboBox_dormitory1_2">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>40</y>
+           <width>69</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox{
+border: 2px solid #849dc5;
+border-radius:4px;
+color:#3e6093;
+}
+
+QComboBox::drop-down {
+width:18px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}
+
+QComboBox QAbstractItemView::item
+{
+color:#3e6093;
+height:30px;
+}
+
+QComboBox QAbstractItemView::item:hover
+{
+border:1px solid #849dc5;
+background:#d9e4f5;
+}
+
+QComboBox QAbstractItemView::item:pressed
+{
+border:1px solid #849dc5;
+background:#bac9e0;
+}
+
+
+</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="comboBox_dormitory4_2">
+         <property name="geometry">
+          <rect>
+           <x>460</x>
+           <y>40</y>
+           <width>69</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox{
+border: 2px solid #849dc5;
+border-radius:4px;
+color:#3e6093;
+}
+
+QComboBox::drop-down {
+width:18px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}
+
+QComboBox QAbstractItemView::item
+{
+color:#3e6093;
+height:30px;
+}
+
+QComboBox QAbstractItemView::item:hover
+{
+border:1px solid #849dc5;
+background:#d9e4f5;
+}
+
+QComboBox QAbstractItemView::item:pressed
+{
+border:1px solid #849dc5;
+background:#bac9e0;
+}
+
+
+</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_25">
+         <property name="geometry">
+          <rect>
+           <x>160</x>
+           <y>40</y>
+           <width>41</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#3e6093;</string>
+         </property>
+         <property name="text">
+          <string>栋</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="comboBox_dormitory2_2">
+         <property name="geometry">
+          <rect>
+           <x>200</x>
+           <y>40</y>
+           <width>69</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox{
+border: 2px solid #849dc5;
+border-radius:4px;
+color:#3e6093;
+}
+
+QComboBox::drop-down {
+width:18px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}
+
+QComboBox QAbstractItemView::item
+{
+color:#3e6093;
+height:30px;
+}
+
+QComboBox QAbstractItemView::item:hover
+{
+border:1px solid #849dc5;
+background:#d9e4f5;
+}
+
+QComboBox QAbstractItemView::item:pressed
+{
+border:1px solid #849dc5;
+background:#bac9e0;
+}
+
+
+</string>
+         </property>
+        </widget>
+        <widget class="QComboBox" name="comboBox_dormitory3_2">
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>40</y>
+           <width>69</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox{
+border: 2px solid #849dc5;
+border-radius:4px;
+color:#3e6093;
+}
+
+QComboBox::drop-down {
+width:18px;
+border-image:url(:/res/所有下拉框.png);
+}  
+
+QComboBox:hover{
+background:#d9e4f5;
+}
+
+QComboBox:pressed{
+background:#bac9e0;
+}
+
+QComboBox QAbstractItemView::item
+{
+color:#3e6093;
+height:30px;
+}
+
+QComboBox QAbstractItemView::item:hover
+{
+border:1px solid #849dc5;
+background:#d9e4f5;
+}
+
+QComboBox QAbstractItemView::item:pressed
+{
+border:1px solid #849dc5;
+background:#bac9e0;
+}
+
+
+</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_32">
+         <property name="geometry">
+          <rect>
+           <x>530</x>
+           <y>40</y>
+           <width>41</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#3e6093;</string>
+         </property>
+         <property name="text">
+          <string>床</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_27">
+         <property name="geometry">
+          <rect>
+           <x>410</x>
+           <y>40</y>
+           <width>41</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#3e6093;</string>
+         </property>
+         <property name="text">
+          <string>小寝</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_26">
+         <property name="geometry">
+          <rect>
+           <x>280</x>
+           <y>40</y>
+           <width>41</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#3e6093;</string>
+         </property>
+         <property name="text">
+          <string>大寝</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_confirm_2">
+         <property name="geometry">
+          <rect>
+           <x>531</x>
+           <y>215</y>
+           <width>91</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color:#3e6093;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </widget>
