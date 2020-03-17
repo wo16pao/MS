@@ -85,10 +85,13 @@ void Aunt::initConnection()
     connect(ui->comboBox_dormitory1,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDormitory2(const QString&)));
     connect(ui->comboBox_dormitory2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDormitory3(const QString&)));
     connect(ui->comboBox_dormitory3,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDormitory4(const QString&)));
+    connect(ui->comboBox_dormitory4,SIGNAL(currentIndexChanged(QString)),this,SLOT(initId(const QString&)));
     connect(ui->comboBox_dormitory1_2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDormitory2_2(const QString&)));
     connect(ui->comboBox_dormitory2_2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDormitory3_2(const QString&)));
     connect(ui->comboBox_dormitory3_2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initDormitory4_2(const QString&)));
+    connect(ui->comboBox_dormitory4_2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initId_2(const QString&)));
     //------------combobox链接-----------------
+    connect(ui->lineEdit_id,SIGNAL(textChanged(QString)),this,SLOT(initIdToDormitory(const QString&)));
 
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(pushButton_indoor()));//进门提交按钮
     connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(pushButton_outdoor()));//出门提交按钮
@@ -835,7 +838,6 @@ void Aunt::initDormitory4(const QString &text)
         header << query.value(0).toString();
     }
     ui->comboBox_dormitory4->addItems(header);
-    initId();
 }
 
 void Aunt::initDormitory1_2()
@@ -890,12 +892,11 @@ void Aunt::initDormitory4_2(const QString &text)
         header << query.value(0).toString();
     }
     ui->comboBox_dormitory4_2->addItems(header);
-    initId_2();
 }
 
 //----------------combobox链接-------------------
 //----------------设置自动链接----------------------
-void Aunt::initId()
+void Aunt::initId(const QString&)
 {
     QString building = ui->comboBox_dormitory1->currentText();
     QString big = ui->comboBox_dormitory2->currentText();
@@ -904,13 +905,17 @@ void Aunt::initId()
     QSqlQuery query(m_db);
     QString str = "select 学号,姓名 from `archive` where 宿舍区域='"+m_area+"' and 楼栋号='"+building+"' and 大寝号='"+big+"' and 小寝号='"+small+"' and 床号='"+bed+"';";
     query.exec(str);
-    while(query.next()){
+    if(query.next()){
         ui->lineEdit_id->setText(query.value(0).toString());
         ui->lineEdit_name->setText(query.value(1).toString());
     }
+    else {
+        ui->lineEdit_id->setText("");
+        ui->lineEdit_name->setText("");
+    }
 }
 
-void Aunt::initId_2()
+void Aunt::initId_2(const QString&)
 {
     QString building = ui->comboBox_dormitory1_2->currentText();
     QString big = ui->comboBox_dormitory2_2->currentText();
@@ -922,6 +927,22 @@ void Aunt::initId_2()
     while(query.next()){
         ui->lineEdit_id_2->setText(query.value(0).toString());
         ui->lineEdit_name_2->setText(query.value(1).toString());
+    }
+}
+
+void Aunt::initIdToDormitory(const QString& text)
+{
+    QString str = "select 楼栋号,大寝号,小寝号,床号 from `archive` where 宿舍区域='"+m_area+"' and 学号='"+text+"';";
+    QSqlQuery query(m_db);
+    query.exec(str);
+    if(query.next()){
+        ui->comboBox_dormitory1->setCurrentText(query.value(0).toString());
+        ui->comboBox_dormitory2->setCurrentText(query.value(1).toString());
+        ui->comboBox_dormitory3->setCurrentText(query.value(2).toString());
+        ui->comboBox_dormitory4->setCurrentText(query.value(3).toString());
+    }
+    else {
+        return;
     }
 }
 

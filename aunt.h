@@ -73,8 +73,9 @@ public slots:
     void initDormitory3_2(const QString& text);//设置小寝号
     void initDormitory4_2(const QString& text);//设置床位
 
-    void initId();
-    void initId_2();
+    void initId(const QString&);
+    void initId_2(const QString& text);
+    void initIdToDormitory(const QString& text);//输入学号链接宿舍和姓名
 
     void pushButton_indoor();//进门提交
     void pushButton_outdoor();//出门提交
