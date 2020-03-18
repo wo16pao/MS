@@ -1390,6 +1390,31 @@ background:#bac9e0;
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
+        <widget class="QListWidget" name="listWidget">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>103</y>
+           <width>151</width>
+           <height>80</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>true</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius:3px;
+border:1px solid #3e6093;
+background:#ffffff;
+color:#3e6093;</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QWidget" name="widget_11" native="true">
         <property name="geometry">
@@ -2135,6 +2160,31 @@ background:#bac9e0;
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QListWidget" name="listWidget_2">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>103</y>
+           <width>151</width>
+           <height>80</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>黑体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>true</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border-radius:3px;
+border:1px solid #3e6093;
+background:#ffffff;
+color:#3e6093;</string>
          </property>
         </widget>
        </widget>

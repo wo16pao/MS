@@ -894,7 +894,7 @@ void Admin::queryUnusual()
 void Admin::queryInfo()
 {
     QString get_row = "SELECT COUNT(*) FROM `information`;";
-    QString str="select * from `information` order by 学号 asc ORDER BY 学号 ASC;";
+    QString str="select * from `information` order by 学号 asc;";
     queryFunction(get_row,str,"information",true);
 }
 
@@ -1213,8 +1213,11 @@ void Admin::pushButton_releaseStyle()
 //---------------------------按钮样式改变--------------------------
 void Admin::keyPressEvent(QKeyEvent *event)
 {
-    if( event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return )
+    if(ui->lineEdit_search->hasFocus())
     {
-         pushButton_search();
+        if( event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return )
+        {
+            pushButton_search();
+        }
     }
 }

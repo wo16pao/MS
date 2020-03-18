@@ -18,7 +18,6 @@ Aunt::Aunt(QWidget *parent) :
     initTitleBar();
     init();
     initConnection();
-
 }
 
 Aunt::~Aunt()
@@ -52,6 +51,8 @@ void Aunt::init()
     ui->comboBox->setItemDelegate(itemDelegate);
     exportThread = new ExportThread;
     loading = new Loading(this);
+
+
 
 }
 //初始化连接
@@ -92,11 +93,19 @@ void Aunt::initConnection()
     connect(ui->comboBox_dormitory4_2,SIGNAL(currentIndexChanged(QString)),this,SLOT(initId_2(const QString&)));
     //------------combobox链接-----------------
     connect(ui->lineEdit_id,SIGNAL(textChanged(QString)),this,SLOT(initIdToDormitory(const QString&)));
+    connect(ui->lineEdit_id_2,SIGNAL(textChanged(QString)),this,SLOT(initIdToDormitory_2(const QString&)));
 
     connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(pushButton_indoor()));//进门提交按钮
     connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(pushButton_outdoor()));//出门提交按钮
-}
 
+    connect(ui->lineEdit_id,SIGNAL(editingFinished()),this,SLOT(listVisible()));//隐藏姓名提示
+    connect(ui->lineEdit_id,SIGNAL(textChanged (QString)),this,SLOT(showList(const QString&)));//显示下拉菜单
+    connect(ui->listWidget,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(mouseClicked(QListWidgetItem*)));//点击下拉菜单
+    connect(ui->lineEdit_id_2,SIGNAL(editingFinished()),this,SLOT(listVisible_2()));//隐藏姓名提示
+    connect(ui->lineEdit_id_2,SIGNAL(textChanged (QString)),this,SLOT(showList_2(const QString&)));//显示下拉菜单
+    connect(ui->listWidget_2,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(mouseClicked(QListWidgetItem*)));//点击下拉菜单
+}
+//有了宿舍区域之后的初始化
 void Aunt::afterInit()
 {
     initDormitory1();
@@ -647,10 +656,52 @@ void Aunt::pushButton_search()
 
 void Aunt::keyPressEvent(QKeyEvent *event)
 {
-    if( event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return )
-    {
-        pushButton_search();
-    }
+   if(ui->lineEdit_search->hasFocus())
+   {
+       if( event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return )
+       {
+           pushButton_search();
+       }
+   }
+
+   if(ui->lineEdit_id->hasFocus()&&ui->listWidget->count() != 0)
+   {
+       int key = event->key();
+       int index = ui->listWidget->currentRow();
+       if(key==Qt::Key_Up){
+           if(--index < 0) index=0;
+           QListWidgetItem *item = ui->listWidget->item(index);
+           ui->listWidget->setCurrentItem(item);
+       }
+       else if(key == Qt::Key_Down){
+           if(++index > ui->listWidget->count()) index = ui->listWidget->currentRow()-1;
+           QListWidgetItem *item = ui->listWidget->item(index);
+           ui->listWidget->setCurrentItem(item);
+       }
+       else if (key == Qt::Key_Enter || key == Qt::Key_Return){
+           ui->lineEdit_id->setText(ui->listWidget->currentItem()->text());
+           ui->listWidget->setVisible(false);
+       }
+   }
+   if(ui->lineEdit_id_2->hasFocus()&&ui->listWidget_2->count() != 0)
+   {
+       int key = event->key();
+       int index = ui->listWidget_2->currentRow();
+       if(key==Qt::Key_Up){
+           if(--index < 0) index=0;
+           QListWidgetItem *item = ui->listWidget_2->item(index);
+           ui->listWidget_2->setCurrentItem(item);
+       }
+       else if(key == Qt::Key_Down){
+           if(++index > ui->listWidget_2->count()) index = ui->listWidget_2->currentRow()-1;
+           QListWidgetItem *item = ui->listWidget_2->item(index);
+           ui->listWidget_2->setCurrentItem(item);
+       }
+       else if (key == Qt::Key_Enter || key == Qt::Key_Return){
+           ui->lineEdit_id_2->setText(ui->listWidget_2->currentItem()->text());
+           ui->listWidget_2->setVisible(false);
+       }
+   }
 }
 
 void Aunt::getTabIndex(const int& index)
@@ -784,7 +835,6 @@ void Aunt::queryOutdoor()
 }
 //-----------信息查询-------------------
 
-
 //----------------combobox链接-------------------
 void Aunt::initDormitory1()
 {
@@ -895,6 +945,7 @@ void Aunt::initDormitory4_2(const QString &text)
 }
 
 //----------------combobox链接-------------------
+
 //----------------设置自动链接----------------------
 void Aunt::initId(const QString&)
 {
@@ -924,9 +975,13 @@ void Aunt::initId_2(const QString&)
     QSqlQuery query(m_db);
     QString str = "select 学号,姓名 from `archive` where 宿舍区域='"+m_area+"' and 楼栋号='"+building+"' and 大寝号='"+big+"' and 小寝号='"+small+"' and 床号='"+bed+"';";
     query.exec(str);
-    while(query.next()){
+    if(query.next()){
         ui->lineEdit_id_2->setText(query.value(0).toString());
         ui->lineEdit_name_2->setText(query.value(1).toString());
+    }
+    else {
+        ui->lineEdit_id_2->setText("");
+        ui->lineEdit_name_2->setText("");
     }
 }
 
@@ -946,12 +1001,31 @@ void Aunt::initIdToDormitory(const QString& text)
     }
 }
 
+void Aunt::initIdToDormitory_2(const QString &text)
+{
+    QString str = "select 楼栋号,大寝号,小寝号,床号 from `archive` where 宿舍区域='"+m_area+"' and 学号='"+text+"';";
+    QSqlQuery query(m_db);
+    query.exec(str);
+    if(query.next()){
+        ui->comboBox_dormitory1_2->setCurrentText(query.value(0).toString());
+        ui->comboBox_dormitory2_2->setCurrentText(query.value(1).toString());
+        ui->comboBox_dormitory3_2->setCurrentText(query.value(2).toString());
+        ui->comboBox_dormitory4_2->setCurrentText(query.value(3).toString());
+    }
+    else {
+        return;
+    }
+}
+
 //----------------设置自动链接----------------------
+//进门提交
 void Aunt::pushButton_indoor()
 {
+    //更新进门表
     QString id = ui->lineEdit_id->text();
     QString name = ui->lineEdit_name->text();
-    QString inTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    QDateTime inDateTime = QDateTime::currentDateTime();
+    QString inTime = inDateTime.toString("yyyy-MM-dd hh:mm:ss");
     QString temp = ui->lineEdit_tem->text();
     QString normal = ui->comboBox_normal->currentText();
     QString remark = ui->lineEdit_remark->text();
@@ -960,20 +1034,35 @@ void Aunt::pushButton_indoor()
         ui->label_confirm->setText("提交失败");
         return;
     }
-    QString str = "insert into `indoor` values ('"+id+"','"+name+"','"+inTime+"','"+temp+"','"+normal+"','"+remark+"');";
+    QString insertIndoor = "insert into `indoor` values ('"+id+"','"+name+"','"+inTime+"','"+temp+"','"+normal+"','"+remark+"');";
     QSqlQuery query(m_db);
-    if(query.exec(str))
-    {
+
+    QString str = "select 出门时间 from `outdoor` where 学号='"+id+"' order by 出门时间 desc;";
+    query.exec(str);
+    QString outTime;
+    QDateTime outDateTime;
+    if(query.next()){
+
+        outDateTime = query.value(0).toDateTime();
+        outTime = outDateTime.toString("yyyy-MM-dd hh:mm:ss");
+    }
+    QString sub = QDateTime::fromSecsSinceEpoch(inDateTime.toSecsSinceEpoch()-outDateTime.toSecsSinceEpoch()).toUTC().toString("hh:mm:ss");
+    QString insertInfo = "insert into `information` values ('"+id+"','"+name+"','"+outTime+"','"+inTime+"','"+sub+"','"+temp+"','"+normal+"','"+remark+"');";
+
+    query.exec("START TRANSACTION");//开启事务
+    if(query.exec(insertIndoor)&&query.exec(insertInfo)){
         ui->label_confirm->setText("提交成功");
         ui->lineEdit_tem->clear();
         ui->lineEdit_remark->clear();
+        query.exec("commit");
         queryIndoor();
     }
-    else {
+    else{
+        query.exec("rollback");
         ui->label_confirm->setText("提交失败");
     }
 }
-
+//出门提交
 void Aunt::pushButton_outdoor()
 {
     QString id = ui->lineEdit_id_2->text();
@@ -995,3 +1084,117 @@ void Aunt::pushButton_outdoor()
         ui->label_confirm_2->setText("提交失败");
     }
 }
+
+//----------------------------学号提示信息------------------------
+void Aunt::listVisible()
+{
+    ui->listWidget->setVisible(false);
+}
+
+void Aunt::showList(const QString &text)
+{
+    ui->listWidget->clear();
+    ui->listWidget->setMinimumHeight(81);
+    ui->listWidget->setMaximumHeight(81);
+    QSqlQuery query(m_db);
+    QString str = "select 学号 from `archive` where 学号 like '"+text+"%' and 宿舍区域='"+m_area+"';";
+    query.exec(str);
+    QStringList header;
+    while(query.next())
+    {
+        header << query.value(0).toString();
+    }
+    if(header.empty()){
+        ui->listWidget->setVisible(false);
+        return;
+    }
+    if(header[0]==ui->lineEdit_id->text()){
+        ui->listWidget->setVisible(false);
+        return;
+    }
+    ui->listWidget->addItems(header);
+    if(ui->listWidget->count()>0)
+        ui->listWidget->setVisible(true);
+    else {
+        ui->listWidget->setVisible(false);
+    }
+
+    switch (ui->listWidget->count()) {
+    case 1:
+        ui->listWidget->setMinimumHeight(21);
+        ui->listWidget->setMaximumHeight(21);
+        break;
+    case 2:
+        ui->listWidget->setMinimumHeight(42);
+        ui->listWidget->setMaximumHeight(42);
+        break;
+    case 3:
+        ui->listWidget->setMinimumHeight(61);
+        ui->listWidget->setMaximumHeight(61);
+        break;
+    }
+}
+
+void Aunt::listVisible_2()
+{
+    ui->listWidget_2->setVisible(false);
+}
+
+void Aunt::showList_2(const QString &text)
+{
+    ui->listWidget_2->clear();
+    ui->listWidget_2->setMinimumHeight(81);
+    ui->listWidget_2->setMaximumHeight(81);
+    QSqlQuery query(m_db);
+    QString str = "select 学号 from `archive` where 学号 like '"+text+"%' and 宿舍区域='"+m_area+"';";
+    query.exec(str);
+    QStringList header;
+    while(query.next())
+    {
+        header << query.value(0).toString();
+    }
+    if(header.empty()){
+        ui->listWidget_2->setVisible(false);
+        return;
+    }
+    if(header[0]==ui->lineEdit_id_2->text()){
+        ui->listWidget_2->setVisible(false);
+        return;
+    }
+    ui->listWidget_2->addItems(header);
+    if(ui->listWidget_2->count()>0)
+        ui->listWidget_2->setVisible(true);
+    else {
+        ui->listWidget_2->setVisible(false);
+    }
+
+    switch (ui->listWidget_2->count()) {
+    case 1:
+        ui->listWidget_2->setMinimumHeight(21);
+        ui->listWidget_2->setMaximumHeight(21);
+        break;
+    case 2:
+        ui->listWidget_2->setMinimumHeight(42);
+        ui->listWidget_2->setMaximumHeight(42);
+        break;
+    case 3:
+        ui->listWidget_2->setMinimumHeight(61);
+        ui->listWidget_2->setMaximumHeight(61);
+        break;
+    }
+}
+
+void Aunt::mouseClicked(QListWidgetItem *item)
+{
+    if(ui->lineEdit_id->hasFocus())
+    {
+        ui->lineEdit_id->setText(item->text());
+        ui->listWidget->setVisible(false);
+    }
+    if(ui->lineEdit_id_2->hasFocus())
+    {
+        ui->lineEdit_id_2->setText(item->text());
+        ui->listWidget_2->setVisible(false);
+    }
+}
+//----------------------------学号提示信息------------------------

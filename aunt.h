@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QListWidgetItem>
+
 
 #include "other/basewindow.h"
 #include "other/mylabel.h"
@@ -76,10 +78,16 @@ public slots:
     void initId(const QString&);
     void initId_2(const QString& text);
     void initIdToDormitory(const QString& text);//输入学号链接宿舍和姓名
+    void initIdToDormitory_2(const QString& text);//输入学号链接宿舍和姓名
 
     void pushButton_indoor();//进门提交
     void pushButton_outdoor();//出门提交
 
+    void listVisible();
+    void showList(const QString& text);
+    void listVisible_2();
+    void showList_2(const QString& text);
+    void mouseClicked(QListWidgetItem*);
 
 signals:
 
