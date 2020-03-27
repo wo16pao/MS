@@ -1554,7 +1554,7 @@ QTableView
 </string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_modify">
+        <widget class="QPushButton" name="pushButton_delete">
          <property name="geometry">
           <rect>
            <x>130</x>
@@ -1574,7 +1574,7 @@ QTableView
          <property name="styleSheet">
           <string notr="true">
 QPushButton{
-border-image:url(:/res/edit.png);
+border-image:url(:/res/delete.png);
 text-align: center;
 padding-right:5px;
 padding-left:5px;
@@ -2326,7 +2326,7 @@ QTableView
 </string>
          </property>
         </widget>
-        <widget class="QPushButton" name="pushButton_modify_2">
+        <widget class="QPushButton" name="pushButton_delete_2">
          <property name="geometry">
           <rect>
            <x>130</x>
@@ -2346,7 +2346,7 @@ QTableView
          <property name="styleSheet">
           <string notr="true">
 QPushButton{
-border-image:url(:/res/edit.png);
+border-image:url(:/res/delete.png);
 text-align: center;
 padding-right:5px;
 padding-left:5px;

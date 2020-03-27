@@ -89,6 +89,10 @@ public slots:
     void showList_2(const QString& text);
     void mouseClicked(QListWidgetItem*);
 
+    void pushButton_delete();//删除进门
+    void pushButton_delete_2();//删除出门
+
+
 signals:
 
     void signal_backWindow();//窗口返回信号

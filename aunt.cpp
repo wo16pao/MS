@@ -104,6 +104,9 @@ void Aunt::initConnection()
     connect(ui->lineEdit_id_2,SIGNAL(editingFinished()),this,SLOT(listVisible_2()));//隐藏姓名提示
     connect(ui->lineEdit_id_2,SIGNAL(textChanged (QString)),this,SLOT(showList_2(const QString&)));//显示下拉菜单
     connect(ui->listWidget_2,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(mouseClicked(QListWidgetItem*)));//点击下拉菜单
+
+    connect(ui->pushButton_delete,SIGNAL(clicked()),this,SLOT(pushButton_delete()));//删除按钮
+    connect(ui->pushButton_delete_2,SIGNAL(clicked()),this,SLOT(pushButton_delete_2()));//删除按钮
 }
 //有了宿舍区域之后的初始化
 void Aunt::afterInit()
@@ -134,6 +137,7 @@ void Aunt::pushButton_index()
 
 void Aunt::pushButton_info()
 {
+    combobox_query(ui->comboBox->currentIndex());
     ui->tabWidget->setCurrentIndex(1);
     ui->label_guide->setText("当前位置：信息管理");
     ui->pushButton_index->setChecked(false);
@@ -1197,4 +1201,49 @@ void Aunt::mouseClicked(QListWidgetItem *item)
         ui->listWidget_2->setVisible(false);
     }
 }
+
 //----------------------------学号提示信息------------------------
+void Aunt::pushButton_delete()
+{
+    if(!ui->tableWidget_2->isItemSelected(ui->tableWidget_2->currentItem()))
+        return;
+
+    if(QMessageBox::No==QMessageBox::question(this,"警告","确定要删除吗",QMessageBox::Yes|QMessageBox::No))
+        return;
+
+    QSqlQuery query(m_db);
+    QString deleteIndoor = "delete from `indoor` where 学号='"+ui->tableWidget_2->item(ui->tableWidget_2->currentRow(),0)->text()+"' and 进门时间='"+ui->tableWidget_2->item(ui->tableWidget_2->currentRow(),2)->text()+"';";
+    QString deleteInfo = "delete from `information` where 学号='"+ui->tableWidget_2->item(ui->tableWidget_2->currentRow(),0)->text()+"' and 进门时间='"+ui->tableWidget_2->item(ui->tableWidget_2->currentRow(),2)->text()+"';";
+    query.exec("START TRANSACTION");//开启事务
+    if(query.exec(deleteIndoor)&&query.exec(deleteInfo))
+    {
+        QMessageBox::information(this,"提示","删除成功",QMessageBox::Ok);
+        query.exec("commit");
+        queryIndoor();
+    }
+    else {
+        query.exec("rollback");
+        QMessageBox::critical(this,"提示","删除失败",QMessageBox::Ok);
+    }
+}
+
+void Aunt::pushButton_delete_2()
+{
+    if(!ui->tableWidget_3->isItemSelected(ui->tableWidget_3->currentItem()))
+        return;
+
+    if(QMessageBox::No==QMessageBox::question(this,"警告","确定要删除吗",QMessageBox::Yes|QMessageBox::No))
+        return;
+
+    QSqlQuery query(m_db);
+    QString str = "delete from `outdoor` where 学号='"+ui->tableWidget_3->item(ui->tableWidget_3->currentRow(),0)->text()+"' and 出门时间='"+ui->tableWidget_3->item(ui->tableWidget_3->currentRow(),2)->text()+"';";
+    if(query.exec(str))
+    {
+
+        QMessageBox::information(this,"提示","删除成功",QMessageBox::Ok);
+        queryOutdoor();
+    }
+    else {
+        QMessageBox::critical(this,"提示","删除失败",QMessageBox::Ok);
+    }
+}

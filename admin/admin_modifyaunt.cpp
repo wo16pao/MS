@@ -77,3 +77,4 @@ void Admin_ModifyAunt::initTitleBar()
     m_titleBar->setButtonType(MIN_BUTTON);
     m_titleBar->setTitleWidth(this->width());
 }
+

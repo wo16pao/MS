@@ -21,6 +21,7 @@ public slots:
     void pushButton_back();
 
     void initTitleBar();
+
 signals:
     void refresh();
 

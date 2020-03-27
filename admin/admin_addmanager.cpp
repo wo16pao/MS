@@ -26,7 +26,6 @@ void Admin_AddManager::addManager()
     QString id = ui->lineEdit_2->text();
     QString password = ui->lineEdit_3->text();
 
-
     if(name.isEmpty()||id.isEmpty()||password.isEmpty())
     {
         ui->label_result->setText("信息不能为空");

@@ -115,6 +115,7 @@ void Admin::pushButton_index()
 
 void Admin::pushButton_info()
 {
+    combobox_query(ui->comboBox->currentIndex());
     ui->tabWidget->setCurrentIndex(1);
     ui->label_guide->setText("当前位置：信息管理");
 }

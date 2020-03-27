@@ -4,27 +4,33 @@
 #include <QtSql/QSqlError>
 #include <QMessageBox>
 #include <QString>
+#include <QAction>
+
 
 Widget::Widget(QWidget *parent) :
     BaseWindow(parent),
     ui(new Ui::Widget)
 {
-//    QFile file(":/qss/addAndModify.qss");
-//    if (file.open(QFile::ReadOnly)) {
-//            QString qss = QLatin1String(file.readAll());
-//            QString paletteColor = qss.mid(20, 7);
-//            qApp->setPalette(QPalette(QColor(paletteColor)));
-//            qApp->setStyleSheet(qss);
-//            file.close();
-//        }
-
     initTitleBar();
-    ui->setupUi(this);
 
+    ui->setupUi(this);
+    startTimer(1000);
     SqlConnect();//首先连接数据库
 
     connect(ui->pushButton_login,SIGNAL(clicked()),this,SLOT(Login()));
-    connect(ui->pushButton_quit,SIGNAL(clicked()),this,SLOT(close()));
+
+    //动画部分初始化
+    pPosAnimation1 = new QPropertyAnimation(ui->label_du1, "pos");
+    pPosAnimation2 = new QPropertyAnimation(ui->label_du2, "pos");
+    pPosGroup = new QSequentialAnimationGroup(this);
+    pPosGroup2 = new QSequentialAnimationGroup(this);
+    group2 = new QParallelAnimationGroup(this);
+    group = new QParallelAnimationGroup(this);
+    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
+    speed1x = 5+qrand()%10;
+    speed1y = 5+qrand()%10;
+    speed2x = 5+qrand()%10;
+    speed2y = 5+qrand()%10;
 }
 
 Widget::~Widget()
@@ -63,6 +69,7 @@ void Widget::Login()
     if(userId.isEmpty()||userPsw.isEmpty())
     {
         QMessageBox::information(this,"提示","请输入信息",QMessageBox::Ok);
+        return;
     }
     QSqlQuery query(db);
     if(ui->radioButton_aunt->isChecked())
@@ -70,10 +77,10 @@ void Widget::Login()
         //宿管登录
         query.exec("select count(账号) from `aunt` where 账号 = '"+userId+"' and 密码 = '"+userPsw+"';");
     }
-//    else if(ui->radioButton_teacher->isChecked())
-//    {
-//        //辅导员登录
-//    }
+    //    else if(ui->radioButton_teacher->isChecked())
+    //    {
+    //        //辅导员登录
+    //    }
     else if(ui->radioButton_admin->isChecked())
     {
         //管理员登陆
@@ -141,13 +148,89 @@ void Widget::ClearUI()
     ui->lineEdit_password->clear();
 }
 
+void Widget::timerEvent(QTimerEvent *e)
+{
+    animation();
+}
+
 void Widget::initTitleBar()
 {
     // 设置标题栏跑马灯效果，可以不设置;
     //m_titleBar->setTitleRoll();
-    m_titleBar->setBackgroundColor(56,70,85);
+    m_titleBar->setBackgroundColor(62,96,147);
     m_titleBar->setTitleIcon(":/icon.png");
     m_titleBar->setTitleContent(QStringLiteral("我的窗口"));
     m_titleBar->setButtonType(MIN_BUTTON);
     m_titleBar->setTitleWidth(this->width());
 }
+
+void Widget::animation()
+{
+    static int du1x = 40, du1y = 50;
+    static int du2x = 380, du2y = 70;
+    //static int speed1x=10,speed1y=10, speed2x=10,speed2y=10;
+
+
+    pPosAnimation1->setDuration(1000);
+    pPosAnimation1->setStartValue(QPoint(du1x, du1y));
+    du1x += speed1x;
+    if(du1x <= 0){
+        du1x = 0;
+        speed1x = -speed1x;
+    }
+    else if(du1x >= this->width()-ui->label_du1->width()){
+        du1x = this->width()-ui->label_du1->width();
+        speed1x = -speed1x;
+    }
+    du1y += speed1y;
+    if(du1y <= 0){
+        du1y = 0;
+        speed1y = -speed1y;
+    }
+    else if(du1y >= this->height()-ui->label_du1->height()){
+        du1y = this->height()-ui->label_du1->height();
+        speed1y = -speed1y;
+    }
+    pPosAnimation1->setEndValue(QPoint(du1x, du1y));
+    pPosAnimation1->setEasingCurve(QEasingCurve::Linear);
+
+
+    pPosAnimation2->setDuration(1000);
+    pPosAnimation2->setStartValue(QPoint(du2x, du2y));
+    du2x += speed2x;
+    if(du2x <= 0){
+        du2x = 0;
+        speed2x = -speed2x;
+    }
+    else if(du2x >= this->width()-ui->label_du2->width()){
+        du2x = this->width()-ui->label_du2->width();
+        speed2x = -speed2x;
+    }
+    du2y += speed2y;
+    if(du2y <= 0){
+        du2y = 0;
+        speed2y = -speed2y;
+    }
+    else if(du2y >= this->height()-ui->label_du2->height()){
+        du2y = this->height()-ui->label_du2->height();
+        speed2y = -speed2y;
+    }
+    pPosAnimation2->setEndValue(QPoint(du2x, du2y));
+    pPosAnimation2->setEasingCurve(QEasingCurve::Linear);
+
+    pPosGroup->addAnimation(pPosAnimation1);
+    pPosGroup2->addAnimation(pPosAnimation2);
+
+    group->addAnimation(pPosGroup);
+    group->setLoopCount(1);
+    group->start();
+    group2->addAnimation(pPosGroup2);
+    group2->setLoopCount(1);
+    group2->start();
+}
+
+void Widget::rememberPassword()
+{
+
+}
+
