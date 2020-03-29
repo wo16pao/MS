@@ -74,5 +74,7 @@ void ExportThread::run()
 
     excelExport->saveExcel(m_filepath);
 
+    delete excelExport;
+
     emit finish();
 }

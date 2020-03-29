@@ -25,7 +25,12 @@ BaseTitleBar::BaseTitleBar(QWidget *parent)
 
 BaseTitleBar::~BaseTitleBar()
 {
-
+    delete m_pIcon;
+    delete m_pTitleContent;
+    delete m_pButtonMin;
+    delete m_pButtonRestore;
+    delete m_pButtonMax;
+    delete m_pButtonClose;
 }
 
 // 初始化控件;

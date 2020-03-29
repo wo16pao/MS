@@ -65,6 +65,8 @@ Widget::~Widget()
         writeInit("isChecked","0");
         writeInit("account",ui->lineEdit_account->text());
     }
+    delete m_aunt;
+    delete m_adm;
     delete ui;
 }
 
@@ -107,12 +109,18 @@ void Widget::Login()
     if(ui->radioButton_aunt->isChecked())
     {
         //宿管登录
-        query.exec("select count(账号) from `aunt` where 账号 = '"+userId+"' and 密码 = '"+userPsw+"';");
+        string stdPsw = userPsw.toStdString();
+        stdPsw = MD5(stdPsw).toStr();
+        QString MD5Psw = QString::fromStdString(stdPsw);
+        query.exec("select count(账号) from `aunt` where 账号 = '"+userId+"' and 密码 = '"+MD5Psw+"';");
     }
     else if(ui->radioButton_admin->isChecked())
     {
         //管理员登陆
-        query.exec("select count(账号) from manager where 账号 = '"+userId+"' and 密码 = '"+userPsw+"';");
+        string stdPsw = userPsw.toStdString();
+        stdPsw = MD5(stdPsw).toStr();
+        QString MD5Psw = QString::fromStdString(stdPsw);
+        query.exec("select count(账号) from manager where 账号 = '"+userId+"' and 密码 = '"+MD5Psw+"';");
     }
     bool flag=false;//判断是否登录成功
     while(query.next())//判断是否存在，若存在则应为1
@@ -136,9 +144,7 @@ void Widget::Login()
                 writeInit("isChecked","1");
             }
 
-            string stdPsw = userPsw.toStdString();
-            stdPsw = MD5(stdPsw).toStr();
-            userPsw = QString::fromStdString(stdPsw);
+
             m_aunt = new Aunt;
             QString temp = "宿管：";
             QString get_name = "select 姓名,宿舍区域 from `aunt` where 账号= '"+userId+"' and 密码 = '"+userPsw+"';";

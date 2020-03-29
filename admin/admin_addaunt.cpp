@@ -2,6 +2,7 @@
 #include "ui_admin_addaunt.h"
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include "other/md5.h"
 
 Admin_AddAunt::Admin_AddAunt(QWidget *parent) :
     BaseWindow(parent),
@@ -25,6 +26,10 @@ void Admin_AddAunt::addAunt()
     QString id = ui->lineEdit_2->text();
     QString password = ui->lineEdit_3->text();
     QString area = ui->comboBox->currentText();
+
+    string stdPassword = password.toStdString();
+    stdPassword = MD5(stdPassword).toStr();
+    password = QString::fromStdString(stdPassword);
 
     if(name.isEmpty()||id.isEmpty()||password.isEmpty())
     {

@@ -22,6 +22,8 @@ Aunt::Aunt(QWidget *parent) :
 
 Aunt::~Aunt()
 {
+    delete exportThread;
+
     delete ui;
 }
 
@@ -52,7 +54,7 @@ void Aunt::init()
     exportThread = new ExportThread;
     loading = new Loading(this);
 
-
+    delete itemDelegate;
 
 }
 //初始化连接

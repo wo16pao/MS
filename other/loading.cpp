@@ -22,4 +22,5 @@ Loading::~Loading()
 {
     delete ui;
     m_movie->stop();
+    delete m_movie;
 }

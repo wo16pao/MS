@@ -8,6 +8,8 @@ WordReadThread::WordReadThread()
 void WordReadThread::run()
 {
     m_text = m_wordRead->readContent(m_filepath);
+
+    delete m_wordRead;
     emit finish(m_text);
 }
 

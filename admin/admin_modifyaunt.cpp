@@ -2,6 +2,7 @@
 #include "ui_admin_modifyaunt.h"
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include "other/md5.h"
 
 Admin_ModifyAunt::Admin_ModifyAunt(QWidget *parent) :
     BaseWindow(parent),
@@ -30,6 +31,9 @@ void Admin_ModifyAunt::modifyAunt()
         ui->label_result->setText("信息不能为空");
         return;
     }
+    string stdPassword = password.toStdString();
+    stdPassword = MD5(stdPassword).toStr();
+    password = QString::fromStdString(stdPassword);
 
     QString str = "update `aunt` set 姓名='"+name+"',账号='"+id+"',密码='"+password+"',宿舍区域='"+area+"' where 姓名='"+m_name+"' and 账号='"+m_id+"' and 密码='"+m_password+"' and 宿舍区域='"+m_area+"';";
     QSqlDatabase db;

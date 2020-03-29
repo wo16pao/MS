@@ -16,5 +16,7 @@ QString WordRead::readContent(const QString& filepath)
     QString text = range->property("Text").toString();
     document->dynamicCall("Close (Boolean)", true);
     word->dynamicCall("Quit (void)");
+
+    delete word;
     return text;
 }

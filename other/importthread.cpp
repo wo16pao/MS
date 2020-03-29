@@ -30,6 +30,8 @@ void ImportThread::run()
     m_success = excelImport->getSuccess();
     m_failure = excelImport->getFailure();
 
+    delete excelImport;
+
     emit finish(m_success,m_failure);
 }
 

@@ -27,6 +27,24 @@ Admin::Admin(QWidget *parent) :
 
 Admin::~Admin()
 {
+    delete m_adm_addDean;
+    delete m_adm_addInfo;
+    delete m_adm_addArchive;
+    delete m_adm_addDormitory;
+    delete m_adm_addAunt;
+    delete m_adm_addManager;
+
+    delete m_adm_modifyDean;
+    delete m_adm_modifyDorm;
+    delete m_adm_modifyArchive;
+    delete m_adm_modifyInfo;
+    delete m_adm_modifyAunt;
+    delete m_adm_modifyManager;
+
+    delete exportThread;
+    delete importThread;
+    delete wordThread;
+
     delete ui;
 }
 
@@ -790,6 +808,7 @@ void Admin::drawChart()
 
     ui->chartWidget->setChart(chart);
     ui->chartWidget->chart()->legend()->hide();
+
 }
 //-----------------------各个按钮-------------------------------------------
 
@@ -832,6 +851,7 @@ void Admin::Init()
 
     QStyledItemDelegate* itemDelegate = new QStyledItemDelegate();
         ui->comboBox->setItemDelegate(itemDelegate);
+
 
     queryUnusual();
 }

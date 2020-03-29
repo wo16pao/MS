@@ -2,6 +2,7 @@
 #include "ui_admin_addmanager.h"
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include "other/md5.h"
 
 Admin_AddManager::Admin_AddManager(QWidget *parent) :
     BaseWindow(parent),
@@ -25,6 +26,10 @@ void Admin_AddManager::addManager()
     QString name = ui->lineEdit->text();
     QString id = ui->lineEdit_2->text();
     QString password = ui->lineEdit_3->text();
+
+    string stdPassword = password.toStdString();
+    stdPassword = MD5(stdPassword).toStr();
+    password = QString::fromStdString(stdPassword);
 
     if(name.isEmpty()||id.isEmpty()||password.isEmpty())
     {
