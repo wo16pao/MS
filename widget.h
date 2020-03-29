@@ -10,6 +10,7 @@
 #include "admin.h"
 #include "aunt.h"
 #include "other/basewindow.h"
+#include "other/md5.h"
 
 namespace Ui {
 class Widget;
@@ -28,6 +29,9 @@ public:
     void ClearUI();//清理界面
 
     void timerEvent(QTimerEvent *e);
+
+    void writeInit(const QString &key, const QString &value);
+    void readInit(const QString &key, QString &value);
 
 private slots:
 

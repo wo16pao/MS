@@ -50,7 +50,8 @@ SOURCES += \
     other/basewindow.cpp \
     other/wordread.cpp \
     other/wordreadthread.cpp \
-    admin.cpp
+    admin.cpp \
+    other/md5.cpp
 
 HEADERS += \
         widget.h \
@@ -77,7 +78,8 @@ HEADERS += \
     other/basetitlebar.h \
     other/basewindow.h \
     other/wordread.h \
-    other/wordreadthread.h
+    other/wordreadthread.h \
+    other/md5.h
 
 FORMS += \
         widget.ui \
@@ -105,6 +107,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     res.qrc
+
 
 
 

@@ -2,10 +2,6 @@
     <qresource prefix="/">
         <file>icon.png</file>
         <file>MyTitle.css</file>
-        <file>MyTitle/close.png</file>
-        <file>MyTitle/max.png</file>
-        <file>MyTitle/min.png</file>
-        <file>MyTitle/restore.png</file>
         <file>res/10.png</file>
         <file>res/account.png</file>
         <file>res/arrow_down.png</file>
@@ -31,5 +27,12 @@
         <file>res/所有下拉框.png</file>
         <file>res/头像.png</file>
         <file>res/信息界面.png</file>
+        <file>MyTitle/close.png</file>
+        <file>MyTitle/max.png</file>
+        <file>MyTitle/min.png</file>
+        <file>MyTitle/restore.png</file>
+        <file>qss/checked.qss</file>
+        <file>qss/my.qss</file>
+        <file>qss/unchecked.qss</file>
     </qresource>
 </RCC>

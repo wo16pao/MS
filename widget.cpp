@@ -5,7 +5,8 @@
 #include <QMessageBox>
 #include <QString>
 #include <QAction>
-
+#include <QSettings>
+#include <QDebug>
 
 Widget::Widget(QWidget *parent) :
     BaseWindow(parent),
@@ -31,10 +32,39 @@ Widget::Widget(QWidget *parent) :
     speed1y = 5+qrand()%10;
     speed2x = 5+qrand()%10;
     speed2y = 5+qrand()%10;
+
+    QString isChecked;
+    QString account;
+    QString password;
+    readInit("isChecked",isChecked);
+    if(isChecked=="0"){
+        readInit("account",account);
+        ui->lineEdit_account->setText(account);
+    }
+    else if(isChecked=="1"){
+        readInit("aunt_account",account);
+        readInit("aunt_password",password);
+        ui->lineEdit_account->setText(account);
+        ui->lineEdit_password->setText(password);
+        ui->checkBox->setChecked(true);
+        ui->radioButton_aunt->setChecked(true);
+    }
+    else if(isChecked=="2"){
+        readInit("admin_account",account);
+        readInit("admin_password",password);
+        ui->lineEdit_account->setText(account);
+        ui->lineEdit_password->setText(password);
+        ui->checkBox->setChecked(true);
+        ui->radioButton_admin->setChecked(true);
+    }
 }
 
 Widget::~Widget()
 {
+    if(!ui->checkBox->isChecked()){
+        writeInit("isChecked","0");
+        writeInit("account",ui->lineEdit_account->text());
+    }
     delete ui;
 }
 
@@ -66,21 +96,19 @@ void Widget::Login()
 {
     QString userId = ui->lineEdit_account->text();//获取账号
     QString userPsw = ui->lineEdit_password->text();//获取密码
+
     if(userId.isEmpty()||userPsw.isEmpty())
     {
         QMessageBox::information(this,"提示","请输入信息",QMessageBox::Ok);
         return;
     }
+
     QSqlQuery query(db);
     if(ui->radioButton_aunt->isChecked())
     {
         //宿管登录
         query.exec("select count(账号) from `aunt` where 账号 = '"+userId+"' and 密码 = '"+userPsw+"';");
     }
-    //    else if(ui->radioButton_teacher->isChecked())
-    //    {
-    //        //辅导员登录
-    //    }
     else if(ui->radioButton_admin->isChecked())
     {
         //管理员登陆
@@ -98,9 +126,19 @@ void Widget::Login()
     if(flag)//登录成功
     {
         this->hide();
+
         if(ui->radioButton_aunt->isChecked())
         {
             //宿管登录
+            if(ui->checkBox->isChecked()){
+                writeInit("aunt_account",userId);
+                writeInit("aunt_password",userPsw);
+                writeInit("isChecked","1");
+            }
+
+            string stdPsw = userPsw.toStdString();
+            stdPsw = MD5(stdPsw).toStr();
+            userPsw = QString::fromStdString(stdPsw);
             m_aunt = new Aunt;
             QString temp = "宿管：";
             QString get_name = "select 姓名,宿舍区域 from `aunt` where 账号= '"+userId+"' and 密码 = '"+userPsw+"';";
@@ -117,7 +155,15 @@ void Widget::Login()
         else if(ui->radioButton_admin->isChecked())
         {
             //管理员登陆
+            if(ui->checkBox->isChecked()){
+                writeInit("admin_account",userId);
+                writeInit("admin_password",userPsw);
+                writeInit("isChecked","2");
+            }
 
+            string stdPsw = userPsw.toStdString();
+            stdPsw = MD5(stdPsw).toStr();
+            userPsw = QString::fromStdString(stdPsw);
             m_adm = new Admin;
             QString temp = "管理员：";
             QString get_name = "select 姓名 from `manager` where 账号= '"+userId+"' and 密码 = '"+userPsw+"';";
@@ -138,7 +184,6 @@ void Widget::Login()
 
 void Widget::Reshow()
 {
-    ClearUI();
     this->show();
 }
 
@@ -151,6 +196,34 @@ void Widget::ClearUI()
 void Widget::timerEvent(QTimerEvent *e)
 {
     animation();
+}
+
+void Widget::writeInit(const QString &key, const QString &value)
+{
+    QString path = "account.ini";
+
+    //创建配置文件操作对象
+    QSettings *config = new QSettings(path, QSettings::IniFormat);
+
+    //将信息写入配置文件
+    config->beginGroup("config");
+    config->setValue(key, value);
+    config->endGroup();
+    delete config;
+}
+
+void Widget::readInit(const QString &key, QString &value)
+{
+    value = QString("");
+    QString path = "account.ini";
+
+    //创建配置文件操作对象
+    QSettings *config = new QSettings(path, QSettings::IniFormat);
+
+    //读取配置信息
+    value = config->value(QString("config/") + key).toString();
+    delete config;
+
 }
 
 void Widget::initTitleBar()
