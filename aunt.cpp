@@ -32,8 +32,8 @@ void Aunt::initTitleBar()
     // 设置标题栏跑马灯效果，可以不设置;
     //m_titleBar->setTitleRoll();
     m_titleBar->setBackgroundColor(56,70,85);
-    m_titleBar->setTitleIcon(":/icon.png");
-    m_titleBar->setTitleContent(QStringLiteral("我的窗口"));
+    m_titleBar->setTitleIcon(":/icon3.png");
+    m_titleBar->setTitleContent(QStringLiteral("学生体温监控管理系统"));
     m_titleBar->setButtonType(MIN_BUTTON);
     m_titleBar->setTitleWidth(this->width());
 }
@@ -54,7 +54,6 @@ void Aunt::init()
     exportThread = new ExportThread;
     loading = new Loading(this);
 
-    delete itemDelegate;
 
 }
 //初始化连接
@@ -109,6 +108,8 @@ void Aunt::initConnection()
 
     connect(ui->pushButton_delete,SIGNAL(clicked()),this,SLOT(pushButton_delete()));//删除按钮
     connect(ui->pushButton_delete_2,SIGNAL(clicked()),this,SLOT(pushButton_delete_2()));//删除按钮
+
+    connect(ui->lineEdit_tem,SIGNAL(textChanged (QString)),this,SLOT(checkNormal(const QString&)));
 }
 //有了宿舍区域之后的初始化
 void Aunt::afterInit()
@@ -217,7 +218,7 @@ void Aunt::setArea(const QString &area)
 void Aunt::label_look(const QString &title)
 {
     ui->label_release_result_2->clear();
-    ui->label_guide->setText("公告修改");
+    ui->label_guide->setText("当前位置：公告查看");
     ui->tabWidget->setCurrentIndex(3);
     ui->lineEdit_look_title->setText(title);
     QSqlQuery query(m_db);
@@ -1247,5 +1248,13 @@ void Aunt::pushButton_delete_2()
     }
     else {
         QMessageBox::critical(this,"提示","删除失败",QMessageBox::Ok);
+    }
+}
+
+void Aunt::checkNormal(const QString &text)
+{
+    double temp = text.toDouble();
+    if(temp>37.3){
+        ui->comboBox_normal->setCurrentText("异常");
     }
 }

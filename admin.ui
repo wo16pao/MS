@@ -58,9 +58,9 @@ border-image:url(:/res/头像.png);</string>
    <widget class="QLabel" name="label_name">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>170</y>
-      <width>91</width>
+      <width>111</width>
       <height>21</height>
      </rect>
     </property>
@@ -73,7 +73,7 @@ border-image:url(:/res/头像.png);</string>
     <property name="font">
      <font>
       <family>黑体</family>
-      <pointsize>12</pointsize>
+      <pointsize>11</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -889,6 +889,7 @@ max-width:12px;
 }
  
 QScrollBar::handle:vertical{
+min-height:24px;
 background:#4b7cc4;
 }
  
@@ -903,12 +904,12 @@ QScrollBar:horizontal{
 background:#d9e2f0;
 padding:0px;
 max-height:12px;
-border-radius:6px;
+
 }
  
 QScrollBar::handle:horizontal{
 background:#4b7cc4;
-border-radius:6px;
+
 }
  
 QScrollBar::handle:hover:horizontal{

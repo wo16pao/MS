@@ -35,7 +35,7 @@ void Admin_ModifyAunt::modifyAunt()
     stdPassword = MD5(stdPassword).toStr();
     password = QString::fromStdString(stdPassword);
 
-    QString str = "update `aunt` set 姓名='"+name+"',账号='"+id+"',密码='"+password+"',宿舍区域='"+area+"' where 姓名='"+m_name+"' and 账号='"+m_id+"' and 密码='"+m_password+"' and 宿舍区域='"+m_area+"';";
+    QString str = "update `aunt` set 姓名='"+name+"',账号='"+id+"',密码='"+password+"',宿舍区域='"+area+"' where 姓名='"+m_name+"' and 账号='"+m_id+"';";
     QSqlDatabase db;
     db = QSqlDatabase::database("mysql_connect");
     QSqlQuery query(db);
@@ -76,8 +76,8 @@ void Admin_ModifyAunt::initTitleBar()
     // 设置标题栏跑马灯效果，可以不设置;
     //m_titleBar->setTitleRoll();
     m_titleBar->setBackgroundColor(56,70,85);
-    m_titleBar->setTitleIcon(":/icon.png");
-    m_titleBar->setTitleContent(QStringLiteral("我的窗口"));
+    m_titleBar->setTitleIcon(":/icon3.png");
+    m_titleBar->setTitleContent(QStringLiteral("学生体温监控管理系统"));
     m_titleBar->setButtonType(MIN_BUTTON);
     m_titleBar->setTitleWidth(this->width());
 }

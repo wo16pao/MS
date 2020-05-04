@@ -43,8 +43,6 @@ private slots:
 
     void animation();
 
-    void rememberPassword();
-
 private:
     Ui::Widget *ui;
     QSqlDatabase db;

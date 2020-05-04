@@ -8,6 +8,12 @@
 #include <QSettings>
 #include <QDebug>
 
+#define HostName "cdb-9dvw3m92.cd.tencentcdb.com"
+#define Port 10103
+#define DatabaseName "test"
+#define UserName "root"
+#define Password "yh990629"
+
 Widget::Widget(QWidget *parent) :
     BaseWindow(parent),
     ui(new Ui::Widget)
@@ -65,8 +71,6 @@ Widget::~Widget()
         writeInit("isChecked","0");
         writeInit("account",ui->lineEdit_account->text());
     }
-    delete m_aunt;
-    delete m_adm;
     delete ui;
 }
 
@@ -79,11 +83,11 @@ void Widget::SqlConnect()
         db=QSqlDatabase::database("mysql_connect");
     }
     db=QSqlDatabase::addDatabase("QMYSQL","mysql_connect");
-    db.setHostName("localhost");
-    db.setPort(3306);
-    db.setDatabaseName("test");
-    db.setUserName("root");
-    db.setPassword("root");
+    db.setHostName(HostName);
+    db.setPort(Port);
+    db.setDatabaseName(DatabaseName);
+    db.setUserName(UserName);
+    db.setPassword(Password);
     while(!db.open())
     {
         if(QMessageBox::Reset==QMessageBox::critical
@@ -143,7 +147,9 @@ void Widget::Login()
                 writeInit("aunt_password",userPsw);
                 writeInit("isChecked","1");
             }
-
+            string stdPsw = userPsw.toStdString();
+            stdPsw = MD5(stdPsw).toStr();
+            userPsw = QString::fromStdString(stdPsw);
 
             m_aunt = new Aunt;
             QString temp = "宿管：";
@@ -237,16 +243,16 @@ void Widget::initTitleBar()
     // 设置标题栏跑马灯效果，可以不设置;
     //m_titleBar->setTitleRoll();
     m_titleBar->setBackgroundColor(62,96,147);
-    m_titleBar->setTitleIcon(":/icon.png");
-    m_titleBar->setTitleContent(QStringLiteral("我的窗口"));
+    m_titleBar->setTitleIcon(":/icon3.png");
+    m_titleBar->setTitleContent(QStringLiteral("学生体温监控管理系统"));
     m_titleBar->setButtonType(MIN_BUTTON);
     m_titleBar->setTitleWidth(this->width());
 }
 
 void Widget::animation()
 {
-    static int du1x = 40, du1y = 50;
-    static int du2x = 380, du2y = 70;
+    static int du1x = 40, du1y = 90;
+    static int du2x = 390, du2y = 90;
     //static int speed1x=10,speed1y=10, speed2x=10,speed2y=10;
 
 
@@ -262,8 +268,8 @@ void Widget::animation()
         speed1x = -speed1x;
     }
     du1y += speed1y;
-    if(du1y <= 0){
-        du1y = 0;
+    if(du1y <= 70){
+        du1y = 70;
         speed1y = -speed1y;
     }
     else if(du1y >= this->height()-ui->label_du1->height()){
@@ -286,8 +292,8 @@ void Widget::animation()
         speed2x = -speed2x;
     }
     du2y += speed2y;
-    if(du2y <= 0){
-        du2y = 0;
+    if(du2y <= 70){
+        du2y = 70;
         speed2y = -speed2y;
     }
     else if(du2y >= this->height()-ui->label_du2->height()){
@@ -306,10 +312,5 @@ void Widget::animation()
     group2->addAnimation(pPosGroup2);
     group2->setLoopCount(1);
     group2->start();
-}
-
-void Widget::rememberPassword()
-{
-
 }
 

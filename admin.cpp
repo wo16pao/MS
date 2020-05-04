@@ -731,6 +731,7 @@ void Admin::drawBarChart()
     series->append(set7);
     series->append(set8);
     series->append(set9);
+    series->setLabelsPosition(QAbstractBarSeries::LabelsOutsideEnd);
 
     QChart *chart = new QChart();
     chart->addSeries(series);//添加系列到QChart上
@@ -1185,8 +1186,8 @@ void Admin::initTitleBar()
     // 设置标题栏跑马灯效果，可以不设置;
     //m_titleBar->setTitleRoll();
     m_titleBar->setBackgroundColor(56,70,85);
-    m_titleBar->setTitleIcon(":/icon.png");
-    m_titleBar->setTitleContent(QStringLiteral("我的窗口"));
+    m_titleBar->setTitleIcon(":/icon3.png");
+    m_titleBar->setTitleContent(QStringLiteral("学生体温监控管理系统"));
     m_titleBar->setButtonType(MIN_BUTTON);
     m_titleBar->setTitleWidth(this->width());
 }

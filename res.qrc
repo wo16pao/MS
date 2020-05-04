@@ -31,8 +31,7 @@
         <file>MyTitle/max.png</file>
         <file>MyTitle/min.png</file>
         <file>MyTitle/restore.png</file>
-        <file>qss/checked.qss</file>
-        <file>qss/my.qss</file>
-        <file>qss/unchecked.qss</file>
+        <file>icon2.png</file>
+        <file>icon3.png</file>
     </qresource>
 </RCC>

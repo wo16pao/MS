@@ -25,12 +25,6 @@ BaseTitleBar::BaseTitleBar(QWidget *parent)
 
 BaseTitleBar::~BaseTitleBar()
 {
-    delete m_pIcon;
-    delete m_pTitleContent;
-    delete m_pButtonMin;
-    delete m_pButtonRestore;
-    delete m_pButtonMax;
-    delete m_pButtonClose;
 }
 
 // 初始化控件;
@@ -96,13 +90,15 @@ void BaseTitleBar::setBackgroundColor(int r, int g, int b)
 void BaseTitleBar::setTitleIcon(QString filePath)
 {
     QPixmap titleIcon(filePath);
-    m_pIcon->setPixmap(titleIcon.scaled(25 , 25));
+    m_pIcon->setPixmap(titleIcon.scaled(22 , 25));
+    m_pIcon->setMargin(2);
 }
 
 // 设置标题内容;
 void BaseTitleBar::setTitleContent(QString titleContent)
 {
     m_pTitleContent->setText(titleContent);
+
     m_titleContent = titleContent;
 }
 
