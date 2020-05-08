@@ -22,7 +22,7 @@ Admin::Admin(QWidget *parent) :
     initTitleBar();
     Init();
     InitConnection();
-
+    ui->toolBox->setCurrentIndex(0);
 }
 
 Admin::~Admin()
@@ -215,8 +215,12 @@ void Admin::pushButton_search()
     case 4:
         tableName = "dean";
         break;
-    default:
-        return;
+    case 5:
+        tableName = "aunt";
+        break;
+    case 6:
+        tableName = "manager";
+        break;
     }
 
     ui->tableWidget->clearContents();
@@ -966,7 +970,7 @@ void Admin::queryManager()
 void Admin::label_look(const QString &title)
 {
     ui->label_release_result_2->clear();
-    ui->label_guide->setText("公告修改");
+    ui->label_guide->setText("当前位置：公告修改");
     ui->tabWidget->setCurrentIndex(3);
     ui->lineEdit_look_title->setText(title);
     m_bulletin_title = title;

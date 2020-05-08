@@ -7,6 +7,7 @@
 #include <QAction>
 #include <QSettings>
 #include <QDebug>
+#include <QTimer>
 
 #define HostName "cdb-9dvw3m92.cd.tencentcdb.com"
 #define Port 10103
@@ -21,8 +22,12 @@ Widget::Widget(QWidget *parent) :
     initTitleBar();
 
     ui->setupUi(this);
-    startTimer(1000);
-    SqlConnect();//首先连接数据库
+
+    timer1 = new QTimer(this);
+    timer1->start(1000);
+    connect(timer1,SIGNAL(timeout()),SLOT(animation()));
+
+
 
     connect(ui->pushButton_login,SIGNAL(clicked()),this,SLOT(Login()));
 
@@ -36,7 +41,7 @@ Widget::Widget(QWidget *parent) :
     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
     speed1x = 5+qrand()%10;
     speed1y = 5+qrand()%10;
-    speed2x = 5+qrand()%10;
+    speed2x = -15+qrand()%10;
     speed2y = 5+qrand()%10;
 
     QString isChecked;
@@ -75,7 +80,7 @@ Widget::~Widget()
 }
 
 //连接数据库
-void Widget::SqlConnect()
+bool Widget::SqlConnect()
 {
 
     if(QSqlDatabase::contains("mysql_connect"))//若已连接则不重复连接
@@ -88,18 +93,22 @@ void Widget::SqlConnect()
     db.setDatabaseName(DatabaseName);
     db.setUserName(UserName);
     db.setPassword(Password);
-    while(!db.open())
+    if(!db.open())
     {
-        if(QMessageBox::Reset==QMessageBox::critical
-                (this,"错误","数据库连接失败",QMessageBox::Reset|QMessageBox::Cancel,QMessageBox::Reset))
-            continue;
-        else
-            exit(0);
+        QMessageBox::critical(this,"错误","数据库连接失败");
+        qDebug() << "Error";
+        return false;
     }
+    return true;
 }
 
 void Widget::Login()
 {
+    if(!SqlConnect())//首先连接数据库
+        return;
+
+    clearOldInfo();
+
     QString userId = ui->lineEdit_account->text();//获取账号
     QString userPsw = ui->lineEdit_password->text();//获取密码
 
@@ -205,10 +214,14 @@ void Widget::ClearUI()
     ui->lineEdit_password->clear();
 }
 
-void Widget::timerEvent(QTimerEvent *e)
+void Widget::keyPressEvent(QKeyEvent *event)
 {
-    animation();
+    if( event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return )
+    {
+        Login();
+    }
 }
+
 
 void Widget::writeInit(const QString &key, const QString &value)
 {
@@ -236,6 +249,17 @@ void Widget::readInit(const QString &key, QString &value)
     value = config->value(QString("config/") + key).toString();
     delete config;
 
+}
+
+void Widget::clearOldInfo()
+{
+    QDateTime now = QDateTime::currentDateTime();
+    QDateTime ago = now.addDays(-21);
+    QString str = "delete from `outdoor` where 出门时间 < '"+ago.toString("yyyy-MM-dd hh:mm:ss")+"';";
+    QSqlQuery query(db);
+    query.exec(str);
+    str = "delete from `indoor` where 进门时间 < '"+ago.toString("yyyy-MM-dd hh:mm:ss")+"';";
+    query.exec(str);
 }
 
 void Widget::initTitleBar()
@@ -268,9 +292,8 @@ void Widget::animation()
         speed1x = -speed1x;
     }
     du1y += speed1y;
-    if(du1y <= 70){
-        du1y = 70;
-        speed1y = -speed1y;
+    if(du1y <= 0){
+        ui->label_du1->hide();
     }
     else if(du1y >= this->height()-ui->label_du1->height()){
         du1y = this->height()-ui->label_du1->height();
@@ -292,14 +315,14 @@ void Widget::animation()
         speed2x = -speed2x;
     }
     du2y += speed2y;
-    if(du2y <= 70){
-        du2y = 70;
-        speed2y = -speed2y;
+    if(du2y <= 0){
+        ui->label_du2->hide();
     }
     else if(du2y >= this->height()-ui->label_du2->height()){
         du2y = this->height()-ui->label_du2->height();
         speed2y = -speed2y;
     }
+
     pPosAnimation2->setEndValue(QPoint(du2x, du2y));
     pPosAnimation2->setEasingCurve(QEasingCurve::Linear);
 
@@ -312,5 +335,6 @@ void Widget::animation()
     group2->addAnimation(pPosGroup2);
     group2->setLoopCount(1);
     group2->start();
+
 }
 

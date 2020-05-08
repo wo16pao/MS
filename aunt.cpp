@@ -66,6 +66,7 @@ void Aunt::initConnection()
     connect(ui->pushButton_info,SIGNAL(clicked()),this,SLOT(pushButton_info()));
     connect(ui->pushButton_data,SIGNAL(clicked()),this,SLOT(pushButton_data()));
     connect(ui->pushButton_data2,SIGNAL(clicked()),this,SLOT(pushButton_data()));
+    connect(ui->pushButton_modify_back,SIGNAL(clicked()),this,SLOT(pushButton_data()));
 
     connect(ui->label_title1,SIGNAL(clicked(const QString &)),this,SLOT(label_look(const QString &)));//公告栏查看
     connect(ui->label_title2,SIGNAL(clicked(const QString &)),this,SLOT(label_look(const QString &)));//公告栏查看
@@ -561,6 +562,7 @@ void Aunt::pushButton_search()
     QString tableName;//表名
     bool flag = false;
     bool case0 = false;
+    QString get_row;
     if(line.isEmpty())//直接搜索不进行搜索
         return;
     //获取表名
@@ -582,11 +584,6 @@ void Aunt::pushButton_search()
     case 3:
         tableName = "dormitory";
         break;
-    case 4:
-        tableName = "dean";
-        break;
-    default:
-        return;
     }
 
     ui->tableWidget->clearContents();
@@ -607,9 +604,22 @@ void Aunt::pushButton_search()
     for(int i=0;i<index;++i)
         ui->tableWidget->setColumnWidth(i,160);
     concat.replace(concat.count()-1,1,' ');
-    QString get_row = "SELECT count(*) FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%';";
-    if(case0)
+
+    switch (ui->comboBox->currentIndex()) {
+    case 0:
         get_row = "SELECT count(*) FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 是否正常='异常' and 学号 in (SELECT 学号 FROM `archive` WHERE 宿舍区域='"+m_area+"');";
+        break;
+    case 1:
+        get_row = "SELECT count(*) FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 学号 in (SELECT 学号 FROM `archive` WHERE 宿舍区域='"+m_area+"');";
+        break;
+    case 2:
+        get_row = "SELECT count(*) FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 宿舍区域='"+m_area+"';";
+        break;
+    case 3:
+        get_row = "SELECT count(*) FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 宿舍区域='"+m_area+"';";
+        break;
+    }
+
     int row=0;
     query.exec(get_row);
     if(query.first())
@@ -624,9 +634,23 @@ void Aunt::pushButton_search()
         ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
         ui->tableWidget->verticalHeader()->setVisible(false);//隐藏列头
         ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);//只允许单选
-        QString str = "SELECT * FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 学号 in (SELECT 学号 FROM `archive` WHERE 宿舍区域='"+m_area+"');";
-        if(case0)
+        QString str;
+
+        switch (ui->comboBox->currentIndex()) {
+        case 0:
             str = "SELECT * FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 是否正常='异常' and 学号 in (SELECT 学号 FROM `archive` WHERE 宿舍区域='"+m_area+"');";
+            break;
+        case 1:
+            str = "SELECT * FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 学号 in (SELECT 学号 FROM `archive` WHERE 宿舍区域='"+m_area+"');";
+            break;
+        case 2:
+            str = "SELECT * FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 宿舍区域='"+m_area+"';";
+            break;
+        case 3:
+             str = "SELECT * FROM `"+tableName+"` WHERE CONCAT("+concat+") LIKE '%"+line+"%' and 宿舍区域='"+m_area+"';";
+            break;
+        }
+
         query.exec(str);
         //设置内容
         for (int i = 0; query.next(); i++)
@@ -1056,8 +1080,10 @@ void Aunt::pushButton_indoor()
     QString sub = QDateTime::fromSecsSinceEpoch(inDateTime.toSecsSinceEpoch()-outDateTime.toSecsSinceEpoch()).toUTC().toString("hh:mm:ss");
     QString insertInfo = "insert into `information` values ('"+id+"','"+name+"','"+outTime+"','"+inTime+"','"+sub+"','"+temp+"','"+normal+"','"+remark+"');";
 
+    QString changeIndoorNum = "update `archive` set 出入次数 = 出入次数+1 where 学号='"+id+"';";
+
     query.exec("START TRANSACTION");//开启事务
-    if(query.exec(insertIndoor)&&query.exec(insertInfo)){
+    if(query.exec(insertIndoor)&&query.exec(insertInfo)&&query.exec(changeIndoorNum)){
         ui->label_confirm->setText("提交成功");
         ui->lineEdit_tem->clear();
         ui->lineEdit_remark->clear();
@@ -1256,5 +1282,8 @@ void Aunt::checkNormal(const QString &text)
     double temp = text.toDouble();
     if(temp>37.3){
         ui->comboBox_normal->setCurrentText("异常");
+    }
+    else{
+        ui->comboBox_normal->setCurrentText("正常");
     }
 }

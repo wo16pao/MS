@@ -24,14 +24,16 @@ public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
 
-    void SqlConnect();//连接数据库
+    bool SqlConnect();//连接数据库
 
     void ClearUI();//清理界面
 
-    void timerEvent(QTimerEvent *e);
+    void keyPressEvent(QKeyEvent *event);
 
     void writeInit(const QString &key, const QString &value);
     void readInit(const QString &key, QString &value);
+
+    void clearOldInfo();
 
 private slots:
 
@@ -57,6 +59,8 @@ private:
     QParallelAnimationGroup *group;
     QParallelAnimationGroup *group2;
     int speed1x,speed1y, speed2x,speed2y;
+
+    QTimer *timer1;
 
 };
 

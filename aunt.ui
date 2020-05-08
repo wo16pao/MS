@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>学生体温监控管理系统</string>
   </property>
   <widget class="QWidget" name="widget_2" native="true">
    <property name="geometry">
@@ -319,6 +319,9 @@ border:2px solid #5d86c7;
          <pointsize>14</pointsize>
         </font>
        </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
        <property name="styleSheet">
         <string notr="true">QTextEdit{
 background-color:#f3f5f8;
@@ -330,11 +333,12 @@ border:0px;}
 QScrollBar:vertical{
 background:#d9e2f0;
 padding:0px;
+max-width:12px;
 }
  
 QScrollBar::handle:vertical{
 background:#4b7cc4;
-border-radius:6px;
+min-height:24px;
 }
  
 QScrollBar::handle:hover:vertical{
@@ -397,11 +401,12 @@ border:0px;}
 QScrollBar:vertical{
 background:#d9e2f0;
 padding:0px;
+max-width:12px;
 }
  
 QScrollBar::handle:vertical{
 background:#4b7cc4;
-border-radius:6px;
+min-height:24px;
 }
  
 QScrollBar::handle:hover:vertical{
@@ -461,11 +466,12 @@ border:0px;}
 QScrollBar:vertical{
 background:#d9e2f0;
 padding:0px;
+max-width:12px;
 }
  
 QScrollBar::handle:vertical{
 background:#4b7cc4;
-border-radius:6px;
+min-height:24px;
 }
  
 QScrollBar::handle:hover:vertical{
@@ -525,11 +531,12 @@ border:0px;}
 QScrollBar:vertical{
 background:#d9e2f0;
 padding:0px;
+max-width:12px;
 }
  
 QScrollBar::handle:vertical{
 background:#4b7cc4;
-border-radius:6px;
+min-height:24px;
 }
  
 QScrollBar::handle:hover:vertical{
@@ -589,11 +596,12 @@ border:0px;}
 QScrollBar:vertical{
 background:#d9e2f0;
 padding:0px;
+max-width:12px;
 }
  
 QScrollBar::handle:vertical{
 background:#4b7cc4;
-border-radius:6px;
+min-height:24px;
 }
  
 QScrollBar::handle:hover:vertical{
@@ -2654,7 +2662,7 @@ background:#bac9e0;
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton{
-border-image:url(:/res/download(1).png);
+border-image:url(:/res/download.png);
 border-top-left-radius:0px;
 }
 
@@ -3258,7 +3266,7 @@ background:#253b5b;
      <property name="styleSheet">
       <string notr="true">color:#3e6093;
 border-radius:8px;
-border:2px solid #566b8a;</string>
+border:0px solid #566b8a;</string>
      </property>
      <property name="text">
       <string/>
@@ -3288,7 +3296,7 @@ border:2px solid #566b8a;</string>
      <property name="styleSheet">
       <string notr="true">color:#3e6093;
 border-radius:8px;
-border:2px solid #566b8a;</string>
+border:0px solid #566b8a;</string>
      </property>
      <property name="text">
       <string/>
@@ -3327,19 +3335,19 @@ border:2px solid #566b8a;</string>
      <property name="styleSheet">
       <string notr="true">QTextEdit{
 color:#3e6093;
-border-radius:5px;
-border:2px solid #566b8a;}
+border:1px solid #566b8a;}
 
 
 
 QScrollBar:vertical{
 background:#d9e2f0;
 padding:0px;
+max-width:12px;
 }
  
 QScrollBar::handle:vertical{
 background:#4b7cc4;
-border-radius:6px;
+min-height:24px;
 }
  
 QScrollBar::handle:hover:vertical{

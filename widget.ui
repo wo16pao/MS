@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Widget</string>
+   <string>学生体温监控管理系统</string>
   </property>
   <widget class="QPushButton" name="pushButton_login">
    <property name="geometry">
@@ -324,7 +324,8 @@ border:2px solid #527ab5;
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">image:url(:/res/病毒(1).png);</string>
+    <string notr="true">image:url(:/res/病毒.png);
+</string>
    </property>
    <property name="text">
     <string/>
@@ -340,7 +341,7 @@ border:2px solid #527ab5;
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">image:url(:/res/病毒(1).png);</string>
+    <string notr="true">image:url(:/res/病毒.png);</string>
    </property>
    <property name="text">
     <string/>

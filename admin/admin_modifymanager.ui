@@ -17,7 +17,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>学生体温监控管理系统</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QLabel{
